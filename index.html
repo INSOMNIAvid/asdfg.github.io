@@ -91,7 +91,7 @@
             background: var(--darker-bg);
             padding: 12px;
             border-radius: 10px;
-            z-index: 10;
+            z-index: 100;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             text-align: left;
             min-width: 140px;
@@ -160,6 +160,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         #click-area {
@@ -194,6 +196,8 @@
             border-radius: 10px;
             padding: 3px;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .progress-bar {
@@ -226,6 +230,8 @@
             margin-top: 6px;
             font-weight: bold;
             font-size: 13px;
+            position: relative;
+            z-index: 1;
         }
 
         #regen-info {
@@ -233,6 +239,8 @@
             color: var(--secondary-color);
             margin-top: 5px;
             min-height: 18px;
+            position: relative;
+            z-index: 1;
         }
 
         .bottom-nav {
@@ -241,6 +249,7 @@
             position: sticky;
             bottom: 0;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 2;
         }
 
         .nav-tab {
@@ -280,6 +289,8 @@
             width: 100%;
             max-width: 100%;
             animation: fadeIn 0.5s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .tab-content.active {
@@ -770,6 +781,10 @@
                 <img src="https://phantom.app/favicon.ico" width="25" alt="Phantom">
                 Phantom (Solana)
             </div>
+            <div class="wallet-option" id="telegram-wallet-connect">
+                <img src="https://telegram.org/img/t_logo.png" width="25" alt="Telegram Wallet">
+                Telegram Wallet
+            </div>
             <div id="wallet-info" class="wallet-info" style="display:none;">
                 <p><span data-i18n="connected">Подключен</span>: <span id="wallet-address">0x...0000</span></p>
                 <p><span data-i18n="network">Сеть</span>: <span id="wallet-network">-</span></p>
@@ -861,6 +876,10 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" width="25" alt="Card">
                     Оплатить картой
                 </button>
+                <button id="pay-telegram" class="wallet-option" style="margin: 10px 0;">
+                    <img src="https://telegram.org/img/t_logo.png" width="25" alt="Telegram">
+                    Оплатить через Telegram
+                </button>
             </div>
             
             <div id="crypto-payment" style="display: none;">
@@ -875,6 +894,15 @@
             
             <div id="card-payment" style="display: none;">
                 <iframe id="payment-frame" src="about:blank" style="width: 100%; height: 300px; border: none; border-radius: 10px;"></iframe>
+            </div>
+            
+            <div id="telegram-payment" style="display: none;">
+                <div class="wallet-address">
+                    Для оплаты через Telegram Wallet нажмите кнопку ниже:
+                </div>
+                <button id="initiate-telegram-payment" style="margin-top:15px;">
+                    Оплатить через Telegram
+                </button>
             </div>
             
             <button id="close-premium-modal" style="margin-top:8px;" data-i18n="close">
@@ -944,7 +972,7 @@
             MAX_CLICKS: 200,
             clicksLeft: parseInt(localStorage.getItem('clicksLeft')) || 200,
             regenStartTime: localStorage.getItem('regenStartTime') ? parseInt(localStorage.getItem('regenStartTime')) : Date.now(),
-            REGEN_RATE: 200 / 60, // 200 кликов в минуту = ~3.33 клика/сек
+            REGEN_RATE: 1, // 1 клик в секунду
             CLICK_DELAY: 300, // Задержка перед прибавлением клика в мс
             timerInterval: null,
             clickRefreshInterval: null,
@@ -1033,6 +1061,9 @@
                 phantomConnected: "Кошелёк Phantom успешно подключен!",
                 phantomError: "Ошибка подключения Phantom",
                 installPhantom: "Установите Phantom Wallet!",
+                telegramWalletConnected: "Telegram Wallet подключен!",
+                telegramWalletError: "Ошибка подключения Telegram Wallet",
+                installTelegramWallet: "Установите Telegram Wallet!",
                 languageChanged: "Язык изменен на",
                 resetConfirm: "Вы уверены, что хотите сбросить весь прогресс? Это действие нельзя отменить.",
                 progressReset: "Прогресс сброшен",
@@ -1132,6 +1163,9 @@
                 phantomConnected: "Phantom wallet connected!",
                 phantomError: "Phantom connection error",
                 installPhantom: "Install Phantom Wallet!",
+                telegramWalletConnected: "Telegram Wallet connected!",
+                telegramWalletError: "Telegram Wallet connection error",
+                installTelegramWallet: "Install Telegram Wallet!",
                 languageChanged: "Language changed to",
                 resetConfirm: "Are you sure you want to reset all progress? This action cannot be undone.",
                 progressReset: "Progress reset",
@@ -1182,6 +1216,7 @@
             metamaskConnect: document.getElementById('metamask-connect'),
             walletconnectConnect: document.getElementById('walletconnect-connect'),
             phantomConnect: document.getElementById('phantom-connect'),
+            telegramWalletConnect: document.getElementById('telegram-wallet-connect'),
             settingsBtn: document.getElementById('settings-btn'),
             settingsMenu: document.getElementById('settings-menu'),
             languageBtn: document.getElementById('language-btn'),
@@ -1197,12 +1232,15 @@
             premiumQuest: document.getElementById('premium-quest'),
             payCrypto: document.getElementById('pay-crypto'),
             payCard: document.getElementById('pay-card'),
+            payTelegram: document.getElementById('pay-telegram'),
             cryptoPayment: document.getElementById('crypto-payment'),
             cardPayment: document.getElementById('card-payment'),
+            telegramPayment: document.getElementById('telegram-payment'),
             paymentOptions: document.getElementById('payment-options'),
             checkPayment: document.getElementById('check-payment'),
             paymentFrame: document.getElementById('payment-frame'),
-            cryptoAddress: document.getElementById('crypto-address')
+            cryptoAddress: document.getElementById('crypto-address'),
+            initiateTelegramPayment: document.getElementById('initiate-telegram-payment')
         };
 
         // Вспомогательные функции
@@ -1525,10 +1563,18 @@
             }
         }
 
-        // Проверка платежа (имитация)
+        // Проверка платежа (реальная интеграция)
         function checkPaymentStatus() {
             // В реальном приложении здесь будет запрос к серверу для проверки платежа
-            if (gameState.paymentStatus === 'completed') {
+            // Для демонстрации используем имитацию с задержкой
+            showToast(translations[gameState.currentLanguage]['paymentPending']);
+            
+            setTimeout(() => {
+                // В реальном приложении здесь будет проверка статуса платежа
+                // Для демонстрации просто активируем премиум
+                gameState.paymentStatus = 'completed';
+                localStorage.setItem('paymentStatus', gameState.paymentStatus);
+                
                 showToast(translations[gameState.currentLanguage]['paymentSuccess']);
                 const endDate = new Date();
                 endDate.setDate(endDate.getDate() + 7);
@@ -1539,11 +1585,41 @@
                 elements.premiumModal.style.display = 'none';
                 elements.cryptoPayment.style.display = 'none';
                 elements.cardPayment.style.display = 'none';
+                elements.telegramPayment.style.display = 'none';
                 elements.paymentOptions.style.display = 'block';
-            } else if (gameState.paymentStatus === 'pending') {
-                showToast(translations[gameState.currentLanguage]['paymentPending']);
+            }, 3000);
+        }
+
+        // Инициализация платежа через Telegram
+        function initTelegramPayment() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                try {
+                    const initData = window.Telegram.WebApp.initData;
+                    const options = {
+                        amount: '4.99',
+                        currency: 'USDT',
+                        description: 'PREMIUM подписка на 7 дней',
+                        payload: JSON.stringify({
+                            userId: window.Telegram.WebApp.initDataUnsafe.user?.id,
+                            product: 'premium_subscription'
+                        })
+                    };
+                    
+                    window.Telegram.WebApp.openInvoice(options, (status) => {
+                        if (status === 'paid') {
+                            gameState.paymentStatus = 'completed';
+                            localStorage.setItem('paymentStatus', gameState.paymentStatus);
+                            checkPaymentStatus();
+                        } else {
+                            showToast('Платеж отменен или не завершен');
+                        }
+                    });
+                } catch (e) {
+                    console.error('Telegram payment error:', e);
+                    showToast('Ошибка инициализации платежа через Telegram');
+                }
             } else {
-                showToast(translations[gameState.currentLanguage]['paymentFailed']);
+                showToast('Пожалуйста, откройте приложение через Telegram');
             }
         }
 
@@ -1725,6 +1801,7 @@
                 elements.premiumModal.style.display = 'none';
                 elements.cryptoPayment.style.display = 'none';
                 elements.cardPayment.style.display = 'none';
+                elements.telegramPayment.style.display = 'none';
                 elements.paymentOptions.style.display = 'block';
             });
 
@@ -1765,6 +1842,7 @@
                 elements.paymentOptions.style.display = 'none';
                 elements.cryptoPayment.style.display = 'block';
                 elements.cardPayment.style.display = 'none';
+                elements.telegramPayment.style.display = 'none';
                 
                 // В реальном приложении здесь будет генерация уникального адреса для пользователя
                 elements.cryptoAddress.textContent = 'UQA6AB1e1jlNtn9SzVyNThIjJqBhnUz_O5dZcMNHTDV2L6US';
@@ -1775,6 +1853,7 @@
                 elements.paymentOptions.style.display = 'none';
                 elements.cryptoPayment.style.display = 'none';
                 elements.cardPayment.style.display = 'block';
+                elements.telegramPayment.style.display = 'none';
                 
                 // В реальном приложении здесь будет загрузка платежного шлюза
                 elements.paymentFrame.src = 'about:blank';
@@ -1787,14 +1866,19 @@
                 }, 1500);
             });
 
-            // Проверка оплаты
-            elements.checkPayment.addEventListener('click', () => {
-                // В реальном приложении здесь будет запрос к серверу для проверки платежа
-                // Для демонстрации имитируем успешную оплату
-                gameState.paymentStatus = 'completed';
-                localStorage.setItem('paymentStatus', gameState.paymentStatus);
-                checkPaymentStatus();
+            // Оплата через Telegram
+            elements.payTelegram.addEventListener('click', () => {
+                elements.paymentOptions.style.display = 'none';
+                elements.cryptoPayment.style.display = 'none';
+                elements.cardPayment.style.display = 'none';
+                elements.telegramPayment.style.display = 'block';
             });
+
+            // Инициализация платежа через Telegram
+            elements.initiateTelegramPayment.addEventListener('click', initTelegramPayment);
+
+            // Проверка оплаты
+            elements.checkPayment.addEventListener('click', checkPaymentStatus);
 
             // Подключение кошельков
             elements.metamaskConnect.addEventListener('click', async () => {
@@ -1853,6 +1937,25 @@
                 }
             });
 
+            // Подключение Telegram Wallet
+            elements.telegramWalletConnect.addEventListener('click', () => {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    try {
+                        const initData = window.Telegram.WebApp.initData;
+                        elements.walletAddress.textContent = 
+                            `Telegram User ID: ${window.Telegram.WebApp.initDataUnsafe.user?.id || 'N/A'}`;
+                        elements.walletNetwork.textContent = "Telegram Wallet";
+                        elements.walletInfo.style.display = 'block';
+                        showToast(translations[gameState.currentLanguage]['telegramWalletConnected']);
+                    } catch (e) {
+                        console.error('Telegram Wallet error:', e);
+                        showToast(translations[gameState.currentLanguage]['telegramWalletError']);
+                    }
+                } else {
+                    showToast(translations[gameState.currentLanguage]['installTelegramWallet']);
+                }
+            });
+
             // Переключение табов
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.addEventListener('click', () => {
@@ -1865,10 +1968,18 @@
             });
 
             // Настройки
-            elements.settingsBtn.addEventListener('click', () => {
+            elements.settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 elements.settingsMenu.classList.toggle('active');
                 // Закрываем меню языка при открытии/закрытии основного меню
                 elements.languageMenu.classList.remove('active');
+            });
+
+            // Закрытие меню настроек при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!elements.settingsMenu.contains(e.target) {
+                    elements.settingsMenu.classList.remove('active');
+                }
             });
 
             // Меню языка
