@@ -1716,7 +1716,7 @@
                 if (now - gameState.lastClickTime < gameState.CLICK_COOLDOWN) return;
                 gameState.lastClickTime = now;
                 
-                if (gameState.clicksLeft > 1 || gameState.premiumActive) {
+                if (gameState.clicksLeft > 60 || gameState.premiumActive) {
                     // Создаем эффект эмодзи
                     createEmojiEffect(e.clientX, e.clientY);
                     
