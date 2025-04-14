@@ -51,6 +51,7 @@
             justify-content: space-between;
             align-items: center;
             transition: background 0.5s;
+            z-index: 100;
         }
 
         .header-content {
@@ -86,16 +87,17 @@
 
         .settings-menu {
             display: none;
-            position: absolute;
-            top: 50px;
+            position: fixed;
+            top: 70px;
             right: 15px;
             background: var(--darker-bg);
             padding: 12px;
             border-radius: 10px;
-            z-index: 10;
+            z-index: 1000;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             text-align: left;
             min-width: 140px;
+            max-width: 90vw;
         }
 
         .settings-menu.active {
@@ -124,16 +126,17 @@
 
         .language-menu {
             display: none;
-            position: absolute;
-            top: 0;
-            right: 100%;
+            position: fixed;
+            top: 70px;
+            right: 15px;
             background: var(--darker-bg);
             padding: 12px;
             border-radius: 10px;
-            z-index: 10;
+            z-index: 1001;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             text-align: left;
             min-width: 140px;
+            max-width: 90vw;
         }
 
         .language-menu.active {
@@ -874,7 +877,7 @@
             
             <div id="crypto-payment" style="display: none;">
                 <div class="wallet-address" data-i18n="paymentWallet">
-                    Для оплаты через Telegram Wallet нажмите кнопку ниже:<br>
+                    Для оплаты отправьте 4.99 USDT на адрес:<br>
                     <span id="crypto-address">UQA6AB1e1jlNtn9SzVyNThIjJqBhnUz_O5dZcMNHTDV2L6US</span>
                 </div>
                 <button id="check-payment" style="margin-top:15px;" data-i18n="checkPayment">
