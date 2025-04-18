@@ -2479,7 +2479,7 @@
             }
             
             const timePassed = now - lastClaimDate;
-            const timeLeft = 24 * 60 * 60 * 1000 - timePassed;
+            const timeLeft = 20 * 60 * 60 * 1000 - timePassed;
             
             if (timeLeft <= 0) {
                 elements.dailyGiftTimer.textContent = translations[gameState.currentLanguage]['dailyGiftAvailable'];
