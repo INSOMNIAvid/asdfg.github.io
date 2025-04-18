@@ -2304,7 +2304,7 @@
             
             gameState.clickRefreshInterval = setInterval(() => {
                 const now = Date.now();
-                const timePassed = (now - gameState.regenStartTime) / 60; // в секундах
+                const timePassed = (now - gameState.regenStartTime) / 1000; // в секундах
                 const regenerated = Math.floor(timePassed * gameState.REGEN_RATE);
                 
                 if (gameState.clicksLeft < gameState.MAX_CLICKS) {
