@@ -2343,7 +2343,7 @@
 
         // Обновление счетчика кликов
         function updateClicksCounter() {
-            const progressPercent = gameState.premiumActive ? 100 : (gameState.clicksLeft / gameState.MAX_CLICKS) * 100;
+            const progressPercent = gameState.premiumActive ? 100 : (gameState.clicksLeft / gameState.MAX_CLICKS) * 1;
             elements.progressBar.style.background = 
                 `linear-gradient(90deg, ${gameState.selectedProgressColor1}, ${gameState.selectedProgressColor2})`;
             elements.progressBar.style.width = `${progressPercent}%`;
