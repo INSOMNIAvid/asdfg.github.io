@@ -180,7 +180,7 @@
             font-weight: bold;
             color: white;
             user-select: none;
-            transition: transform 0.1s, background 0.5s, box-shadow 0.3s);
+            transition: transform 0.1s, background 0.5s, box-shadow 0.3s;
             box-shadow: 0 0 20px rgba(110, 69, 226, 0.6);
             position: relative;
             border: 3px solid rgba(255, 255, 255, 0.1);
@@ -205,7 +205,7 @@
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             border-radius: 8px;
             width: 100%;
-            transition: width 0.3s, background 0.5s);
+            transition: width 0.3s, background 0.5s;
             position: relative;
             overflow: hidden;
         }
@@ -251,7 +251,7 @@
             flex: 1;
             padding: 12px 8px;
             cursor: pointer;
-            transition: background 0.3s, color 0.3s);
+            transition: background 0.3s, color 0.3s;
             font-weight: 600;
             position: relative;
             font-size: 14px;
@@ -299,7 +299,7 @@
             cursor: pointer;
             font-size: 15px;
             margin: 6px;
-            transition: all 0.3s);
+            transition: all 0.3s;
             font-weight: 600;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -367,7 +367,7 @@
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: transform 0.2s, border-color 0.2s);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .color-option:hover {
@@ -415,7 +415,7 @@
             margin: 8px 0;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s);
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -451,7 +451,7 @@
             padding: 10px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s);
+            transition: all 0.3s;
             margin: 12px 0;
             position: relative;
             overflow: hidden;
@@ -476,7 +476,7 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: opacity 0.3s);
+            transition: opacity 0.3s;
         }
 
         .ref-link-container:hover::after {
@@ -637,144 +637,70 @@
         }
 
         /* Стили для ежедневных подарков */
-        .daily-rewards {
-            margin: 15px 0;
-            background: rgba(15, 52, 96, 0.7);
-            padding: 15px;
-            border-radius: 10px;
+        .daily-gifts-container {
             width: 100%;
+            margin: 15px 0;
         }
 
-        .daily-rewards-title {
+        .daily-gifts-title {
             font-weight: 600;
             margin-bottom: 10px;
-            font-size: 16px;
+            text-align: left;
         }
 
-        .daily-rewards-container {
+        .daily-gifts-progress {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
-        .daily-reward {
-            width: 40px;
-            height: 40px;
+        .daily-gift {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background: rgba(110, 69, 226, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
             position: relative;
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 12px;
         }
 
-        .daily-reward.claimed {
-            background: rgba(76, 175, 80, 0.5);
+        .daily-gift.claimed {
+            background: var(--success-color);
             color: white;
         }
 
-        .daily-reward.available {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 0 10px rgba(110, 69, 226, 0.6);
-            animation: pulse 2s infinite;
-        }
-
-        .daily-reward.today {
-            border: 2px solid gold;
-        }
-
-        .daily-reward-day {
-            position: absolute;
-            bottom: -15px;
-            font-size: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .daily-reward-timer {
-            margin-top: 10px;
-            font-size: 12px;
-            color: var(--secondary-color);
-        }
-
-        /* Стили для 7-дневной серии */
-        .streak-rewards {
-            margin: 15px 0;
-            background: rgba(15, 52, 96, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-            width: 100%;
-        }
-
-        .streak-rewards-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .streak-rewards-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .streak-reward {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(110, 69, 226, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .streak-reward.claimed {
-            background: rgba(76, 175, 80, 0.5);
+        .daily-gift.active {
+            background: var(--primary-color);
             color: white;
         }
 
-        .streak-reward.available {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 0 10px rgba(110, 69, 226, 0.6);
-        }
-
-        .streak-reward.current {
-            border: 2px solid gold;
-            animation: pulse 2s infinite;
-        }
-
-        .streak-reward-day {
+        .daily-gift::after {
+            content: '';
             position: absolute;
-            bottom: -15px;
-            font-size: 10px;
-            width: 100%;
-            text-align: center;
+            top: 50%;
+            left: 100%;
+            width: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        .streak-reward-amount {
+        .daily-gift:last-child::after {
+            display: none;
+        }
+
+        .daily-gift-value {
             position: absolute;
-            top: -15px;
+            bottom: -20px;
             font-size: 10px;
-            width: 100%;
-            text-align: center;
+            white-space: nowrap;
         }
 
-        .streak-info {
-            margin-top: 10px;
+        .daily-gift-timer {
             font-size: 12px;
             color: var(--secondary-color);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            margin-top: 5px;
         }
 
         @keyframes fadeIn {
@@ -842,6 +768,17 @@
             
             .privacy-content {
                 padding: 12px;
+            }
+            
+            .daily-gift {
+                width: 25px;
+                height: 25px;
+                font-size: 10px;
+            }
+            
+            .daily-gift-value {
+                bottom: -18px;
+                font-size: 9px;
             }
         }
     </style>
@@ -924,83 +861,12 @@
         <div id="quests-tab" class="tab-content">
             <h3 data-i18n="questsTitle">Задания</h3>
             
-            <!-- Ежедневные подарки -->
-            <div class="daily-rewards">
-                <div class="daily-rewards-title" data-i18n="dailyRewards">Ежедневные подарки</div>
-                <div class="daily-rewards-container">
-                    <div class="daily-reward" id="day1-reward">
-                        <span>25</span>
-                        <div class="daily-reward-day" data-i18n="day1">День 1</div>
-                    </div>
-                    <div class="daily-reward" id="day2-reward">
-                        <span>50</span>
-                        <div class="daily-reward-day" data-i18n="day2">День 2</div>
-                    </div>
-                    <div class="daily-reward" id="day3-reward">
-                        <span>75</span>
-                        <div class="daily-reward-day" data-i18n="day3">День 3</div>
-                    </div>
-                    <div class="daily-reward" id="day4-reward">
-                        <span>100</span>
-                        <div class="daily-reward-day" data-i18n="day4">День 4</div>
-                    </div>
-                    <div class="daily-reward" id="day5-reward">
-                        <span>125</span>
-                        <div class="daily-reward-day" data-i18n="day5">День 5</div>
-                    </div>
-                    <div class="daily-reward" id="day6-reward">
-                        <span>150</span>
-                        <div class="daily-reward-day" data-i18n="day6">День 6</div>
-                    </div>
-                    <div class="daily-reward" id="day7-reward">
-                        <span>175</span>
-                        <div class="daily-reward-day" data-i18n="day7">День 7</div>
-                    </div>
+            <div class="daily-gifts-container">
+                <div class="daily-gifts-title" data-i18n="dailyGiftsTitle">Ежедневные подарки</div>
+                <div class="daily-gifts-progress" id="daily-gifts-progress">
+                    <!-- Будет заполнено JavaScript -->
                 </div>
-                <div class="daily-reward-timer" id="daily-timer" data-i18n="nextDailyReward">Следующий подарок через: 24:00:00</div>
-            </div>
-            
-            <!-- 7-дневная серия -->
-            <div class="streak-rewards">
-                <div class="streak-rewards-title" data-i18n="streakRewards">7-дневная серия</div>
-                <div class="streak-rewards-container">
-                    <div class="streak-reward" id="streak-day1">
-                        <span>25</span>
-                        <div class="streak-reward-amount">+25</div>
-                        <div class="streak-reward-day">1</div>
-                    </div>
-                    <div class="streak-reward" id="streak-day2">
-                        <span>50</span>
-                        <div class="streak-reward-amount">+50</div>
-                        <div class="streak-reward-day">2</div>
-                    </div>
-                    <div class="streak-reward" id="streak-day3">
-                        <span>75</span>
-                        <div class="streak-reward-amount">+75</div>
-                        <div class="streak-reward-day">3</div>
-                    </div>
-                    <div class="streak-reward" id="streak-day4">
-                        <span>100</span>
-                        <div class="streak-reward-amount">+100</div>
-                        <div class="streak-reward-day">4</div>
-                    </div>
-                    <div class="streak-reward" id="streak-day5">
-                        <span>125</span>
-                        <div class="streak-reward-amount">+125</div>
-                        <div class="streak-reward-day">5</div>
-                    </div>
-                    <div class="streak-reward" id="streak-day6">
-                        <span>150</span>
-                        <div class="streak-reward-amount">+150</div>
-                        <div class="streak-reward-day">6</div>
-                    </div>
-                    <div class="streak-reward" id="streak-day7">
-                        <span>175</span>
-                        <div class="streak-reward-amount">+175</div>
-                        <div class="streak-reward-day">7</div>
-                    </div>
-                </div>
-                <div class="streak-info" id="streak-info" data-i18n="currentStreak">Текущая серия: 0 дней</div>
+                <div class="daily-gift-timer" id="daily-gift-timer"></div>
             </div>
             
             <div class="quest-item" id="telegram-quest">
@@ -1079,16 +945,16 @@
                 <h3 data-i18n="paymentMethods">Способы оплаты:</h3>
                 <button id="pay-telegram" class="wallet-option" style="margin: 10px 0;">
                     <img src="https://web.telegram.org/favicon.ico" width="25" alt="Telegram">
-                    Оплатить через Telegram (@insomnia_ins_bot)
+                    Оплатить через Telegram Stars
                 </button>
             </div>
             
             <div id="telegram-payment" style="display: none;">
                 <div class="wallet-address" data-i18n="paymentWallet">
-                    Для оплаты через Telegram Wallet нажмите кнопку ниже:
+                    Для оплаты через Telegram Stars нажмите кнопку ниже:
                 </div>
                 <button id="init-telegram-payment" style="margin-top:15px;">
-                    Оплатить 4.99 USDT через Telegram
+                    Оплатить 4.99 USDT через Telegram Stars
                 </button>
             </div>
             
@@ -1127,7 +993,7 @@
             <h3 data-i18n="thirdParty">4. Третьи стороны</h3>
             <p data-i18n="thirdPartyText">Приложение может интегрироваться со следующими сервисами:</p>
             <ul>
-                <li data-i18n="service1">Telegram Wallet (по вашему выбору)</li>
+                <li data-i18n="service1">MetaMask и другие кошельки (по вашему выбору)</li>
                 <li data-i18n="service2">Аналитические сервисы для сбора анонимной статистики</li>
             </ul>
             
@@ -1169,13 +1035,12 @@
             totalClicks: parseInt(localStorage.getItem('totalClicks')) || 0,
             completedQuests: JSON.parse(localStorage.getItem('completedQuests')) || [],
             paymentStatus: localStorage.getItem('paymentStatus') || 'not_started',
-            lastDailyReward: localStorage.getItem('lastDailyReward') ? new Date(localStorage.getItem('lastDailyReward')) : null,
-            nextDailyReward: localStorage.getItem('nextDailyReward') ? new Date(localStorage.getItem('nextDailyReward')) : new Date(Date.now() + 24 * 60 * 60 * 1000),
-            dailyRewardsClaimed: JSON.parse(localStorage.getItem('dailyRewardsClaimed')) || [],
-            currentStreak: parseInt(localStorage.getItem('currentStreak')) || 0,
-            lastStreakDate: localStorage.getItem('lastStreakDate') ? new Date(localStorage.getItem('lastStreakDate')) : null,
-            streakRewards: [25, 50, 75, 100, 125, 150, 175],
-            dailyRewards: [25, 50, 75, 100, 125, 150, 175]
+            dailyGifts: JSON.parse(localStorage.getItem('dailyGifts')) || {
+                streak: 0,
+                lastClaimDate: null,
+                claimedDays: []
+            },
+            dailyGiftValues: [25, 50, 75, 100, 125, 150, 175]
         };
 
         // Локализация
@@ -1232,12 +1097,12 @@
                 dataStorageText: "Все игровые данные хранятся локально в вашем браузере. Вы можете в любой момент сбросить прогресс в настройках.",
                 thirdParty: "4. Третьи стороны",
                 thirdPartyText: "Приложение может интегрироваться со следующими сервисами:",
-                service1: "Telegram Wallet (по вашему выбору)",
+                service1: "MetaMask и другие кошельки (по вашему выбору)",
                 service2: "Аналитические сервисы для сбора анонимной статистики",
                 changes: "5. Изменения в политике",
                 changesText: "Мы оставляем за собой право обновлять данную Политику конфиденциальности. Все изменения будут отражены в этом документе.",
                 understand: "Понятно",
-                paymentWallet: "Для оплаты через Telegram Wallet нажмите кнопку ниже:",
+                paymentWallet: "Для оплаты отправьте 4.99 USDT на адрес:",
                 premiumActive: "PREMIUM активен",
                 unlimitedClicks: "Безлимитные клики",
                 premiumExpiresIn: "PREMIUM истекает через",
@@ -1251,6 +1116,11 @@
                 refLinkCopied: "Реферальная ссылка скопирована!\nОтправьте её друзьям!",
                 walletConnected: "Кошелёк подключен",
                 walletError: "Ошибка подключения кошелька",
+                installMetamask: "Установите MetaMask!",
+                walletConnectIntegration: "Интеграция с WalletConnect будет здесь",
+                phantomConnected: "Кошелёк Phantom успешно подключен!",
+                phantomError: "Ошибка подключения Phantom",
+                installPhantom: "Установите Phantom Wallet!",
                 telegramWalletConnected: "Telegram Wallet подключен!",
                 telegramWalletError: "Ошибка подключения Telegram Wallet",
                 installTelegramWallet: "Установите Telegram Wallet!",
@@ -1268,17 +1138,7 @@
                 paymentPending: "Оплата еще не подтверждена. Попробуйте позже.",
                 paymentFailed: "Оплата не найдена. Пожалуйста, попробуйте еще раз.",
                 questsTitle: "Задания",
-                dailyRewards: "Ежедневные подарки",
-                streakRewards: "7-дневная серия",
-                day1: "День 1",
-                day2: "День 2",
-                day3: "День 3",
-                day4: "День 4",
-                day5: "День 5",
-                day6: "День 6",
-                day7: "День 7",
-                nextDailyReward: "Следующий подарок через:",
-                currentStreak: "Текущая серия:",
+                dailyGiftsTitle: "Ежедневные подарки",
                 telegramQuestTitle: "Подпишись на Telegram канал",
                 telegramQuestDesc: "Подпишись на наш канал и получи 100 $INSOMNIA",
                 clickQuestTitle: "Сделай 100 кликов",
@@ -1289,9 +1149,10 @@
                 subscribeTelegram: "Подписаться на канал",
                 telegramSubscribed: "Спасибо за подписку! Награда зачислена.",
                 telegramPaymentInitiated: "Платеж через Telegram инициирован",
-                dailyRewardClaimed: "Ежедневный подарок получен! +",
-                streakRewardClaimed: "Награда за серию получена! +",
-                streakReset: "Серия обнулена, так как прошло более 24 часов с последнего входа"
+                dailyGiftAvailable: "Ежедневный подарок доступен!",
+                dailyGiftClaimed: "Вы получили ежедневный подарок! +",
+                dailyGiftReset: "Серия ежедневных подарков сброшена",
+                nextDailyGiftIn: "Следующий подарок через:"
             },
             en: {
                 title: "Insomnia Clicker",
@@ -1319,7 +1180,7 @@
                 premiumFeature2: "2X coins for referrals",
                 premiumFeature3: "Unlimited clicks",
                 premiumFeature4: "🎨 Button and background color selection",
-                premiumFeature5: "2X daily rewards",
+                premiumFeature5: "2X daily gifts",
                 chooseButtonColor: "Choose button color:",
                 chooseBgColor: "Choose background color:",
                 chooseProgressColor: "Choose progress bar color:",
@@ -1345,12 +1206,12 @@
                 dataStorageText: "All game data is stored locally in your browser. You can reset progress at any time in the settings.",
                 thirdParty: "4. Third parties",
                 thirdPartyText: "The application may integrate with the following services:",
-                service1: "Telegram Wallet (at your choice)",
+                service1: "MetaMask and other wallets (at your choice)",
                 service2: "Analytics services for collecting anonymous statistics",
                 changes: "5. Policy changes",
                 changesText: "We reserve the right to update this Privacy Policy. All changes will be reflected in this document.",
                 understand: "I understand",
-                paymentWallet: "For payment via Telegram Wallet click the button below:",
+                paymentWallet: "For payment send 4.99 USDT to address:",
                 premiumActive: "PREMIUM active",
                 unlimitedClicks: "Unlimited clicks",
                 premiumExpiresIn: "PREMIUM expires in",
@@ -1364,6 +1225,11 @@
                 refLinkCopied: "Referral link copied!\nShare it with friends!",
                 walletConnected: "Wallet connected",
                 walletError: "Wallet connection error",
+                installMetamask: "Install MetaMask!",
+                walletConnectIntegration: "WalletConnect integration would go here",
+                phantomConnected: "Phantom wallet connected!",
+                phantomError: "Phantom connection error",
+                installPhantom: "Install Phantom Wallet!",
                 telegramWalletConnected: "Telegram Wallet connected!",
                 telegramWalletError: "Telegram Wallet connection error",
                 installTelegramWallet: "Install Telegram Wallet!",
@@ -1381,17 +1247,7 @@
                 paymentPending: "Payment not confirmed yet. Please try again later.",
                 paymentFailed: "Payment not found. Please try again.",
                 questsTitle: "Quests",
-                dailyRewards: "Daily rewards",
-                streakRewards: "7-day streak",
-                day1: "Day 1",
-                day2: "Day 2",
-                day3: "Day 3",
-                day4: "Day 4",
-                day5: "Day 5",
-                day6: "Day 6",
-                day7: "Day 7",
-                nextDailyReward: "Next reward in:",
-                currentStreak: "Current streak:",
+                dailyGiftsTitle: "Daily Gifts",
                 telegramQuestTitle: "Subscribe to Telegram channel",
                 telegramQuestDesc: "Subscribe to our channel and get 100 $INSOMNIA",
                 clickQuestTitle: "Make 100 clicks",
@@ -1402,14 +1258,15 @@
                 subscribeTelegram: "Subscribe to channel",
                 telegramSubscribed: "Thanks for subscribing! Reward credited.",
                 telegramPaymentInitiated: "Telegram payment initiated",
-                dailyRewardClaimed: "Daily reward claimed! +",
-                streakRewardClaimed: "Streak reward claimed! +",
-                streakReset: "Streak reset as more than 24 hours passed since last login"
+                dailyGiftAvailable: "Daily gift available!",
+                dailyGiftClaimed: "You got daily gift! +",
+                dailyGiftReset: "Daily gift streak reset",
+                nextDailyGiftIn: "Next gift in:"
             },
             es: {
                 title: "Insomnia Clicker",
                 premiumBadge: "PREMIUM",
-                balance: "Saldo:",
+                balance: "Balance:",
                 clicksLeft: "Clics restantes:",
                 regenInfo: "¡Listo! Clics máximos",
                 buyPremium: "Comprar PREMIUM",
@@ -1432,7 +1289,7 @@
                 premiumFeature2: "2X monedas por referidos",
                 premiumFeature3: "Clics ilimitados",
                 premiumFeature4: "🎨 Selección de color de botón y fondo",
-                premiumFeature5: "2X recompensas diarias",
+                premiumFeature5: "2X regalos diarios",
                 chooseButtonColor: "Elige el color del botón:",
                 chooseBgColor: "Elige el color de fondo:",
                 chooseProgressColor: "Elige el color de la barra de progreso:",
@@ -1458,16 +1315,16 @@
                 dataStorageText: "Todos los datos del juego se almacenan localmente en su navegador. Puede restablecer el progreso en cualquier momento en la configuración.",
                 thirdParty: "4. Terceros",
                 thirdPartyText: "La aplicación puede integrarse con los siguientes servicios:",
-                service1: "Telegram Wallet (a su elección)",
-                service2: "Servicios de análisis para recopilar estadísticas anónimas",
+                service1: "MetaMask y otras billeteras (a su elección)",
+                service2: "Servicios analíticos para recopilar estadísticas anónimas",
                 changes: "5. Cambios en la política",
                 changesText: "Nos reservamos el derecho de actualizar esta Política de Privacidad. Todos los cambios se reflejarán en este documento.",
                 understand: "Entiendo",
-                paymentWallet: "Para pagar a través de Telegram Wallet haga clic en el botón a continuación:",
+                paymentWallet: "Para el pago envíe 4.99 USDT a la dirección:",
                 premiumActive: "PREMIUM activo",
                 unlimitedClicks: "Clics ilimitados",
-                premiumExpiresIn: "PREMIUM expira en",
-                premiumActiveFor: "Su suscripción está activa por",
+                premiumExpiresIn: "PREMIUM caduca en",
+                premiumActiveFor: "Tu suscripción está activa por",
                 premiumOnly: "¡Esta función es solo para usuarios PREMIUM!",
                 premiumActivated: "¡PREMIUM activado!",
                 premiumActivated7Days: "¡Suscripción PREMIUM activada por 7 días!",
@@ -1475,13 +1332,18 @@
                 refReward: "Recibiste",
                 forFriendInvite: "por invitar a un amigo!",
                 refLinkCopied: "¡Enlace de referido copiado!\n¡Compártelo con amigos!",
-                walletConnected: "Billetera conectada",
+                walletConnected: "¡Billetera conectada!",
                 walletError: "Error de conexión de billetera",
+                installMetamask: "¡Instala MetaMask!",
+                walletConnectIntegration: "La integración con WalletConnect estaría aquí",
+                phantomConnected: "¡Billetera Phantom conectada!",
+                phantomError: "Error de conexión Phantom",
+                installPhantom: "¡Instala Phantom Wallet!",
                 telegramWalletConnected: "¡Telegram Wallet conectado!",
-                telegramWalletError: "Error de conexión de Telegram Wallet",
+                telegramWalletError: "Error de conexión Telegram Wallet",
                 installTelegramWallet: "¡Instala Telegram Wallet!",
                 languageChanged: "Idioma cambiado a",
-                resetConfirm: "¿Estás seguro de que deseas restablecer todo el progreso? Esta acción no se puede deshacer.",
+                resetConfirm: "¿Estás seguro de que deseas reiniciar todo el progreso? Esta acción no se puede deshacer.",
                 progressReset: "Progreso reiniciado",
                 regenInfo: "Regeneración",
                 nextIn: "siguiente +1 en",
@@ -1491,20 +1353,10 @@
                 paymentMethods: "Métodos de pago:",
                 checkPayment: "Verificar pago",
                 paymentSuccess: "¡Pago confirmado! ¡PREMIUM activado!",
-                paymentPending: "Pago aún no confirmado. Por favor, inténtelo de nuevo más tarde.",
-                paymentFailed: "Pago no encontrado. Por favor, inténtelo de nuevo.",
+                paymentPending: "Pago no confirmado aún. Por favor, inténtalo más tarde.",
+                paymentFailed: "Pago no encontrado. Por favor, inténtalo de nuevo.",
                 questsTitle: "Misiones",
-                dailyRewards: "Recompensas diarias",
-                streakRewards: "Racha de 7 días",
-                day1: "Día 1",
-                day2: "Día 2",
-                day3: "Día 3",
-                day4: "Día 4",
-                day5: "Día 5",
-                day6: "Día 6",
-                day7: "Día 7",
-                nextDailyReward: "Próxima recompensa en:",
-                currentStreak: "Racha actual:",
+                dailyGiftsTitle: "Regalos diarios",
                 telegramQuestTitle: "Suscríbete al canal de Telegram",
                 telegramQuestDesc: "Suscríbete a nuestro canal y obtén 100 $INSOMNIA",
                 clickQuestTitle: "Haz 100 clics",
@@ -1515,9 +1367,10 @@
                 subscribeTelegram: "Suscribirse al canal",
                 telegramSubscribed: "¡Gracias por suscribirte! Recompensa acreditada.",
                 telegramPaymentInitiated: "Pago por Telegram iniciado",
-                dailyRewardClaimed: "¡Recompensa diaria reclamada! +",
-                streakRewardClaimed: "¡Recompensa por racha reclamada! +",
-                streakReset: "Racha reiniciada ya que pasaron más de 24 horas desde el último inicio de sesión"
+                dailyGiftAvailable: "¡Regalo diario disponible!",
+                dailyGiftClaimed: "¡Recibiste el regalo diario! +",
+                dailyGiftReset: "Serie de regalos diarios reiniciada",
+                nextDailyGiftIn: "Próximo regalo en:"
             },
             fr: {
                 title: "Insomnia Clicker",
@@ -1542,10 +1395,10 @@
                 questsTab: "Quêtes",
                 premiumTitle: "Abonnement PREMIUM",
                 premiumFeature1: "2X pièces par clic",
-                premiumFeature2: "2X pièces pour les parrainages",
+                premiumFeature2: "2X pièces pour les filleuls",
                 premiumFeature3: "Clics illimités",
                 premiumFeature4: "🎨 Sélection de la couleur du bouton et de l'arrière-plan",
-                premiumFeature5: "2X récompenses quotidiennes",
+                premiumFeature5: "2X cadeaux quotidiens",
                 chooseButtonColor: "Choisissez la couleur du bouton:",
                 chooseBgColor: "Choisissez la couleur de l'arrière-plan:",
                 chooseProgressColor: "Choisissez la couleur de la barre de progression:",
@@ -1559,7 +1412,7 @@
                 privacyIntro: "Cette politique de confidentialité décrit comment vos informations sont collectées, utilisées et protégées lorsque vous utilisez notre application Insomnia Clicker.",
                 dataCollection: "1. Collecte de données",
                 dataCollectionText: "L'application Insomnia Clicker collecte les données suivantes:",
-                data1: "Données stockées localement sur votre progression dans le jeu (solde, nombre de clics, parrainages)",
+                data1: "Données stockées localement sur votre progression dans le jeu (solde, nombre de clics, filleuls)",
                 data2: "Informations sur les portefeuilles connectés (si vous choisissez de vous connecter)",
                 data3: "Statistiques d'utilisation anonymes pour améliorer l'application",
                 dataUsage: "2. Utilisation des données",
@@ -1571,12 +1424,12 @@
                 dataStorageText: "Toutes les données du jeu sont stockées localement dans votre navigateur. Vous pouvez réinitialiser la progression à tout moment dans les paramètres.",
                 thirdParty: "4. Tiers",
                 thirdPartyText: "L'application peut s'intégrer aux services suivants:",
-                service1: "Telegram Wallet (à votre choix)",
+                service1: "MetaMask et autres portefeuilles (à votre choix)",
                 service2: "Services d'analyse pour collecter des statistiques anonymes",
                 changes: "5. Modifications de la politique",
-                changesText: "Nous nous réservons le droit de mettre à jour cette politique de confidentialité. Tous les changements seront reflétés dans ce document.",
+                changesText: "Nous nous réservons le droit de mettre à jour cette politique de confidentialité. Toutes les modifications seront reflétées dans ce document.",
                 understand: "Je comprends",
-                paymentWallet: "Pour payer via Telegram Wallet, cliquez sur le bouton ci-dessous:",
+                paymentWallet: "Pour le paiement, envoyez 4.99 USDT à l'adresse:",
                 premiumActive: "PREMIUM actif",
                 unlimitedClicks: "Clics illimités",
                 premiumExpiresIn: "PREMIUM expire dans",
@@ -1585,13 +1438,18 @@
                 premiumActivated: "PREMIUM activé!",
                 premiumActivated7Days: "Abonnement PREMIUM activé pour 7 jours!",
                 premiumExpired: "Abonnement PREMIUM expiré",
-                refReward: "Vous avez obtenu",
+                refReward: "Vous avez reçu",
                 forFriendInvite: "pour avoir invité un ami!",
                 refLinkCopied: "Lien de parrainage copié!\nPartagez-le avec des amis!",
                 walletConnected: "Portefeuille connecté",
                 walletError: "Erreur de connexion du portefeuille",
-                telegramWalletConnected: "Telegram Wallet connecté!",
-                telegramWalletError: "Erreur de connexion Telegram Wallet",
+                installMetamask: "Installez MetaMask!",
+                walletConnectIntegration: "L'intégration WalletConnect serait ici",
+                phantomConnected: "Portefeuille Phantom connecté!",
+                phantomError: "Erreur de connexion Phantom",
+                installPhantom: "Installez Phantom Wallet!",
+                telegramWalletConnected: "Portefeuille Telegram connecté!",
+                telegramWalletError: "Erreur de connexion du portefeuille Telegram",
                 installTelegramWallet: "Installez Telegram Wallet!",
                 languageChanged: "Langue changée en",
                 resetConfirm: "Êtes-vous sûr de vouloir réinitialiser toute la progression? Cette action ne peut pas être annulée.",
@@ -1607,17 +1465,7 @@
                 paymentPending: "Paiement non encore confirmé. Veuillez réessayer plus tard.",
                 paymentFailed: "Paiement non trouvé. Veuillez réessayer.",
                 questsTitle: "Quêtes",
-                dailyRewards: "Récompenses quotidiennes",
-                streakRewards: "Série de 7 jours",
-                day1: "Jour 1",
-                day2: "Jour 2",
-                day3: "Jour 3",
-                day4: "Jour 4",
-                day5: "Jour 5",
-                day6: "Jour 6",
-                day7: "Jour 7",
-                nextDailyReward: "Prochaine récompense dans:",
-                currentStreak: "Série actuelle:",
+                dailyGiftsTitle: "Cadeaux quotidiens",
                 telegramQuestTitle: "Abonnez-vous à la chaîne Telegram",
                 telegramQuestDesc: "Abonnez-vous à notre chaîne et obtenez 100 $INSOMNIA",
                 clickQuestTitle: "Faites 100 clics",
@@ -1628,9 +1476,10 @@
                 subscribeTelegram: "S'abonner à la chaîne",
                 telegramSubscribed: "Merci pour votre abonnement! Récompense créditée.",
                 telegramPaymentInitiated: "Paiement via Telegram initié",
-                dailyRewardClaimed: "Récompense quotidienne réclamée! +",
-                streakRewardClaimed: "Récompense de série réclamée! +",
-                streakReset: "Série réinitialisée car plus de 24 heures se sont écoulées depuis la dernière connexion"
+                dailyGiftAvailable: "Cadeau quotidien disponible!",
+                dailyGiftClaimed: "Vous avez reçu un cadeau quotidien! +",
+                dailyGiftReset: "Série de cadeaux quotidiens réinitialisée",
+                nextDailyGiftIn: "Prochain cadeau dans:"
             },
             pt: {
                 title: "Insomnia Clicker",
@@ -1639,14 +1488,14 @@
                 clicksLeft: "Cliques restantes:",
                 regenInfo: "Pronto! Cliques máximos",
                 buyPremium: "Comprar PREMIUM",
-                referralTitle: "Sistema de referência",
+                referralTitle: "Sistema de indicação",
                 refBonusText: "Ganhe +100 $INSOMNIA por cada amigo!",
                 refBonusTextPremium: "Ganhe +200 $INSOMNIA por cada amigo! (PREMIUM 2X)",
-                copyRefLink: "Copiar link de referência",
+                copyRefLink: "Copiar link de indicação",
                 invitedFriends: "Convidados",
                 friends: "amigos",
                 earned: "Ganho",
-                walletTitle: "Conexão de carteira",
+                walletTitle: "Conexão da carteira",
                 connected: "Conectado",
                 network: "Rede",
                 clickerTab: "Clicker",
@@ -1655,24 +1504,24 @@
                 questsTab: "Missões",
                 premiumTitle: "Assinatura PREMIUM",
                 premiumFeature1: "2X moedas por clique",
-                premiumFeature2: "2X moedas por referências",
+                premiumFeature2: "2X moedas por indicações",
                 premiumFeature3: "Cliques ilimitados",
                 premiumFeature4: "🎨 Seleção de cor do botão e fundo",
-                premiumFeature5: "2X recompensas diárias",
+                premiumFeature5: "2X presentes diários",
                 chooseButtonColor: "Escolha a cor do botão:",
                 chooseBgColor: "Escolha a cor de fundo:",
                 chooseProgressColor: "Escolha a cor da barra de progresso:",
                 confirmPayment: "Eu paguei",
                 close: "Fechar",
-                privacy: "Política de Privacidade",
+                privacy: "Política de privacidade",
                 support: "Suporte",
                 resetProgress: "Redefinir progresso",
                 language: "Idioma",
                 privacyTitle: "Política de Privacidade do Insomnia Clicker",
-                privacyIntro: "Esta Política de Privacidade descreve como suas informações são coletadas, usadas e protegidas quando você usa nosso aplicativo Insomnia Clicker.",
+                privacyIntro: "Esta Política de Privacidade descreve como suas informações são coletadas, usadas e protegidas ao usar nosso aplicativo Insomnia Clicker.",
                 dataCollection: "1. Coleta de dados",
                 dataCollectionText: "O aplicativo Insomnia Clicker coleta os seguintes dados:",
-                data1: "Dados armazenados localmente sobre seu progresso no jogo (saldo, número de cliques, referências)",
+                data1: "Dados armazenados localmente sobre seu progresso no jogo (saldo, número de cliques, indicações)",
                 data2: "Informações sobre carteiras conectadas (se você optar por conectar)",
                 data3: "Estatísticas de uso anônimas para melhorar o aplicativo",
                 dataUsage: "2. Uso de dados",
@@ -1684,12 +1533,12 @@
                 dataStorageText: "Todos os dados do jogo são armazenados localmente no seu navegador. Você pode redefinir o progresso a qualquer momento nas configurações.",
                 thirdParty: "4. Terceiros",
                 thirdPartyText: "O aplicativo pode se integrar aos seguintes serviços:",
-                service1: "Telegram Wallet (a sua escolha)",
-                service2: "Serviços de análise para coletar estatísticas anônimas",
+                service1: "MetaMask e outras carteiras (à sua escolha)",
+                service2: "Serviços analíticos para coletar estatísticas anônimas",
                 changes: "5. Alterações na política",
                 changesText: "Reservamo-nos o direito de atualizar esta Política de Privacidade. Todas as alterações serão refletidas neste documento.",
                 understand: "Entendo",
-                paymentWallet: "Para pagar via Telegram Wallet, clique no botão abaixo:",
+                paymentWallet: "Para pagamento, envie 4.99 USDT para o endereço:",
                 premiumActive: "PREMIUM ativo",
                 unlimitedClicks: "Cliques ilimitados",
                 premiumExpiresIn: "PREMIUM expira em",
@@ -1700,12 +1549,17 @@
                 premiumExpired: "Assinatura PREMIUM expirada",
                 refReward: "Você ganhou",
                 forFriendInvite: "por convidar um amigo!",
-                refLinkCopied: "Link de referência copiado!\nCompartilhe com amigos!",
+                refLinkCopied: "Link de indicação copiado!\nCompartilhe com amigos!",
                 walletConnected: "Carteira conectada",
                 walletError: "Erro de conexão da carteira",
-                telegramWalletConnected: "Telegram Wallet conectado!",
-                telegramWalletError: "Erro de conexão do Telegram Wallet",
-                installTelegramWallet: "Instale o Telegram Wallet!",
+                installMetamask: "Instale o MetaMask!",
+                walletConnectIntegration: "A integração com WalletConnect estaria aqui",
+                phantomConnected: "Carteira Phantom conectada!",
+                phantomError: "Erro de conexão Phantom",
+                installPhantom: "Instale a Phantom Wallet!",
+                telegramWalletConnected: "Carteira Telegram conectada!",
+                telegramWalletError: "Erro de conexão da carteira Telegram",
+                installTelegramWallet: "Instale a Telegram Wallet!",
                 languageChanged: "Idioma alterado para",
                 resetConfirm: "Tem certeza de que deseja redefinir todo o progresso? Esta ação não pode ser desfeita.",
                 progressReset: "Progresso redefinido",
@@ -1720,17 +1574,7 @@
                 paymentPending: "Pagamento ainda não confirmado. Por favor, tente novamente mais tarde.",
                 paymentFailed: "Pagamento não encontrado. Por favor, tente novamente.",
                 questsTitle: "Missões",
-                dailyRewards: "Recompensas diárias",
-                streakRewards: "Sequência de 7 dias",
-                day1: "Dia 1",
-                day2: "Dia 2",
-                day3: "Dia 3",
-                day4: "Dia 4",
-                day5: "Dia 5",
-                day6: "Dia 6",
-                day7: "Dia 7",
-                nextDailyReward: "Próxima recompensa em:",
-                currentStreak: "Sequência atual:",
+                dailyGiftsTitle: "Presentes diários",
                 telegramQuestTitle: "Inscreva-se no canal do Telegram",
                 telegramQuestDesc: "Inscreva-se no nosso canal e ganhe 100 $INSOMNIA",
                 clickQuestTitle: "Faça 100 cliques",
@@ -1741,9 +1585,10 @@
                 subscribeTelegram: "Inscrever-se no canal",
                 telegramSubscribed: "Obrigado por se inscrever! Recompensa creditada.",
                 telegramPaymentInitiated: "Pagamento via Telegram iniciado",
-                dailyRewardClaimed: "Recompensa diária reivindicada! +",
-                streakRewardClaimed: "Recompensa de sequência reivindicada! +",
-                streakReset: "Sequência reiniciada pois passaram mais de 24 horas desde o último login"
+                dailyGiftAvailable: "Presente diário disponível!",
+                dailyGiftClaimed: "Você recebeu um presente diário! +",
+                dailyGiftReset: "Sequência de presentes diários redefinida",
+                nextDailyGiftIn: "Próximo presente em:"
             },
             zh: {
                 title: "Insomnia Clicker",
@@ -1753,8 +1598,8 @@
                 regenInfo: "准备就绪! 最大点击次数",
                 buyPremium: "购买高级版",
                 referralTitle: "推荐系统",
-                refBonusText: "每个朋友获得+100 $INSOMNIA!",
-                refBonusTextPremium: "每个朋友获得+200 $INSOMNIA! (高级版2X)",
+                refBonusText: "每邀请一位朋友获得+100 $INSOMNIA!",
+                refBonusTextPremium: "每邀请一位朋友获得+200 $INSOMNIA! (高级版2X)",
                 copyRefLink: "复制推荐链接",
                 invitedFriends: "已邀请",
                 friends: "朋友",
@@ -1767,11 +1612,11 @@
                 walletTab: "钱包",
                 questsTab: "任务",
                 premiumTitle: "高级版订阅",
-                premiumFeature1: "2X 每次点击硬币",
-                premiumFeature2: "2X 推荐奖励",
+                premiumFeature1: "每次点击2倍金币",
+                premiumFeature2: "推荐奖励2倍",
                 premiumFeature3: "无限点击",
                 premiumFeature4: "🎨 按钮和背景颜色选择",
-                premiumFeature5: "2X 每日奖励",
+                premiumFeature5: "2倍每日礼物",
                 chooseButtonColor: "选择按钮颜色:",
                 chooseBgColor: "选择背景颜色:",
                 chooseProgressColor: "选择进度条颜色:",
@@ -1782,27 +1627,27 @@
                 resetProgress: "重置进度",
                 language: "语言",
                 privacyTitle: "Insomnia Clicker隐私政策",
-                privacyIntro: "本隐私政策描述了在使用我们的Insomnia Clicker应用程序时如何收集、使用和保护您的信息。",
+                privacyIntro: "本隐私政策描述了您在使用我们的Insomnia Clicker应用程序时如何收集、使用和保护您的信息。",
                 dataCollection: "1. 数据收集",
                 dataCollectionText: "Insomnia Clicker应用程序收集以下数据:",
                 data1: "本地存储的游戏进度数据(余额、点击次数、推荐)",
-                data2: "连接钱包的信息(如果您选择连接)",
+                data2: "连接的钱包信息(如果您选择连接)",
                 data3: "用于改进应用程序的匿名使用统计",
                 dataUsage: "2. 数据使用",
                 dataUsageText: "收集的数据用于:",
                 usage1: "提供游戏功能",
                 usage2: "改善用户体验",
-                usage3: "分析应用程序功能的效率",
+                usage3: "分析应用程序功能的有效性",
                 dataStorage: "3. 数据存储",
                 dataStorageText: "所有游戏数据都存储在您的浏览器本地。您可以随时在设置中重置进度。",
                 thirdParty: "4. 第三方",
                 thirdPartyText: "应用程序可能与以下服务集成:",
-                service1: "Telegram钱包(根据您的选择)",
+                service1: "MetaMask和其他钱包(根据您的选择)",
                 service2: "用于收集匿名统计的分析服务",
                 changes: "5. 政策变更",
                 changesText: "我们保留更新本隐私政策的权利。所有变更将反映在本文件中。",
                 understand: "我明白了",
-                paymentWallet: "要通过Telegram钱包支付，请点击下方按钮:",
+                paymentWallet: "支付请发送4.99 USDT至地址:",
                 premiumActive: "高级版已激活",
                 unlimitedClicks: "无限点击",
                 premiumExpiresIn: "高级版将在",
@@ -1812,15 +1657,20 @@
                 premiumActivated7Days: "高级版订阅已激活7天!",
                 premiumExpired: "高级版订阅已过期",
                 refReward: "您获得了",
-                forFriendInvite: "因为邀请朋友!",
-                refLinkCopied: "推荐链接已复制!\n与朋友分享!",
+                forFriendInvite: "邀请朋友!",
+                refLinkCopied: "推荐链接已复制!\n分享给朋友!",
                 walletConnected: "钱包已连接",
                 walletError: "钱包连接错误",
+                installMetamask: "安装MetaMask!",
+                walletConnectIntegration: "WalletConnect集成将在此处",
+                phantomConnected: "Phantom钱包已连接!",
+                phantomError: "Phantom连接错误",
+                installPhantom: "安装Phantom钱包!",
                 telegramWalletConnected: "Telegram钱包已连接!",
                 telegramWalletError: "Telegram钱包连接错误",
                 installTelegramWallet: "安装Telegram钱包!",
                 languageChanged: "语言已更改为",
-                resetConfirm: "您确定要重置所有进度吗? 此操作无法撤消。",
+                resetConfirm: "您确定要重置所有进度吗?此操作无法撤销。",
                 progressReset: "进度已重置",
                 regenInfo: "恢复",
                 nextIn: "下一个+1在",
@@ -1833,17 +1683,7 @@
                 paymentPending: "支付尚未确认。请稍后再试。",
                 paymentFailed: "未找到支付。请重试。",
                 questsTitle: "任务",
-                dailyRewards: "每日奖励",
-                streakRewards: "7天连胜",
-                day1: "第1天",
-                day2: "第2天",
-                day3: "第3天",
-                day4: "第4天",
-                day5: "第5天",
-                day6: "第6天",
-                day7: "第7天",
-                nextDailyReward: "下次奖励在:",
-                currentStreak: "当前连胜:",
+                dailyGiftsTitle: "每日礼物",
                 telegramQuestTitle: "订阅Telegram频道",
                 telegramQuestDesc: "订阅我们的频道并获得100 $INSOMNIA",
                 clickQuestTitle: "点击100次",
@@ -1852,11 +1692,12 @@
                 premiumQuestDesc: "激活高级版订阅并获得1000 $INSOMNIA",
                 questCompleted: "任务完成! +",
                 subscribeTelegram: "订阅频道",
-                telegramSubscribed: "感谢订阅! 奖励已发放。",
+                telegramSubscribed: "感谢订阅!奖励已发放。",
                 telegramPaymentInitiated: "Telegram支付已启动",
-                dailyRewardClaimed: "每日奖励已领取! +",
-                streakRewardClaimed: "连胜奖励已领取! +",
-                streakReset: "由于超过24小时未登录，连胜已重置"
+                dailyGiftAvailable: "每日礼物可用!",
+                dailyGiftClaimed: "您获得了每日礼物! +",
+                dailyGiftReset: "每日礼物连续天数已重置",
+                nextDailyGiftIn: "下一个礼物在:"
             },
             de: {
                 title: "Insomnia Clicker",
@@ -1884,43 +1725,43 @@
                 premiumFeature2: "2X Münzen für Empfehlungen",
                 premiumFeature3: "Unbegrenzte Klicks",
                 premiumFeature4: "🎨 Knopf- und Hintergrundfarbe auswählen",
-                premiumFeature5: "2X tägliche Belohnungen",
+                premiumFeature5: "2X tägliche Geschenke",
                 chooseButtonColor: "Wählen Sie die Knopffarbe:",
                 chooseBgColor: "Wählen Sie die Hintergrundfarbe:",
                 chooseProgressColor: "Wählen Sie die Fortschrittsbalkenfarbe:",
                 confirmPayment: "Ich habe bezahlt",
                 close: "Schließen",
-                privacy: "Datenschutzrichtlinie",
+                privacy: "Datenschutz",
                 support: "Support",
                 resetProgress: "Fortschritt zurücksetzen",
                 language: "Sprache",
                 privacyTitle: "Datenschutzrichtlinie von Insomnia Clicker",
                 privacyIntro: "Diese Datenschutzrichtlinie beschreibt, wie Ihre Informationen bei der Verwendung unserer Insomnia Clicker-App gesammelt, verwendet und geschützt werden.",
-                dataCollection: "1. Datensammlung",
+                dataCollection: "1. Datenerfassung",
                 dataCollectionText: "Die Insomnia Clicker-App sammelt folgende Daten:",
                 data1: "Lokal gespeicherte Daten über Ihren Spielstand (Guthaben, Anzahl der Klicks, Empfehlungen)",
                 data2: "Informationen über verbundene Wallets (falls Sie sich entscheiden, eine zu verbinden)",
                 data3: "Anonyme Nutzungsstatistiken zur Verbesserung der App",
                 dataUsage: "2. Datennutzung",
                 dataUsageText: "Die gesammelten Daten werden verwendet für:",
-                usage1: "Bereitstellung von Spielfunktionen",
+                usage1: "Bereitstellung von Spiel-Funktionen",
                 usage2: "Verbesserung der Benutzererfahrung",
-                usage3: "Analyse der Effektivität der App-Funktionen",
+                usage3: "Analyse der Effektivität von App-Funktionen",
                 dataStorage: "3. Datenspeicherung",
                 dataStorageText: "Alle Spieledaten werden lokal in Ihrem Browser gespeichert. Sie können den Fortschritt jederzeit in den Einstellungen zurücksetzen.",
-                thirdParty: "4. Dritte",
+                thirdParty: "4. Drittanbieter",
                 thirdPartyText: "Die App kann sich mit folgenden Diensten integrieren:",
-                service1: "Telegram Wallet (nach Ihrer Wahl)",
+                service1: "MetaMask und andere Wallets (nach Ihrer Wahl)",
                 service2: "Analysedienste zum Sammeln anonymer Statistiken",
                 changes: "5. Richtlinienänderungen",
                 changesText: "Wir behalten uns das Recht vor, diese Datenschutzrichtlinie zu aktualisieren. Alle Änderungen werden in diesem Dokument widergespiegelt.",
                 understand: "Verstanden",
-                paymentWallet: "Um über Telegram Wallet zu bezahlen, klicken Sie auf die Schaltfläche unten:",
+                paymentWallet: "Für die Zahlung senden Sie 4.99 USDT an die Adresse:",
                 premiumActive: "PREMIUM aktiv",
                 unlimitedClicks: "Unbegrenzte Klicks",
                 premiumExpiresIn: "PREMIUM läuft ab in",
                 premiumActiveFor: "Ihr Abonnement ist noch aktiv für",
-                premiumOnly: "Diese Funktion ist nur für PREMIUM-Benutzer!",
+                premiumOnly: "Diese Funktion ist nur für PREMIUM-Nutzer!",
                 premiumActivated: "PREMIUM aktiviert!",
                 premiumActivated7Days: "PREMIUM-Abonnement für 7 Tage aktiviert!",
                 premiumExpired: "PREMIUM-Abonnement abgelaufen",
@@ -1929,9 +1770,14 @@
                 refLinkCopied: "Empfehlungslink kopiert!\nTeilen Sie ihn mit Freunden!",
                 walletConnected: "Wallet verbunden",
                 walletError: "Wallet-Verbindungsfehler",
+                installMetamask: "Installieren Sie MetaMask!",
+                walletConnectIntegration: "WalletConnect-Integration wäre hier",
+                phantomConnected: "Phantom-Wallet verbunden!",
+                phantomError: "Phantom-Verbindungsfehler",
+                installPhantom: "Installieren Sie Phantom Wallet!",
                 telegramWalletConnected: "Telegram Wallet verbunden!",
                 telegramWalletError: "Telegram Wallet-Verbindungsfehler",
-                installTelegramWallet: "Telegram Wallet installieren!",
+                installTelegramWallet: "Installieren Sie Telegram Wallet!",
                 languageChanged: "Sprache geändert in",
                 resetConfirm: "Sind Sie sicher, dass Sie den gesamten Fortschritt zurücksetzen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
                 progressReset: "Fortschritt zurückgesetzt",
@@ -1946,30 +1792,21 @@
                 paymentPending: "Zahlung noch nicht bestätigt. Bitte versuchen Sie es später erneut.",
                 paymentFailed: "Zahlung nicht gefunden. Bitte versuchen Sie es erneut.",
                 questsTitle: "Aufgaben",
-                dailyRewards: "Tägliche Belohnungen",
-                streakRewards: "7-Tage-Serie",
-                day1: "Tag 1",
-                day2: "Tag 2",
-                day3: "Tag 3",
-                day4: "Tag 4",
-                day5: "Tag 5",
-                day6: "Tag 6",
-                day7: "Tag 7",
-                nextDailyReward: "Nächste Belohnung in:",
-                currentStreak: "Aktuelle Serie:",
+                dailyGiftsTitle: "Tägliche Geschenke",
                 telegramQuestTitle: "Abonnieren Sie den Telegram-Kanal",
                 telegramQuestDesc: "Abonnieren Sie unseren Kanal und erhalten Sie 100 $INSOMNIA",
-                clickQuestTitle: "Machen Sie 100 Klicks",
+                clickQuestTitle: "100 Mal klicken",
                 clickQuestDesc: "Klicken Sie 100 Mal und erhalten Sie 100 $INSOMNIA",
                 premiumQuestTitle: "Aktivieren Sie PREMIUM",
                 premiumQuestDesc: "Aktivieren Sie das PREMIUM-Abonnement und erhalten Sie 1000 $INSOMNIA",
                 questCompleted: "Aufgabe abgeschlossen! +",
                 subscribeTelegram: "Kanal abonnieren",
-                telegramSubscribed: "Danke fürs Abonnieren! Belohnung gutgeschrieben.",
+                telegramSubscribed: "Danke für das Abonnieren! Belohnung gutgeschrieben.",
                 telegramPaymentInitiated: "Telegram-Zahlung eingeleitet",
-                dailyRewardClaimed: "Tägliche Belohnung beansprucht! +",
-                streakRewardClaimed: "Serienbelohnung beansprucht! +",
-                streakReset: "Serie zurückgesetzt, da seit dem letzten Login mehr als 24 Stunden vergangen sind"
+                dailyGiftAvailable: "Tägliches Geschenk verfügbar!",
+                dailyGiftClaimed: "Sie haben ein tägliches Geschenk erhalten! +",
+                dailyGiftReset: "Serie täglicher Geschenke zurückgesetzt",
+                nextDailyGiftIn: "Nächstes Geschenk in:"
             },
             it: {
                 title: "Insomnia Clicker",
@@ -1997,15 +1834,15 @@
                 premiumFeature2: "2X monete per referral",
                 premiumFeature3: "Clic illimitati",
                 premiumFeature4: "🎨 Selezione colore pulsante e sfondo",
-                premiumFeature5: "2X ricompense giornaliere",
+                premiumFeature5: "2X regali giornalieri",
                 chooseButtonColor: "Scegli il colore del pulsante:",
                 chooseBgColor: "Scegli il colore dello sfondo:",
                 chooseProgressColor: "Scegli il colore della barra di progresso:",
                 confirmPayment: "Ho pagato",
                 close: "Chiudi",
-                privacy: "Privacy Policy",
+                privacy: "Privacy",
                 support: "Supporto",
-                resetProgress: "Resetta progresso",
+                resetProgress: "Azzera progresso",
                 language: "Lingua",
                 privacyTitle: "Privacy Policy di Insomnia Clicker",
                 privacyIntro: "Questa Privacy Policy descrive come le tue informazioni vengono raccolte, utilizzate e protette quando usi la nostra app Insomnia Clicker.",
@@ -2015,20 +1852,20 @@
                 data2: "Informazioni sui wallet connessi (se scegli di connetterne uno)",
                 data3: "Statistiche di utilizzo anonime per migliorare l'app",
                 dataUsage: "2. Utilizzo dati",
-                dataUsageText: "I dati raccolti sono utilizzati per:",
+                dataUsageText: "I dati raccolti sono usati per:",
                 usage1: "Fornire funzionalità di gioco",
                 usage2: "Migliorare l'esperienza utente",
                 usage3: "Analizzare l'efficacia delle funzioni dell'app",
                 dataStorage: "3. Archiviazione dati",
-                dataStorageText: "Tutti i dati di gioco sono archiviati localmente nel tuo browser. Puoi resettare il progresso in qualsiasi momento nelle impostazioni.",
+                dataStorageText: "Tutti i dati di gioco sono archiviati localmente nel tuo browser. Puoi azzerare il progresso in qualsiasi momento nelle impostazioni.",
                 thirdParty: "4. Terze parti",
                 thirdPartyText: "L'app può integrarsi con i seguenti servizi:",
-                service1: "Telegram Wallet (a tua scelta)",
-                service2: "Servizi di analisi per raccogliere statistiche anonime",
+                service1: "MetaMask e altri wallet (a tua scelta)",
+                service2: "Servizi analitici per raccogliere statistiche anonime",
                 changes: "5. Modifiche alla policy",
                 changesText: "Ci riserviamo il diritto di aggiornare questa Privacy Policy. Tutte le modifiche saranno riflesse in questo documento.",
-                understand: "Ho capito",
-                paymentWallet: "Per pagare tramite Telegram Wallet clicca il pulsante qui sotto:",
+                understand: "Capisco",
+                paymentWallet: "Per il pagamento invia 4.99 USDT all'indirizzo:",
                 premiumActive: "PREMIUM attivo",
                 unlimitedClicks: "Clic illimitati",
                 premiumExpiresIn: "PREMIUM scade tra",
@@ -2041,13 +1878,18 @@
                 forFriendInvite: "per aver invitato un amico!",
                 refLinkCopied: "Link di referral copiato!\nCondividilo con gli amici!",
                 walletConnected: "Wallet connesso",
-                walletError: "Errore di connessione wallet",
-                telegramWalletConnected: "Telegram Wallet connesso!",
-                telegramWalletError: "Errore di connessione Telegram Wallet",
+                walletError: "Errore connessione wallet",
+                installMetamask: "Installa MetaMask!",
+                walletConnectIntegration: "L'integrazione con WalletConnect sarebbe qui",
+                phantomConnected: "Wallet Phantom connesso!",
+                phantomError: "Errore connessione Phantom",
+                installPhantom: "Installa Phantom Wallet!",
+                telegramWalletConnected: "Wallet Telegram connesso!",
+                telegramWalletError: "Errore connessione wallet Telegram",
                 installTelegramWallet: "Installa Telegram Wallet!",
                 languageChanged: "Lingua cambiata in",
-                resetConfirm: "Sei sicuro di voler resettare tutto il progresso? Questa azione non può essere annullata.",
-                progressReset: "Progresso resettato",
+                resetConfirm: "Sei sicuro di voler azzerare tutto il progresso? Questa azione non può essere annullata.",
+                progressReset: "Progresso azzerato",
                 regenInfo: "Rigenerazione",
                 nextIn: "prossimo +1 tra",
                 seconds: "sec",
@@ -2059,17 +1901,7 @@
                 paymentPending: "Pagamento non ancora confermato. Riprova più tardi.",
                 paymentFailed: "Pagamento non trovato. Riprova.",
                 questsTitle: "Missioni",
-                dailyRewards: "Ricompense giornaliere",
-                streakRewards: "Serie di 7 giorni",
-                day1: "Giorno 1",
-                day2: "Giorno 2",
-                day3: "Giorno 3",
-                day4: "Giorno 4",
-                day5: "Giorno 5",
-                day6: "Giorno 6",
-                day7: "Giorno 7",
-                nextDailyReward: "Prossima ricompensa tra:",
-                currentStreak: "Serie attuale:",
+                dailyGiftsTitle: "Regali giornalieri",
                 telegramQuestTitle: "Iscriviti al canale Telegram",
                 telegramQuestDesc: "Iscriviti al nostro canale e ottieni 100 $INSOMNIA",
                 clickQuestTitle: "Fai 100 clic",
@@ -2079,10 +1911,11 @@
                 questCompleted: "Missione completata! +",
                 subscribeTelegram: "Iscriviti al canale",
                 telegramSubscribed: "Grazie per esserti iscritto! Ricompensa accreditata.",
-                telegramPaymentInitiated: "Pagamento tramite Telegram avviato",
-                dailyRewardClaimed: "Ricompensa giornaliera ottenuta! +",
-                streakRewardClaimed: "Ricompensa serie ottenuta! +",
-                streakReset: "Serie azzerata poiché sono passate più di 24 ore dall'ultimo accesso"
+                telegramPaymentInitiated: "Pagamento via Telegram avviato",
+                dailyGiftAvailable: "Regalo giornaliero disponibile!",
+                dailyGiftClaimed: "Hai ottenuto un regalo giornaliero! +",
+                dailyGiftReset: "Serie regali giornalieri azzerata",
+                nextDailyGiftIn: "Prossimo regalo tra:"
             },
             tr: {
                 title: "Insomnia Clicker",
@@ -2092,8 +1925,8 @@
                 regenInfo: "Hazır! Maksimum tıklama",
                 buyPremium: "PREMIUM Satın Al",
                 referralTitle: "Referans sistemi",
-                refBonusText: "Her arkadaş için +100 $INSOMNIA kazan!",
-                refBonusTextPremium: "Her arkadaş için +200 $INSOMNIA kazan! (PREMIUM 2X)",
+                refBonusText: "Her arkadaş için +100 $INSOMNIA kazanın!",
+                refBonusTextPremium: "Her arkadaş için +200 $INSOMNIA kazanın! (PREMIUM 2X)",
                 copyRefLink: "Referans bağlantısını kopyala",
                 invitedFriends: "Davet edilen",
                 friends: "arkadaş",
@@ -2105,16 +1938,16 @@
                 friendsTab: "Arkadaşlar",
                 walletTab: "Cüzdan",
                 questsTab: "Görevler",
-                premiumTitle: "PREMIUM aboneliği",
-                premiumFeature1: "2X tıklama başına para",
-                premiumFeature2: "2X referans için para",
+                premiumTitle: "PREMIUM abonelik",
+                premiumFeature1: "Tıklama başına 2X para",
+                premiumFeature2: "Referanslar için 2X para",
                 premiumFeature3: "Sınırsız tıklama",
                 premiumFeature4: "🎨 Düğme ve arka plan rengi seçimi",
-                premiumFeature5: "2X günlük ödüller",
+                premiumFeature5: "2X günlük hediyeler",
                 chooseButtonColor: "Düğme rengini seçin:",
                 chooseBgColor: "Arka plan rengini seçin:",
                 chooseProgressColor: "İlerleme çubuğu rengini seçin:",
-                confirmPayment: "Ödeme yaptım",
+                confirmPayment: "Ödedim",
                 close: "Kapat",
                 privacy: "Gizlilik Politikası",
                 support: "Destek",
@@ -2124,9 +1957,9 @@
                 privacyIntro: "Bu Gizlilik Politikası, Insomnia Clicker uygulamamızı kullanırken bilgilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.",
                 dataCollection: "1. Veri toplama",
                 dataCollectionText: "Insomnia Clicker uygulaması şu verileri toplar:",
-                data1: "Oyun ilerlemeniz hakkında yerel olarak saklanan veriler (bakiye, tıklama sayısı, referanslar)",
-                data2: "Bağlı cüzdanlar hakkında bilgi (bağlamayı seçerseniz)",
-                data3: "Uygulamayı iyileştirmek için anonim kullanım istatistikleri",
+                data1: "Oyun ilerlemenizle ilgili yerel olarak saklanan veriler (bakiye, tıklama sayısı, referanslar)",
+                data2: "Bağlı cüzdanlarla ilgili bilgiler (bağlanmayı seçerseniz)",
+                data3: "Uygulamayı geliştirmek için anonim kullanım istatistikleri",
                 dataUsage: "2. Veri kullanımı",
                 dataUsageText: "Toplanan veriler şunlar için kullanılır:",
                 usage1: "Oyun işlevselliği sağlama",
@@ -2136,16 +1969,16 @@
                 dataStorageText: "Tüm oyun verileri tarayıcınızda yerel olarak saklanır. İlerlemeyi istediğiniz zaman ayarlardan sıfırlayabilirsiniz.",
                 thirdParty: "4. Üçüncü taraflar",
                 thirdPartyText: "Uygulama şu hizmetlerle entegre olabilir:",
-                service1: "Telegram Cüzdan (seçiminize göre)",
-                service2: "Anonim istatistik toplamak için analiz hizmetleri",
+                service1: "MetaMask ve diğer cüzdanlar (seçiminize göre)",
+                service2: "Anonim istatistik toplamak için analitik hizmetler",
                 changes: "5. Politika değişiklikleri",
                 changesText: "Bu Gizlilik Politikasını güncelleme hakkını saklı tutarız. Tüm değişiklikler bu belgede yansıtılacaktır.",
                 understand: "Anladım",
-                paymentWallet: "Telegram Cüzdan ile ödeme yapmak için aşağıdaki düğmeye tıklayın:",
+                paymentWallet: "Ödeme için 4.99 USDT'yi şu adrese gönderin:",
                 premiumActive: "PREMIUM aktif",
                 unlimitedClicks: "Sınırsız tıklama",
-                premiumExpiresIn: "PREMIUM süresi doluyor",
-                premiumActiveFor: "Aboneliğiniz şu süre için aktif",
+                premiumExpiresIn: "PREMIUM şu kadar sürede sona eriyor",
+                premiumActiveFor: "Aboneliğiniz şu kadar süre daha aktif",
                 premiumOnly: "Bu özellik yalnızca PREMIUM kullanıcıları içindir!",
                 premiumActivated: "PREMIUM etkinleştirildi!",
                 premiumActivated7Days: "7 günlük PREMIUM aboneliği etkinleştirildi!",
@@ -2155,9 +1988,14 @@
                 refLinkCopied: "Referans bağlantısı kopyalandı!\nArkadaşlarınızla paylaşın!",
                 walletConnected: "Cüzdan bağlandı",
                 walletError: "Cüzdan bağlantı hatası",
-                telegramWalletConnected: "Telegram Cüzdan bağlandı!",
-                telegramWalletError: "Telegram Cüzdan bağlantı hatası",
-                installTelegramWallet: "Telegram Cüzdan'ı yükleyin!",
+                installMetamask: "MetaMask'i yükleyin!",
+                walletConnectIntegration: "WalletConnect entegrasyonu burada olacak",
+                phantomConnected: "Phantom cüzdanı bağlandı!",
+                phantomError: "Phantom bağlantı hatası",
+                installPhantom: "Phantom Wallet'i yükleyin!",
+                telegramWalletConnected: "Telegram Wallet bağlandı!",
+                telegramWalletError: "Telegram Wallet bağlantı hatası",
+                installTelegramWallet: "Telegram Wallet'i yükleyin!",
                 languageChanged: "Dil şu olarak değiştirildi",
                 resetConfirm: "Tüm ilerlemeyi sıfırlamak istediğinizden emin misiniz? Bu işlem geri alınamaz.",
                 progressReset: "İlerleme sıfırlandı",
@@ -2172,30 +2010,21 @@
                 paymentPending: "Ödeme henüz onaylanmadı. Lütfen daha sonra tekrar deneyin.",
                 paymentFailed: "Ödeme bulunamadı. Lütfen tekrar deneyin.",
                 questsTitle: "Görevler",
-                dailyRewards: "Günlük ödüller",
-                streakRewards: "7 günlük seri",
-                day1: "Gün 1",
-                day2: "Gün 2",
-                day3: "Gün 3",
-                day4: "Gün 4",
-                day5: "Gün 5",
-                day6: "Gün 6",
-                day7: "Gün 7",
-                nextDailyReward: "Sonraki ödül şu kadar sonra:",
-                currentStreak: "Mevcut seri:",
+                dailyGiftsTitle: "Günlük hediyeler",
                 telegramQuestTitle: "Telegram kanalına abone ol",
-                telegramQuestDesc: "Kanalımıza abone ol ve 100 $INSOMNIA kazan",
+                telegramQuestDesc: "Kanalımıza abone olun ve 100 $INSOMNIA kazanın",
                 clickQuestTitle: "100 tıklama yap",
-                clickQuestDesc: "100 kez tıkla ve 100 $INSOMNIA kazan",
+                clickQuestDesc: "100 kez tıklayın ve 100 $INSOMNIA kazanın",
                 premiumQuestTitle: "PREMIUM'u etkinleştir",
-                premiumQuestDesc: "PREMIUM aboneliğini etkinleştir ve 1000 $INSOMNIA kazan",
+                premiumQuestDesc: "PREMIUM aboneliğini etkinleştirin ve 1000 $INSOMNIA kazanın",
                 questCompleted: "Görev tamamlandı! +",
                 subscribeTelegram: "Kanala abone ol",
                 telegramSubscribed: "Abone olduğunuz için teşekkürler! Ödül verildi.",
-                telegramPaymentInitiated: "Telegram ile ödeme başlatıldı",
-                dailyRewardClaimed: "Günlük ödül alındı! +",
-                streakRewardClaimed: "Seri ödülü alındı! +",
-                streakReset: "Son girişten 24 saatten fazla geçtiği için seri sıfırlandı"
+                telegramPaymentInitiated: "Telegram ödemesi başlatıldı",
+                dailyGiftAvailable: "Günlük hediye mevcut!",
+                dailyGiftClaimed: "Günlük hediye aldınız! +",
+                dailyGiftReset: "Günlük hediye serisi sıfırlandı",
+                nextDailyGiftIn: "Sonraki hediye şu kadar sonra:"
             }
         };
 
@@ -2238,8 +2067,8 @@
             telegramPayment: document.getElementById('telegram-payment'),
             paymentOptions: document.getElementById('payment-options'),
             initTelegramPayment: document.getElementById('init-telegram-payment'),
-            dailyTimer: document.getElementById('daily-timer'),
-            streakInfo: document.getElementById('streak-info')
+            dailyGiftsProgress: document.getElementById('daily-gifts-progress'),
+            dailyGiftTimer: document.getElementById('daily-gift-timer')
         };
 
         // Вспомогательные функции
@@ -2330,8 +2159,7 @@
             // Обновляем динамические тексты
             updateClicksCounter();
             updatePremiumTimeInfo();
-            updateDailyRewardsUI();
-            updateStreakUI();
+            updateDailyGiftsUI();
             
             // Для кнопки премиума с особым текстом
             if (gameState.premiumActive) {
@@ -2591,225 +2419,118 @@
 
         // Инициализация Telegram платежа
         function initTelegramPayment() {
-            // Открываем ссылку на бота Telegram для оплаты
-            window.open('https://t.me/insomnia_ins_bot', '_blank');
-            showToast(translations[gameState.currentLanguage]['telegramPaymentInitiated']);
-            
-            // В реальном приложении здесь будет вызов платежного интерфейса Telegram
-            // Для демонстрации имитируем успешный платеж через 3 секунды
-            setTimeout(() => {
-                localStorage.setItem('paymentStatus', 'completed');
-                checkPaymentStatus();
-            }, 3000);
+            if (window.Telegram && window.Telegram.WebApp) {
+                showToast(translations[gameState.currentLanguage]['telegramPaymentInitiated']);
+                
+                // Здесь будет реальный вызов платежного интерфейса Telegram
+                // Для демонстрации имитируем успешный платеж через 3 секунды
+                setTimeout(() => {
+                    localStorage.setItem('paymentStatus', 'completed');
+                    checkPaymentStatus();
+                }, 3000);
+            } else {
+                showToast('Telegram WebApp не доступен');
+            }
         }
 
         // Ежедневные подарки
-        function checkDailyRewards() {
+        function checkDailyGifts() {
             const now = new Date();
+            const lastClaimDate = gameState.dailyGifts.lastClaimDate ? new Date(gameState.dailyGifts.lastClaimDate) : null;
             
-            // Если это первый вход пользователя или подарки еще не настроены
-            if (!gameState.lastDailyReward) {
-                // Первый подарок доступен сразу
-                gameState.nextDailyReward = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-                localStorage.setItem('nextDailyReward', gameState.nextDailyReward);
-                updateDailyRewardsUI();
-                return;
+            // Если последний подарок был получен более 24 часов назад, сбрасываем серию
+            if (lastClaimDate && (now - lastClaimDate) > 24 * 60 * 60 * 1000) {
+                gameState.dailyGifts.streak = 0;
+                gameState.dailyGifts.claimedDays = [];
+                localStorage.setItem('dailyGifts', JSON.stringify(gameState.dailyGifts));
+                showToast(translations[gameState.currentLanguage]['dailyGiftReset']);
             }
             
-            // Проверяем, можно ли получить подарок
-            if (now >= gameState.nextDailyReward) {
-                // Пользователь может получить подарок
-                updateDailyRewardsUI(true);
-            } else {
-                // Обновляем таймер
-                updateDailyRewardsUI();
-            }
+            updateDailyGiftsUI();
         }
 
-        function updateDailyRewardsUI(canClaim = false) {
-            const now = new Date();
-            const rewardElements = [
-                document.getElementById('day1-reward'),
-                document.getElementById('day2-reward'),
-                document.getElementById('day3-reward'),
-                document.getElementById('day4-reward'),
-                document.getElementById('day5-reward'),
-                document.getElementById('day6-reward'),
-                document.getElementById('day7-reward')
-            ];
+        function updateDailyGiftsUI() {
+            elements.dailyGiftsProgress.innerHTML = '';
             
-            // Сбрасываем все состояния
-            rewardElements.forEach(el => {
-                el.classList.remove('claimed', 'available', 'today');
-            });
-            
-            // Помечаем уже полученные подарки
-            gameState.dailyRewardsClaimed.forEach(day => {
-                if (day <= rewardElements.length) {
-                    rewardElements[day - 1].classList.add('claimed');
-                }
-            });
-            
-            // Определяем текущий день для подарка (1-7)
-            let nextDay = gameState.dailyRewardsClaimed.length + 1;
-            if (nextDay > 7) nextDay = 1; // Цикл из 7 дней
-            
-            if (canClaim) {
-                // Пользователь может получить подарок
-                rewardElements[nextDay - 1].classList.add('available', 'today');
+            for (let i = 0; i < 7; i++) {
+                const gift = document.createElement('div');
+                gift.className = 'daily-gift';
                 
-                // Добавляем обработчик клика
-                rewardElements[nextDay - 1].onclick = () => claimDailyReward(nextDay);
-            } else {
-                // Показываем, какой будет следующий подарок
-                rewardElements[nextDay - 1].classList.add('today');
-            }
-            
-            // Обновляем таймер
-            updateDailyRewardTimer();
-        }
-
-        function updateDailyRewardTimer() {
-            const now = new Date();
-            let diff = gameState.nextDailyReward - now;
-            
-            if (diff <= 0) {
-                elements.dailyTimer.textContent = translations[gameState.currentLanguage]['nextDailyReward'] + ": 00:00:00";
-                return;
-            }
-            
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            elements.dailyTimer.textContent = 
-                `${translations[gameState.currentLanguage]['nextDailyReward']}: ` +
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            setTimeout(updateDailyRewardTimer, 1000);
-        }
-
-        function claimDailyReward(day) {
-            const now = new Date();
-            let reward = gameState.dailyRewards[day - 1];
-            
-            // Удваиваем награду для премиум пользователей
-            if (gameState.premiumActive) {
-                reward *= 2;
-            }
-            
-            gameState.coins += reward;
-            gameState.dailyRewardsClaimed.push(day);
-            gameState.lastDailyReward = now;
-            gameState.nextDailyReward = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-            
-            // Сохраняем в localStorage
-            localStorage.setItem('insomniaCoins', gameState.coins);
-            localStorage.setItem('dailyRewardsClaimed', JSON.stringify(gameState.dailyRewardsClaimed));
-            localStorage.setItem('lastDailyReward', gameState.lastDailyReward);
-            localStorage.setItem('nextDailyReward', gameState.nextDailyReward);
-            
-            // Обновляем UI
-            updateBalance();
-            updateDailyRewardsUI();
-            
-            // Показываем уведомление
-            showToast(`${translations[gameState.currentLanguage]['dailyRewardClaimed']}${reward} $INSOMNIA`);
-            
-            // Проверяем 7-дневную серию
-            checkStreak();
-        }
-
-        // 7-дневная серия
-        function checkStreak() {
-            const now = new Date();
-            
-            // Если это первый вход пользователя
-            if (!gameState.lastStreakDate) {
-                gameState.currentStreak = 1;
-                gameState.lastStreakDate = new Date();
-                localStorage.setItem('currentStreak', gameState.currentStreak);
-                localStorage.setItem('lastStreakDate', gameState.lastStreakDate);
-                updateStreakUI();
-                return;
-            }
-            
-            // Проверяем, прошло ли более 24 часов с последнего входа
-            const diffHours = (now - gameState.lastStreakDate) / (1000 * 60 * 60);
-            
-            if (diffHours > 24) {
-                // Сбрасываем серию, если прошло более 24 часов
-                gameState.currentStreak = 1;
-                showToast(translations[gameState.currentLanguage]['streakReset']);
-            } else {
-                // Увеличиваем серию
-                gameState.currentStreak++;
-                if (gameState.currentStreak > 7) gameState.currentStreak = 1; // Цикл из 7 дней
-            }
-            
-            gameState.lastStreakDate = now;
-            localStorage.setItem('currentStreak', gameState.currentStreak);
-            localStorage.setItem('lastStreakDate', gameState.lastStreakDate);
-            
-            // Проверяем, можно ли получить награду за серию
-            if (gameState.currentStreak > 0) {
-                claimStreakReward(gameState.currentStreak);
-            }
-            
-            updateStreakUI();
-        }
-
-        function updateStreakUI() {
-            const streakElements = [
-                document.getElementById('streak-day1'),
-                document.getElementById('streak-day2'),
-                document.getElementById('streak-day3'),
-                document.getElementById('streak-day4'),
-                document.getElementById('streak-day5'),
-                document.getElementById('streak-day6'),
-                document.getElementById('streak-day7')
-            ];
-            
-            // Сбрасываем все состояния
-            streakElements.forEach(el => {
-                el.classList.remove('claimed', 'available', 'current');
-            });
-            
-            // Помечаем пройденные дни
-            for (let i = 0; i < gameState.currentStreak - 1; i++) {
-                if (i < streakElements.length) {
-                    streakElements[i].classList.add('claimed');
+                if (gameState.dailyGifts.claimedDays.includes(i)) {
+                    gift.classList.add('claimed');
+                } else if (i === gameState.dailyGifts.streak) {
+                    gift.classList.add('active');
                 }
+                
+                gift.innerHTML = `${i + 1}<span class="daily-gift-value">${gameState.dailyGiftValues[i] * (gameState.premiumActive ? 2 : 1)}</span>`;
+                elements.dailyGiftsProgress.appendChild(gift);
             }
             
-            // Помечаем текущий день
-            if (gameState.currentStreak > 0 && gameState.currentStreak <= streakElements.length) {
-                streakElements[gameState.currentStreak - 1].classList.add('current');
-            }
-            
-            // Обновляем информацию о серии
-            elements.streakInfo.textContent = 
-                `${translations[gameState.currentLanguage]['currentStreak']} ${gameState.currentStreak} ${translations[gameState.currentLanguage]['day' + gameState.currentStreak]}`;
+            updateDailyGiftTimer();
         }
 
-        function claimStreakReward(day) {
-            let reward = gameState.streakRewards[day - 1];
+        function updateDailyGiftTimer() {
+            const lastClaimDate = gameState.dailyGifts.lastClaimDate ? new Date(gameState.dailyGifts.lastClaimDate) : null;
+            const now = new Date();
             
-            // Удваиваем награду для премиум пользователей
-            if (gameState.premiumActive) {
-                reward *= 2;
+            if (!lastClaimDate) {
+                elements.dailyGiftTimer.textContent = translations[gameState.currentLanguage]['dailyGiftAvailable'];
+                return;
             }
             
+            const timePassed = now - lastClaimDate;
+            const timeLeft = 24 * 60 * 60 * 1000 - timePassed;
+            
+            if (timeLeft <= 0) {
+                elements.dailyGiftTimer.textContent = translations[gameState.currentLanguage]['dailyGiftAvailable'];
+                return;
+            }
+            
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            elements.dailyGiftTimer.textContent = 
+                `${translations[gameState.currentLanguage]['nextDailyGiftIn']} ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function claimDailyGift() {
+            const now = new Date();
+            const lastClaimDate = gameState.dailyGifts.lastClaimDate ? new Date(gameState.dailyGifts.lastClaimDate) : null;
+            
+            // Если последний подарок был получен менее 24 часов назад
+            if (lastClaimDate && (now - lastClaimDate) <= 24 * 60 * 60 * 1000) {
+                return;
+            }
+            
+            // Увеличиваем серию, если это следующий день
+            if (!lastClaimDate || (now - lastClaimDate) > 24 * 60 * 60 * 1000) {
+                gameState.dailyGifts.streak = 0;
+            }
+            
+            // Получаем текущий день (0-6)
+            const currentDay = gameState.dailyGifts.streak;
+            
+            // Проверяем, что день не превышает 6 (7 дней в неделе)
+            if (currentDay >= 7) {
+                return;
+            }
+            
+            // Начисляем подарок
+            const reward = gameState.dailyGiftValues[currentDay] * (gameState.premiumActive ? 2 : 1);
             gameState.coins += reward;
-            
-            // Сохраняем в localStorage
-            localStorage.setItem('insomniaCoins', gameState.coins);
-            
-            // Обновляем UI
             updateBalance();
             
-            // Показываем уведомление
-            showToast(`${translations[gameState.currentLanguage]['streakRewardClaimed']}${reward} $INSOMNIA`);
+            // Обновляем данные о подарках
+            gameState.dailyGifts.streak = currentDay + 1;
+            gameState.dailyGifts.claimedDays.push(currentDay);
+            gameState.dailyGifts.lastClaimDate = now.toISOString();
+            localStorage.setItem('dailyGifts', JSON.stringify(gameState.dailyGifts));
+            
+            // Обновляем UI
+            updateDailyGiftsUI();
+            
+            showToast(`${translations[gameState.currentLanguage]['dailyGiftClaimed']}${reward} $INSOMNIA`);
         }
 
         // Сброс прогресса
@@ -2849,11 +2570,11 @@
                 gameState.totalClicks = 0;
                 gameState.completedQuests = [];
                 gameState.paymentStatus = 'not_started';
-                gameState.lastDailyReward = null;
-                gameState.nextDailyReward = new Date(Date.now() + 24 * 60 * 60 * 1000);
-                gameState.dailyRewardsClaimed = [];
-                gameState.currentStreak = 0;
-                gameState.lastStreakDate = null;
+                gameState.dailyGifts = {
+                    streak: 0,
+                    lastClaimDate: null,
+                    claimedDays: []
+                };
                 
                 // Восстанавливаем премиум статус
                 gameState.premiumActive = premiumData.active;
@@ -2870,8 +2591,7 @@
                 elements.refEarned.textContent = gameState.refEarned;
                 updateClicksCounter();
                 updateQuestStatus();
-                updateDailyRewardsUI();
-                updateStreakUI();
+                updateDailyGiftsUI();
                 
                 if (gameState.premiumActive) {
                     activatePremium();
@@ -2921,11 +2641,13 @@
             checkPremiumStatus();
             startClickRefresh();
             checkQuests();
-            checkDailyRewards();
-            checkStreak();
+            checkDailyGifts();
             
             // Применяем выбранный язык
             translatePage(gameState.currentLanguage);
+            
+            // Запускаем таймер для обновления времени до следующего подарка
+            setInterval(updateDailyGiftTimer, 1000);
         }
 
         // Обработчики событий
@@ -3073,6 +2795,11 @@
                     
                     tab.classList.add('active');
                     document.getElementById(tab.dataset.tab).classList.add('active');
+                    
+                    // При переключении на вкладку заданий проверяем доступность ежедневного подарка
+                    if (tab.dataset.tab === 'quests-tab') {
+                        checkDailyGifts();
+                    }
                 });
             });
 
@@ -3120,7 +2847,7 @@
 
             // Поддержка
             elements.supportBtn.addEventListener('click', () => {
-                window.open('https://t.me/@Nasoo4ek', '_blank');
+                window.open('https://t.me/insomnia_ins_bot', '_blank');
                 elements.settingsMenu.classList.remove('active');
             });
 
@@ -3137,6 +2864,11 @@
 
             // Сброс прогресса
             elements.resetProgress.addEventListener('click', resetProgress);
+            
+            // Ежедневные подарки
+            elements.dailyGiftsProgress.addEventListener('click', () => {
+                claimDailyGift();
+            });
         }
 
         // Запуск игры
