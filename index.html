@@ -822,69 +822,7 @@
                 <span data-i18n="invitedFriends">Приглашено</span>: <span id="ref-count">0</span> <span data-i18n="friends">друзей</span> | 
                 <span data-i18n="earned">Получено</span>: <span id="ref-earned">0</span> $INSOMNIA
             </div>
-        </div>
-
-        <!-- Кошелёк -->
-        <div id="wallet-tab" class="tab-content">
-            <h3 data-i18n="walletTitle">Подключение кошелька</h3>
-            <div class="wallet-option" id="metamask-connect">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" width="25" alt="MetaMask">
-                MetaMask
-            </div>
-            <div class="wallet-option" id="walletconnect-connect">
-                <img src="https://walletconnect.com/walletconnect-logo.png" width="25" alt="WalletConnect">
-                WalletConnect
-            </div>
-            <div class="wallet-option" id="phantom-connect">
-                <img src="https://phantom.app/favicon.ico" width="25" alt="Phantom">
-                Phantom (Solana)
-            </div>
-            <div class="wallet-option" id="telegram-wallet-connect">
-                <img src="https://web.telegram.org/favicon.ico" width="25" alt="Telegram Wallet">
-                Telegram Wallet
-            </div>
-            <div id="wallet-info" class="wallet-info" style="display:none;">
-                <p><span data-i18n="connected">Подключен</span>: <span id="wallet-address">0x...0000</span></p>
-                <p><span data-i18n="network">Сеть</span>: <span id="wallet-network">-</span></p>
-            </div>
-        </div>
-
-        <!-- Задания -->
-        <div id="quests-tab" class="tab-content">
-            <h3 data-i18n="questsTitle">Задания</h3>
             
-            <div class="quest-item" id="telegram-quest">
-                <div>
-                    <div class="quest-title">Подпишись на Telegram канал</div>
-                    <div class="quest-description">Подпишись на наш канал и получи 100 $INSOMNIA</div>
-                </div>
-                <div class="quest-reward">+100 $INSOMNIA</div>
-            </div>
-            
-            <div class="quest-item" id="click-quest">
-                <div>
-                    <div class="quest-title">Сделай 100 кликов</div>
-                    <div class="quest-description">Кликни 100 раз и получи 100 $INSOMNIA</div>
-                </div>
-                <div class="quest-reward">+100 $INSOMNIA</div>
-            </div>
-            
-            <div class="quest-item" id="premium-quest">
-                <div>
-                    <div class="quest-title">Активируй PREMIUM</div>
-                    <div class="quest-description">Активируй PREMIUM подписку и получи 1000 $INSOMNIA</div>
-                </div>
-                <div class="quest-reward">+1000 $INSOMNIA</div>
-            </div>
-            
-            <div class="quest-item" id="daily-quest">
-                <div>
-                    <div class="quest-title">Собери 7 ежедневных наград</div>
-                    <div class="quest-description">Зайди в игру 7 дней подряд и получи бонус</div>
-                </div>
-                <div class="quest-reward">+100 $INSOMNIA</div>
-            </div>
-
             <!-- Ежедневные награды -->
             <h3 style="margin-top: 20px;" data-i18n="dailyRewards">Ежедневные награды</h3>
             <div class="daily-rewards" id="daily-rewards">
@@ -919,6 +857,68 @@
             </div>
             <button id="claim-reward-btn" class="claim-reward-btn" data-i18n="claimReward" style="display: none;">Получить награду</button>
             <div id="next-reward-info" style="font-size: 12px; color: var(--secondary-color); margin-top: 5px;"></div>
+        </div>
+
+        <!-- Кошелёк -->
+        <div id="wallet-tab" class="tab-content">
+            <h3 data-i18n="walletTitle">Подключение кошелька</h3>
+            <div class="wallet-option" id="metamask-connect">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" width="25" alt="MetaMask">
+                MetaMask
+            </div>
+            <div class="wallet-option" id="walletconnect-connect">
+                <img src="https://walletconnect.com/walletconnect-logo.png" width="25" alt="WalletConnect">
+                WalletConnect
+            </div>
+            <div class="wallet-option" id="phantom-connect">
+                <img src="https://phantom.app/favicon.ico" width="25" alt="Phantom">
+                Phantom (Solana)
+            </div>
+            <div class="wallet-option" id="telegram-wallet-connect">
+                <img src="https://web.telegram.org/favicon.ico" width="25" alt="Telegram Wallet">
+                Telegram Wallet
+            </div>
+            <div id="wallet-info" class="wallet-info" style="display:none;">
+                <p><span data-i18n="connected">Подключен</span>: <span id="wallet-address">0x...0000</span></p>
+                <p><span data-i18n="network">Сеть</span>: <span id="wallet-network">-</span></p>
+            </div>
+        </div>
+
+        <!-- Задания -->
+        <div id="quests-tab" class="tab-content">
+            <h3 data-i18n="questsTitle">Задания</h3>
+            
+            <div class="quest-item" id="telegram-quest">
+                <div>
+                    <div class="quest-title">Подпишись на Telegram канал</div>
+                    <div class="quest-description">Подпишись на наш канал и получи 500 $INSOMNIA</div>
+                </div>
+                <div class="quest-reward">+500 $INSOMNIA</div>
+            </div>
+            
+            <div class="quest-item" id="click-quest">
+                <div>
+                    <div class="quest-title">Сделай 100 кликов</div>
+                    <div class="quest-description">Кликни 100 раз и получи 200 $INSOMNIA</div>
+                </div>
+                <div class="quest-reward">+200 $INSOMNIA</div>
+            </div>
+            
+            <div class="quest-item" id="premium-quest">
+                <div>
+                    <div class="quest-title">Активируй PREMIUM</div>
+                    <div class="quest-description">Активируй PREMIUM подписку и получи 1000 $INSOMNIA</div>
+                </div>
+                <div class="quest-reward">+1000 $INSOMNIA</div>
+            </div>
+            
+            <div class="quest-item" id="daily-quest">
+                <div>
+                    <div class="quest-title">Собери 7 ежедневных наград</div>
+                    <div class="quest-description">Зайди в игру 7 дней подряд и получи бонус</div>
+                </div>
+                <div class="quest-reward">+500 $INSOMNIA</div>
+            </div>
         </div>
     </div>
 
@@ -1087,8 +1087,7 @@
             dailyRewards: JSON.parse(localStorage.getItem('dailyRewards')) || {
                 streak: 0,
                 lastClaimDate: null,
-                claimedDays: [],
-                lastClaimTimestamp: null
+                claimedDays: []
             },
             dailyRewardsAmounts: [25, 50, 75, 100, 125, 150, 175]
         };
@@ -1188,9 +1187,9 @@
                 paymentFailed: "Оплата не найдена. Пожалуйста, попробуйте еще раз.",
                 questsTitle: "Задания",
                 telegramQuestTitle: "Подпишись на Telegram канал",
-                telegramQuestDesc: "Подпишись на наш канал и получи 100 $INSOMNIA",
+                telegramQuestDesc: "Подпишись на наш канал и получи 500 $INSOMNIA",
                 clickQuestTitle: "Сделай 100 кликов",
-                clickQuestDesc: "Кликни 100 раз и получи 100 $INSOMNIA",
+                clickQuestDesc: "Кликни 100 раз и получи 200 $INSOMNIA",
                 premiumQuestTitle: "Активируй PREMIUM",
                 premiumQuestDesc: "Активируй PREMIUM подписку и получи 1000 $INSOMNIA",
                 dailyQuestTitle: "Собери 7 ежедневных наград",
@@ -1300,9 +1299,9 @@
                 paymentFailed: "Payment not found. Please try again.",
                 questsTitle: "Quests",
                 telegramQuestTitle: "Subscribe to Telegram channel",
-                telegramQuestDesc: "Subscribe to our channel and get 100 $INSOMNIA",
+                telegramQuestDesc: "Subscribe to our channel and get 500 $INSOMNIA",
                 clickQuestTitle: "Make 100 clicks",
-                clickQuestDesc: "Click 100 times and get 100 $INSOMNIA",
+                clickQuestDesc: "Click 100 times and get 200 $INSOMNIA",
                 premiumQuestTitle: "Activate PREMIUM",
                 premiumQuestDesc: "Activate PREMIUM subscription and get 1000 $INSOMNIA",
                 dailyQuestTitle: "Collect 7 daily rewards",
@@ -1367,7 +1366,7 @@
                 usage2: "Mejorar la experiencia del usuario",
                 usage3: "Analizar la efectividad de las funciones de la aplicación",
                 dataStorage: "3. Almacenamiento de datos",
-                dataStorageText: "Todos los datos del juego son almacenados localmente en su navegador. Puede reiniciar el progreso en cualquier momento en la configuración.",
+                dataStorageText: "Todos los datos del juego se almacenan localmente en su navegador. Puede reiniciar el progreso en cualquier momento en la configuración.",
                 thirdParty: "4. Terceros",
                 thirdPartyText: "La aplicación puede integrarse con los siguientes servicios:",
                 service1: "MetaMask y otras billeteras (a su elección)",
@@ -1412,14 +1411,14 @@
                 paymentFailed: "Pago no encontrado. Por favor, inténtalo de nuevo.",
                 questsTitle: "Misiones",
                 telegramQuestTitle: "Suscríbete al canal de Telegram",
-                telegramQuestDesc: "Suscríbete a nuestro canal y obtén 100 $INSOMNIA",
+                telegramQuestDesc: "Suscríbete a nuestro canal y obtén 500 $INSOMNIA",
                 clickQuestTitle: "Haz 100 clics",
-                clickQuestDesc: "Haz clic 100 veces y obtén 100 $INSOMNIA",
+                clickQuestDesc: "Haz clic 100 veces y obtén 200 $INSOMNIA",
                 premiumQuestTitle: "Activa PREMIUM",
                 premiumQuestDesc: "Activa la suscripción PREMIUM y obtén 1000 $INSOMNIA",
                 dailyQuestTitle: "Recoge 7 recompensas diarias",
                 dailyQuestDesc: "Inicia sesión durante 7 días seguidos y obtén un bono",
-                questCompleted: "Misión completada! +",
+                questCompleted: "¡Misión completada! +",
                 subscribeTelegram: "Suscribirse al canal",
                 telegramSubscribed: "¡Gracias por suscribirte! Recompensa acreditada.",
                 telegramPaymentInitiated: "Pago por Telegram iniciado",
@@ -1524,9 +1523,9 @@
                 paymentFailed: "Paiement non trouvé. Veuillez réessayer.",
                 questsTitle: "Quêtes",
                 telegramQuestTitle: "Abonnez-vous à la chaîne Telegram",
-                telegramQuestDesc: "Abonnez-vous à notre chaîne et obtenez 100 $INSOMNIA",
+                telegramQuestDesc: "Abonnez-vous à notre chaîne et obtenez 500 $INSOMNIA",
                 clickQuestTitle: "Faites 100 clics",
-                clickQuestDesc: "Cliquez 100 fois et obtenez 100 $INSOMNIA",
+                clickQuestDesc: "Cliquez 100 fois et obtenez 200 $INSOMNIA",
                 premiumQuestTitle: "Activez PREMIUM",
                 premiumQuestDesc: "Activez l'abonnement PREMIUM et obtenez 1000 $INSOMNIA",
                 dailyQuestTitle: "Collectez 7 récompenses quotidiennes",
@@ -1636,13 +1635,13 @@
                 paymentFailed: "Pagamento não encontrado. Por favor, tente novamente.",
                 questsTitle: "Missões",
                 telegramQuestTitle: "Inscreva-se no canal do Telegram",
-                telegramQuestDesc: "Inscreva-se no nosso canal e ganhe 100 $INSOMNIA",
-                clickQuestTitle: "Faça 100 clics",
-                clickQuestDesc: "Clique 100 vezes e ganhe 100 $INSOMNIA",
+                telegramQuestDesc: "Inscreva-se no nosso canal e ganhe 500 $INSOMNIA",
+                clickQuestTitle: "Faça 100 cliques",
+                clickQuestDesc: "Clique 100 vezes e ganhe 200 $INSOMNIA",
                 premiumQuestTitle: "Ative o PREMIUM",
                 premiumQuestDesc: "Ative a assinatura PREMIUM e ganhe 1000 $INSOMNIA",
                 dailyQuestTitle: "Colete 7 recompensas diárias",
-                dailyQuestDesc: "Faça login por 7 dias consecutivos e ganhe um bono",
+                dailyQuestDesc: "Faça login por 7 dias consecutivos e ganhe um bônus",
                 questCompleted: "Missão concluída! +",
                 subscribeTelegram: "Inscrever-se no canal",
                 telegramSubscribed: "Obrigado por se inscrever! Recompensa creditada.",
@@ -1748,9 +1747,9 @@
                 paymentFailed: "未找到支付。请重试。",
                 questsTitle: "任务",
                 telegramQuestTitle: "订阅Telegram频道",
-                telegramQuestDesc: "订阅我们的频道并获得100 $INSOMNIA",
+                telegramQuestDesc: "订阅我们的频道并获得500 $INSOMNIA",
                 clickQuestTitle: "点击100次",
-                clickQuestDesc: "点击100次并获得100 $INSOMNIA",
+                clickQuestDesc: "点击100次并获得200 $INSOMNIA",
                 premiumQuestTitle: "激活高级版",
                 premiumQuestDesc: "激活高级版订阅并获得1000 $INSOMNIA",
                 dailyQuestTitle: "收集7天每日奖励",
@@ -1860,9 +1859,9 @@
                 paymentFailed: "Zahlung nicht gefunden. Bitte versuchen Sie es erneut.",
                 questsTitle: "Aufgaben",
                 telegramQuestTitle: "Abonniere den Telegram-Kanal",
-                telegramQuestDesc: "Abonniere unseren Kanal und erhalte 100 $INSOMNIA",
+                telegramQuestDesc: "Abonniere unseren Kanal und erhalte 500 $INSOMNIA",
                 clickQuestTitle: "Mache 100 Klicks",
-                clickQuestDesc: "Klicke 100 Mal und erhalte 100 $INSOMNIA",
+                clickQuestDesc: "Klicke 100 Mal und erhalte 200 $INSOMNIA",
                 premiumQuestTitle: "Aktiviere PREMIUM",
                 premiumQuestDesc: "Aktiviere das PREMIUM-Abonnement und erhalte 1000 $INSOMNIA",
                 dailyQuestTitle: "Sammle 7 tägliche Belohnungen",
@@ -1972,9 +1971,9 @@
                 paymentFailed: "Pagamento non trovato. Riprova.",
                 questsTitle: "Missioni",
                 telegramQuestTitle: "Iscriviti al canale Telegram",
-                telegramQuestDesc: "Iscriviti al nostro canale e ottieni 100 $INSOMNIA",
+                telegramQuestDesc: "Iscriviti al nostro canale e ottieni 500 $INSOMNIA",
                 clickQuestTitle: "Fai 100 clic",
-                clickQuestDesc: "Clicca 100 volte e ottieni 100 $INSOMNIA",
+                clickQuestDesc: "Clicca 100 volte e ottieni 200 $INSOMNIA",
                 premiumQuestTitle: "Attiva PREMIUM",
                 premiumQuestDesc: "Attiva l'abbonamento PREMIUM e ottieni 1000 $INSOMNIA",
                 dailyQuestTitle: "Raccogli 7 ricompense giornaliere",
@@ -2084,9 +2083,9 @@
                 paymentFailed: "Ödeme bulunamadı. Lütfen tekrar deneyin.",
                 questsTitle: "Görevler",
                 telegramQuestTitle: "Telegram kanalına abone ol",
-                telegramQuestDesc: "Kanalımıza abone olun ve 100 $INSOMNIA kazanın",
+                telegramQuestDesc: "Kanalımıza abone olun ve 500 $INSOMNIA kazanın",
                 clickQuestTitle: "100 tıklama yap",
-                clickQuestDesc: "100 kez tıkla ve 100 $INSOMNIA kazan",
+                clickQuestDesc: "100 kez tıkla ve 200 $INSOMNIA kazan",
                 premiumQuestTitle: "PREMIUM'u etkinleştir",
                 premiumQuestDesc: "PREMIUM aboneliğini etkinleştir ve 1000 $INSOMNIA kazan",
                 dailyQuestTitle: "7 günlük ödül topla",
@@ -2134,9 +2133,7 @@
             settingsMenu: document.getElementById('settings-menu'),
             languageBtn: document.getElementById('language-btn'),
             languageMenu: document.getElementById('language-menu'),
-            resetProgress: document
-
-resetProgress: document.getElementById('reset-progress'),
+            resetProgress: document.getElementById('reset-progress'),
             privacyBtn: document.getElementById('privacy-btn'),
             supportBtn: document.getElementById('support-btn'),
             privacyModal: document.getElementById('privacy-modal'),
@@ -2445,7 +2442,7 @@ resetProgress: document.getElementById('reset-progress'),
         function checkQuests() {
             // Проверяем задание на клики
             if (gameState.totalClicks >= 100 && !gameState.completedQuests.includes('click_quest')) {
-                completeQuest('click_quest', 100);
+                completeQuest('click_quest', 200);
             }
             
             // Обновляем статус заданий
@@ -2540,7 +2537,6 @@ resetProgress: document.getElementById('reset-progress'),
             if (!gameState.dailyRewards.lastClaimDate) {
                 gameState.dailyRewards.streak = 0;
                 gameState.dailyRewards.lastClaimDate = today;
-                gameState.dailyRewards.lastClaimTimestamp = Date.now();
                 gameState.dailyRewards.claimedDays = [];
                 saveDailyRewards();
                 return;
@@ -2564,7 +2560,6 @@ resetProgress: document.getElementById('reset-progress'),
             
             // Обновляем дату последнего входа
             gameState.dailyRewards.lastClaimDate = today;
-            gameState.dailyRewards.lastClaimTimestamp = Date.now();
             saveDailyRewards();
             
             // Обновляем отображение наград
@@ -2606,34 +2601,12 @@ resetProgress: document.getElementById('reset-progress'),
                 
                 // Проверяем задание на ежедневные награды
                 if (!gameState.completedQuests.includes('daily_quest')) {
-                    completeQuest('daily_quest', 100);
+                    completeQuest('daily_quest', 500);
                 }
             } else {
                 // Показываем информацию о следующей награде
-                updateNextRewardTimer();
+                elements.nextRewardInfo.textContent = `${translations[gameState.currentLanguage]['nextRewardIn']} ${7 - gameState.dailyRewards.streak} ${translations[gameState.currentLanguage]['day']}`;
             }
-        }
-
-        function updateNextRewardTimer() {
-            if (!gameState.dailyRewards.lastClaimTimestamp) return;
-            
-            const now = Date.now();
-            const timeSinceLastClaim = now - gameState.dailyRewards.lastClaimTimestamp;
-            const timeUntilNextReward = 24 * 60 * 60 * 1000 - timeSinceLastClaim;
-            
-            if (timeUntilNextReward <= 0) {
-                elements.nextRewardInfo.textContent = translations[gameState.currentLanguage]['claimReward'];
-                return;
-            }
-            
-            const hours = Math.floor(timeUntilNextReward / (60 * 60 * 1000));
-            const minutes = Math.floor((timeUntilNextReward % (60 * 60 * 1000)) / (60 * 1000));
-            const seconds = Math.floor((timeUntilNextReward % (60 * 1000)) / 1000);
-            
-            elements.nextRewardInfo.textContent = 
-                `${translations[gameState.currentLanguage]['nextRewardIn']} ${hours}h ${minutes}m ${seconds}s`;
-            
-            setTimeout(updateNextRewardTimer, 1000);
         }
 
         function claimDailyReward() {
@@ -2644,34 +2617,11 @@ resetProgress: document.getElementById('reset-progress'),
                 return;
             }
             
-            // Проверяем, что прошло 24 часа с последнего получения награды
-            if (gameState.dailyRewards.lastClaimTimestamp) {
-                const now = Date.now();
-                const timeSinceLastClaim = now - gameState.dailyRewards.lastClaimTimestamp;
-                
-                if (timeSinceLastClaim < 24 * 60 * 60 * 1000) {
-                    const timeLeft = 24 * 60 * 60 * 1000 - timeSinceLastClaim;
-                    const hours = Math.floor(timeLeft / (60 * 60 * 1000));
-                    const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
-                    const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
-                    
-                    showToast(`${translations[gameState.currentLanguage]['nextRewardIn']} ${hours}h ${minutes}m ${seconds}s`);
-                    return;
-                }
-            }
-            
             // Получаем награду за текущий день
-            let rewardAmount = gameState.dailyRewardsAmounts[nextDay - 1];
-            
-            // Удваиваем награду для премиум пользователей
-            if (gameState.premiumActive) {
-                rewardAmount *= 2;
-            }
-            
+            const rewardAmount = gameState.dailyRewardsAmounts[nextDay - 1];
             gameState.coins += rewardAmount;
             gameState.dailyRewards.streak = nextDay;
             gameState.dailyRewards.claimedDays.push(nextDay);
-            gameState.dailyRewards.lastClaimTimestamp = Date.now();
             
             // Обновляем баланс и сохраняем данные
             updateBalance();
@@ -2738,7 +2688,6 @@ resetProgress: document.getElementById('reset-progress'),
                 gameState.dailyRewards = {
                     streak: 0,
                     lastClaimDate: null,
-                    lastClaimTimestamp: null,
                     claimedDays: []
                 };
                 
@@ -2852,7 +2801,7 @@ resetProgress: document.getElementById('reset-progress'),
                             
                             // Проверяем задание на клики
                             if (gameState.totalClicks >= 100 && !gameState.completedQuests.includes('click_quest')) {
-                                completeQuest('click_quest', 100);
+                                completeQuest('click_quest', 200);
                             }
                         }, gameState.CLICK_DELAY);
                     } else {
@@ -2989,520 +2938,166 @@ resetProgress: document.getElementById('reset-progress'),
             });
 
             // Подключение кошельков
-            elements.metamaskConnect.addEventListener('click', async ()
-
-} else {
-    elements.buyPremiumBtn.textContent = translations[lang]['buyPremium'];
-    elements.buyPremiumBtn.classList.remove('premium-btn');
-}
-
-// Проверка премиум-статуса
-function checkPremiumStatus() {
-    if (gameState.premiumEndDate && new Date() < new Date(gameState.premiumEndDate)) {
-        activatePremium();
-        startTimer();
-    } else if (gameState.premiumActive) {
-        // Если премиум активен, но дата истекла, деактивируем
-        gameState.premiumActive = false;
-        localStorage.setItem('premiumActive', 'false');
-    }
-}
-
-// Активация премиума
-function activatePremium() {
-    gameState.premiumActive = true;
-    localStorage.setItem('premiumActive', 'true');
-    gameState.clickPower = 2;
-    elements.premiumBadge.style.display = "inline";
-    elements.refBonusText.textContent = translations[gameState.currentLanguage]['refBonusTextPremium'];
-    elements.buyPremiumBtn.textContent = translations[gameState.currentLanguage]['premiumActive'];
-    elements.buyPremiumBtn.classList.add('premium-btn');
-    elements.timeLeft.style.display = "block";
-    elements.regenInfo.textContent = translations[gameState.currentLanguage]['unlimitedClicks'];
-    
-    // Восстанавливаем клики при активации премиума
-    gameState.clicksLeft = Infinity;
-    updateClicksCounter();
-    
-    // Применяем сохраненные цвета
-    applySavedColors();
-    
-    showToast(translations[gameState.currentLanguage]['premiumActivated']);
-    
-    // Проверяем задание на премиум
-    checkPremiumQuest();
-}
-
-// Таймер обратного отсчета
-function startTimer() {
-    clearInterval(gameState.timerInterval);
-    
-    gameState.timerInterval = setInterval(() => {
-        const now = new Date();
-        const endDate = new Date(gameState.premiumEndDate);
-        const diff = endDate - now;
-        
-        if (diff <= 0) {
-            clearInterval(gameState.timerInterval);
-            gameState.premiumActive = false;
-            localStorage.setItem('premiumActive', 'false');
-            elements.premiumBadge.style.display = "none";
-            elements.buyPremiumBtn.textContent = translations[gameState.currentLanguage]['buyPremium'];
-            elements.buyPremiumBtn.classList.remove('premium-btn');
-            elements.timeLeft.style.display = "none";
-            gameState.clicksLeft = gameState.MAX_CLICKS;
-            updateClicksCounter();
-            startClickRefresh();
-            showToast(translations[gameState.currentLanguage]['premiumExpired']);
-            return;
-        }
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        elements.timeLeft.textContent = 
-            `${translations[gameState.currentLanguage]['premiumExpiresIn']}: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-        
-        updatePremiumTimeInfo();
-    }, 1000);
-}
-
-// Постоянное восстановление кликов
-function startClickRefresh() {
-    clearInterval(gameState.clickRefreshInterval);
-    
-    if (gameState.premiumActive) return;
-    
-    gameState.clickRefreshInterval = setInterval(() => {
-        const now = Date.now();
-        const timePassed = (now - gameState.regenStartTime) / 1000; // в секундах
-        const regenerated = Math.floor(timePassed * gameState.REGEN_RATE);
-        
-        if (gameState.clicksLeft < gameState.MAX_CLICKS) {
-            gameState.clicksLeft = Math.min(gameState.MAX_CLICKS, regenerated);
-            updateClicksCounter();
-            
-            if (gameState.clicksLeft < gameState.MAX_CLICKS) {
-                const nextClickIn = Math.ceil(1 - (timePassed % 1));
-                elements.regenInfo.textContent = 
-                    `${translations[gameState.currentLanguage]['regenInfo']}: ${gameState.clicksLeft}/${gameState.MAX_CLICKS} ` + 
-                    `(${translations[gameState.currentLanguage]['nextIn']} ${nextClickIn}${translations[gameState.currentLanguage]['seconds']})`;
-            } else {
-                elements.regenInfo.textContent = translations[gameState.currentLanguage]['regenReady'];
-            }
-        }
-    }, 100); // Частое обновление для плавности
-}
-
-// Обновление информации о времени в модальном окне
-function updatePremiumTimeInfo() {
-    if (!gameState.premiumActive) return;
-    
-    const now = new Date();
-    const endDate = new Date(gameState.premiumEndDate);
-    const diff = endDate - now;
-    
-    if (diff <= 0) return;
-    
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    elements.premiumTimeInfo.innerHTML = 
-        `<p style="color:gold;">${translations[gameState.currentLanguage]['premiumActiveFor']} ${days}d ${hours}h ${minutes}m</p>`;
-}
-
-// Обновление счетчика кликов
-function updateClicksCounter() {
-    const progressPercent = gameState.premiumActive ? 100 : (gameState.clicksLeft / gameState.MAX_CLICKS) * 100;
-    elements.progressBar.style.background = 
-        `linear-gradient(90deg, ${gameState.selectedProgressColor1}, ${gameState.selectedProgressColor2})`;
-    elements.progressBar.style.width = `${progressPercent}%`;
-    
-    if (gameState.premiumActive) {
-        elements.clicksLeft.textContent = translations[gameState.currentLanguage]['unlimitedClicksPremium'];
-    } else {
-        const [before] = elements.clicksLeft.textContent.split(':');
-        elements.clicksLeft.textContent = `${before || translations[gameState.currentLanguage]['clicksLeft']}: ${gameState.clicksLeft}/${gameState.MAX_CLICKS}`;
-    }
-    
-    localStorage.setItem('clicksLeft', gameState.clicksLeft);
-}
-
-// Обновление баланса
-function updateBalance() {
-    elements.balance.textContent = gameState.coins;
-    localStorage.setItem('insomniaCoins', gameState.coins);
-}
-
-// Применение сохраненных цветов
-function applySavedColors() {
-    if (gameState.premiumActive) {
-        elements.clickArea.style.background = 
-            `linear-gradient(45deg, ${gameState.selectedButtonColor1}, ${gameState.selectedButtonColor2})`;
-        document.body.style.backgroundColor = gameState.selectedBgColor;
-        document.querySelector('.header').style.backgroundColor = gameState.selectedBgColor;
-        updateClicksCounter();
-    }
-}
-
-// Генерация реферального кода
-function generateRefCode() {
-    return Math.random().toString(36).substring(2, 8).toUpperCase();
-}
-
-// Проверка реферала
-function checkReferral() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('ref')) {
-        const refCode = urlParams.get('ref');
-        if (!localStorage.getItem('refProcessed')) {
-            gameState.refCount++;
-            const reward = gameState.premiumActive ? gameState.REF_REWARD * 2 : gameState.REF_REWARD;
-            gameState.refEarned += reward;
-            gameState.coins += reward;
-            updateBalance();
-            localStorage.setItem('refCount', gameState.refCount);
-            localStorage.setItem('refEarned', gameState.refEarned);
-            localStorage.setItem('refProcessed', 'true');
-            elements.refCount.textContent = gameState.refCount;
-            elements.refEarned.textContent = gameState.refEarned;
-            showToast(`${translations[gameState.currentLanguage]['refReward']} ${reward} $INSOMNIA ${translations[gameState.currentLanguage]['forFriendInvite']}`);
-        }
-    }
-}
-
-// Проверка заданий
-function checkQuests() {
-    // Проверяем задание на клики
-    if (gameState.totalClicks >= 100 && !gameState.completedQuests.includes('click_quest')) {
-        completeQuest('click_quest', 100);
-    }
-    
-    // Обновляем статус заданий
-    updateQuestStatus();
-}
-
-function completeQuest(questId, reward) {
-    gameState.completedQuests.push(questId);
-    gameState.coins += reward;
-    updateBalance();
-    localStorage.setItem('completedQuests', JSON.stringify(gameState.completedQuests));
-    showToast(`${translations[gameState.currentLanguage]['questCompleted']}${reward} $INSOMNIA`);
-    updateQuestStatus();
-}
-
-function updateQuestStatus() {
-    // Telegram quest
-    if (gameState.completedQuests.includes('telegram_quest')) {
-        elements.telegramQuest.classList.add('quest-completed');
-    }
-    
-    // Click quest
-    if (gameState.completedQuests.includes('click_quest')) {
-        elements.clickQuest.classList.add('quest-completed');
-    }
-    
-    // Premium quest
-    if (gameState.completedQuests.includes('premium_quest')) {
-        elements.premiumQuest.classList.add('quest-completed');
-    }
-    
-    // Daily quest
-    if (gameState.completedQuests.includes('daily_quest')) {
-        elements.dailyQuest.classList.add('quest-completed');
-    }
-}
-
-function checkPremiumQuest() {
-    if (gameState.premiumActive && !gameState.completedQuests.includes('premium_quest')) {
-        completeQuest('premium_quest', 1000);
-    }
-}
-
-// Система ежедневных наград
-function checkDailyRewards() {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    
-    // Если это первый вход пользователя, даем первый подарок сразу
-    if (!gameState.dailyRewards.lastClaimDate) {
-        claimDailyReward(true); // true - первый подарок
-        return;
-    }
-    
-    const lastClaimDate = new Date(gameState.dailyRewards.lastClaimDate);
-    const daysSinceLastClaim = Math.floor((today - lastClaimDate) / (1000 * 60 * 60 * 24));
-    
-    // Если пользователь заходит в тот же день
-    if (daysSinceLastClaim === 0) {
-        // Ничего не делаем, награда уже получена
-        return;
-    }
-    
-    // Если пользователь пропустил день, сбрасываем серию
-    if (daysSinceLastClaim > 1) {
-        gameState.dailyRewards.streak = 0;
-        gameState.dailyRewards.claimedDays = [];
-        showToast(translations[gameState.currentLanguage]['streakReset']);
-    }
-    
-    // Обновляем отображение наград
-    updateDailyRewardsDisplay();
-}
-
-function updateDailyRewardsDisplay() {
-    const rewardDays = elements.dailyRewards.querySelectorAll('.reward-day');
-    
-    rewardDays.forEach(day => {
-        const dayNumber = parseInt(day.getAttribute('data-day'));
-        
-        // Сбрасываем все классы
-        day.className = 'reward-day';
-        
-        // Если день уже получен
-        if (gameState.dailyRewards.claimedDays.includes(dayNumber)) {
-            day.classList.add('claimed');
-        } 
-        // Если это текущий день в серии
-        else if (dayNumber === gameState.dailyRewards.streak + 1) {
-            day.classList.add('current');
-            elements.claimRewardBtn.style.display = 'block';
-        }
-        // Если это день в активной серии, но еще не получен
-        else if (dayNumber <= gameState.dailyRewards.streak + 1) {
-            day.classList.add('active');
-        }
-        // Если это день после пропуска
-        else {
-            day.classList.add('missed');
-        }
-    });
-    
-    // Если все 7 дней получены, показываем сообщение
-    if (gameState.dailyRewards.streak >= 7) {
-        elements.claimRewardBtn.style.display = 'none';
-        elements.nextRewardInfo.textContent = translations[gameState.currentLanguage]['dailyStreakComplete'];
-        
-        // Проверяем задание на ежедневные награды
-        if (!gameState.completedQuests.includes('daily_quest')) {
-            completeQuest('daily_quest', 100);
-        }
-    } else {
-        // Показываем информацию о следующей награде
-        updateNextRewardTimer();
-    }
-}
-
-function updateNextRewardTimer() {
-    if (!gameState.dailyRewards.lastClaimTimestamp) return;
-    
-    const now = Date.now();
-    const timeSinceLastClaim = now - gameState.dailyRewards.lastClaimTimestamp;
-    const timeUntilNextReward = 24 * 60 * 60 * 1000 - timeSinceLastClaim;
-    
-    if (timeUntilNextReward <= 0) {
-        elements.nextRewardInfo.textContent = translations[gameState.currentLanguage]['claimReward'];
-        return;
-    }
-    
-    const hours = Math.floor(timeUntilNextReward / (60 * 60 * 1000));
-    const minutes = Math.floor((timeUntilNextReward % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((timeUntilNextReward % (60 * 1000)) / 1000);
-    
-    elements.nextRewardInfo.textContent = 
-        `${translations[gameState.currentLanguage]['nextRewardIn']} ${hours}h ${minutes}m ${seconds}s`;
-    
-    setTimeout(updateNextRewardTimer, 1000);
-}
-
-function claimDailyReward(isFirstTime = false) {
-    const nextDay = gameState.dailyRewards.streak + 1;
-    
-    // Проверяем, что день еще не получен (кроме первого входа)
-    if (!isFirstTime && gameState.dailyRewards.claimedDays.includes(nextDay)) {
-        return;
-    }
-    
-    // Для первого входа пропускаем проверку времени
-    if (!isFirstTime && gameState.dailyRewards.lastClaimTimestamp) {
-        const now = Date.now();
-        const timeSinceLastClaim = now - gameState.dailyRewards.lastClaimTimestamp;
-        
-        if (timeSinceLastClaim < 24 * 60 * 60 * 1000) {
-            updateNextRewardTimer();
-            return;
-        }
-    }
-    
-    // Получаем награду за текущий день
-    let rewardAmount = gameState.dailyRewardsAmounts[nextDay - 1];
-    
-    // Удваиваем награду для премиум пользователей
-    if (gameState.premiumActive) {
-        rewardAmount *= 2;
-    }
-    
-    gameState.coins += rewardAmount;
-    gameState.dailyRewards.streak = nextDay;
-    gameState.dailyRewards.claimedDays.push(nextDay);
-    gameState.dailyRewards.lastClaimDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime();
-    gameState.dailyRewards.lastClaimTimestamp = Date.now();
-    
-    // Обновляем баланс и сохраняем данные
-    updateBalance();
-    saveDailyRewards();
-    
-    // Обновляем отображение
-    updateDailyRewardsDisplay();
-    
-    // Показываем сообщение о получении награды
-    showToast(`${translations[gameState.currentLanguage]['rewardClaimed']}${rewardAmount} $INSOMNIA`);
-    
-    // Если это 7-й день, сбрасываем серию
-    if (nextDay === 7) {
-        setTimeout(() => {
-            gameState.dailyRewards.streak = 0;
-            gameState.dailyRewards.claimedDays = [];
-            saveDailyRewards();
-            updateDailyRewardsDisplay();
-        }, 3000);
-    }
-}
-
-function saveDailyRewards() {
-    localStorage.setItem('dailyRewards', JSON.stringify(gameState.dailyRewards));
-}
-
-// Инициализация игры
-function init() {
-    // Восстановление кликов при загрузке
-    if (!gameState.premiumActive) {
-        const now = Date.now();
-        const timePassed = (now - gameState.regenStartTime) / 1000;
-        const regenerated = Math.floor(timePassed * gameState.REGEN_RATE);
-        gameState.clicksLeft = Math.min(gameState.MAX_CLICKS, regenerated);
-        updateClicksCounter();
-        
-        if (gameState.clicksLeft < gameState.MAX_CLICKS) {
-            const nextClickIn = Math.ceil(1 - (timePassed % 1));
-            elements.regenInfo.textContent = 
-                `${translations[gameState.currentLanguage]['regenInfo']}: ${gameState.clicksLeft}/${gameState.MAX_CLICKS} ` + 
-                `(${translations[gameState.currentLanguage]['nextIn']} ${nextClickIn}${translations[gameState.currentLanguage]['seconds']})`;
-        } else {
-            elements.regenInfo.textContent = translations[gameState.currentLanguage]['regenReady'];
-        }
-    }
-    
-    elements.balance.textContent = gameState.coins;
-    elements.refCount.textContent = gameState.refCount;
-    elements.refEarned.textContent = gameState.refEarned;
-    updateClicksCounter();
-    checkPremiumStatus();
-    startClickRefresh();
-    checkQuests();
-    checkDailyRewards();
-    
-    // Применяем выбранный язык
-    translatePage(gameState.currentLanguage);
-}
-
-// Обработчики событий
-function setupEventListeners() {
-    // Кликер с задержкой и эффектом
-    elements.clickArea.addEventListener('click', (e) => {
-        const now = Date.now();
-        if (now - gameState.lastClickTime < gameState.CLICK_COOLDOWN) return;
-        gameState.lastClickTime = now;
-        
-        if (gameState.clicksLeft > 0 || gameState.premiumActive) {
-            // Создаем эффект эмодзи
-            createEmojiEffect(e.clientX, e.clientY);
-            
-            if (!gameState.premiumActive) {
-                if (gameState.clicksLeft <= 0) return;
-                
-                // Визуальная реакция на клик
-                animateClick();
-                
-                // Задержка перед обработкой клика
-                setTimeout(() => {
-                    gameState.clicksLeft--;
-                    gameState.totalClicks++;
-                    localStorage.setItem('totalClicks', gameState.totalClicks);
-                    updateClicksCounter();
-                    
-                    if (gameState.clicksLeft <= 0) {
-                        gameState.regenStartTime = Date.now();
-                        localStorage.setItem('regenStartTime', gameState.regenStartTime);
-                        elements.regenInfo.textContent = 
-                            `${translations[gameState.currentLanguage]['regenInfo']}: 0/${gameState.MAX_CLICKS} ` + 
-                            `(${translations[gameState.currentLanguage]['nextIn']} 1${translations[gameState.currentLanguage]['seconds']})`;
+            elements.metamaskConnect.addEventListener('click', async () => {
+                if (typeof window.ethereum !== 'undefined') {
+                    try {
+                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const address = accounts[0];
+                        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                        
+                        let networkName = "Unknown";
+                        switch(chainId) {
+                            case '0x1': networkName = "Ethereum Mainnet"; break;
+                            case '0x89': networkName = "Polygon"; break;
+                            case '0x38': networkName = "BNB Chain"; break;
+                        }
+                        
+                        elements.walletAddress.textContent = 
+                            `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+                        elements.walletNetwork.textContent = networkName;
+                        elements.walletInfo.style.display = 'block';
+                        
+                        showToast(`${translations[gameState.currentLanguage]['walletConnected']}!\n${translations[gameState.currentLanguage]['network']}: ${networkName}`);
+                    } catch (error) {
+                        console.error(error);
+                        showToast(translations[gameState.currentLanguage]['walletError']);
                     }
-                    
-                    gameState.coins += gameState.clickPower;
-                    createCoinEffect(e.clientX, e.clientY, gameState.clickPower);
-                    updateBalance();
-                    
-                    // Проверяем задание на клики
-                    if (gameState.totalClicks >= 100 && !gameState.completedQuests.includes('click_quest')) {
-                        completeQuest('click_quest', 100);
+                } else {
+                    showToast(translations[gameState.currentLanguage]['installMetamask']);
+                    window.open('https://metamask.io/download.html', '_blank');
+                }
+            });
+
+            // WalletConnect и другие кошельки (заглушки)
+            elements.walletconnectConnect.addEventListener('click', () => {
+                showToast(translations[gameState.currentLanguage]['walletConnectIntegration']);
+            });
+
+            elements.phantomConnect.addEventListener('click', () => {
+                if (window.solana && window.solana.isPhantom) {
+                    window.solana.connect()
+                        .then(() => {
+                            const address = window.solana.publicKey.toString();
+                            elements.walletAddress.textContent = 
+                                `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+                            elements.walletNetwork.textContent = "Solana";
+                            elements.walletInfo.style.display = 'block';
+                            showToast(translations[gameState.currentLanguage]['phantomConnected']);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            showToast(translations[gameState.currentLanguage]['phantomError']);
+                        });
+                } else {
+                    showToast(translations[gameState.currentLanguage]['installPhantom']);
+                    window.open('https://phantom.app/', '_blank');
+                }
+            });
+
+            // Подключение Telegram Wallet
+            elements.telegramWalletConnect.addEventListener('click', () => {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    try {
+                        // В реальном приложении здесь будет вызов API Telegram Wallet
+                        const address = "UQ" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                        elements.walletAddress.textContent = 
+                            `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+                        elements.walletNetwork.textContent = "TON";
+                        elements.walletInfo.style.display = 'block';
+                        showToast(translations[gameState.currentLanguage]['telegramWalletConnected']);
+                    } catch (error) {
+                        console.error(error);
+                        showToast(translations[gameState.currentLanguage]['telegramWalletError']);
                     }
-                }, gameState.CLICK_DELAY);
-            } else {
-                // Для премиум-пользователей без задержки
-                animateClick();
-                gameState.coins += gameState.clickPower;
-                gameState.totalClicks++;
-                localStorage.setItem('totalClicks', gameState.totalClicks);
-                createCoinEffect(e.clientX, e.clientY, gameState.clickPower);
-                updateBalance();
-            }
+                } else {
+                    showToast(translations[gameState.currentLanguage]['installTelegramWallet']);
+                    window.open('https://telegram.org/', '_blank');
+                }
+            });
+
+            // Переключение табов
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            // Настройки
+            elements.settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                elements.settingsMenu.classList.toggle('active');
+                // Закрываем меню языка при открытии/закрытии основного меню
+                elements.languageMenu.classList.remove('active');
+            });
+
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.settings-menu') && !e.target.closest('#settings-btn')) {
+                    elements.settingsMenu.classList.remove('active');
+                    elements.languageMenu.classList.remove('active');
+                }
+            });
+
+            // Меню языка
+            elements.languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                elements.languageMenu.classList.toggle('active');
+            });
+
+            // Смена языка
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    elements.languageMenu.classList.remove('active');
+                    showToast(`${translations[gameState.currentLanguage]['languageChanged']} ${this.textContent}`);
+                });
+            });
+
+            // Политика конфиденциальности
+            elements.privacyBtn.addEventListener('click', () => {
+                elements.privacyModal.style.display = 'flex';
+                elements.settingsMenu.classList.remove('active');
+            });
+
+            elements.closePrivacy.addEventListener('click', () => {
+                elements.privacyModal.style.display = 'none';
+            });
+
+            // Поддержка
+            elements.supportBtn.addEventListener('click', () => {
+                window.open('https://t.me/@Nasoo4ek', '_blank');
+                elements.settingsMenu.classList.remove('active');
+            });
+
+            // Задание на подписку Telegram
+            elements.telegramQuest.addEventListener('click', () => {
+                if (!gameState.completedQuests.includes('telegram_quest')) {
+                    window.open('https://t.me/+WTwhgx9lxdU4NDRi', '_blank');
+                    // В реальном приложении здесь будет проверка подписки через Telegram бота
+                    // Для демонстрации сразу зачисляем награду
+                    completeQuest('telegram_quest', 500);
+                    showToast(translations[gameState.currentLanguage]['telegramSubscribed']);
+                }
+            });
+
+            // Получение ежедневной награды
+            elements.claimRewardBtn.addEventListener('click', claimDailyReward);
+
+            // Сброс прогресса
+            elements.resetProgress.addEventListener('click', resetProgress);
         }
-    });
 
-    // Ежедневные награды
-    elements.claimRewardBtn.addEventListener('click', () => {
-        claimDailyReward();
-    });
-
-    // Остальные обработчики событий остаются без изменений
-    // ...
-}
-
-// В HTML нужно добавить элемент для отображения ежедневных наград во вкладке "Задания"
-// Пример структуры:
-/*
-<div id="quests-tab" class="tab-content">
-    <div class="quest-item" id="telegram-quest">
-        <!-- Существующие задания -->
-    </div>
-    <div class="quest-item" id="click-quest">
-        <!-- Существующие задания -->
-    </div>
-    <div class="quest-item" id="premium-quest">
-        <!-- Существующие задания -->
-    </div>
-    
-    <!-- Добавляем блок ежедневных наград -->
-    <div class="quest-item daily-rewards-container">
-        <h3>Ежедневные награды</h3>
-        <div id="daily-rewards">
-            <div class="reward-day" data-day="1">День 1<br>100</div>
-            <div class="reward-day" data-day="2">День 2<br>200</div>
-            <div class="reward-day" data-day="3">День 3<br>300</div>
-            <div class="reward-day" data-day="4">День 4<br>400</div>
-            <div class="reward-day" data-day="5">День 5<br>500</div>
-            <div class="reward-day" data-day="6">День 6<br>600</div>
-            <div class="reward-day" data-day="7">День 7<br>1000</div>
-        </div>
-        <button id="claim-reward-btn" class="btn">Получить награду</button>
-        <p id="next-reward-info"></p>
-    </div>
-</div>
-
+        // Запуск игры
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            checkReferral();
+            init();
+        });
     </script>
 </body>
 </html>
