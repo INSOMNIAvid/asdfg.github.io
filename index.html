@@ -65,6 +65,262 @@
             margin-bottom: 5px;
         }
 
+        /* Профиль игрока */
+        .player-profile {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 101;
+            background: rgba(15, 52, 96, 0.7);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            max-width: 180px;
+        }
+
+        .player-profile:hover {
+            background: rgba(110, 69, 226, 0.5);
+        }
+
+        .player-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .player-info {
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .player-name {
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-tag {
+            font-size: 11px;
+            opacity: 0.8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-level {
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-top: 2px;
+        }
+
+        .profile-popup {
+            position: fixed;
+            top: 70px;
+            left: 15px;
+            background: var(--darker-bg);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            width: 280px;
+            max-width: 90vw;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .profile-popup.active {
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .profile-tag {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .profile-level {
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .stat-item {
+            background: rgba(110, 69, 226, 0.2);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .achievements-section {
+            margin-top: 12px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .achievement {
+            background: rgba(15, 52, 96, 0.7);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement:hover {
+            background: rgba(110, 69, 226, 0.3);
+        }
+
+        .achievement-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 5px;
+            font-size: 18px;
+        }
+
+        .achievement-name {
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .achievement.locked {
+            opacity: 0.5;
+        }
+
+        .achievement.locked .achievement-icon {
+            filter: grayscale(1);
+        }
+
+        .achievement-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--success-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .achievement-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            width: 160px;
+            z-index: 10;
+            display: none;
+            margin-bottom: 5px;
+        }
+
+        .achievement:hover .achievement-tooltip {
+            display: block;
+        }
+
+        .achievement-tooltip-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .achievement-tooltip-desc {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-bottom: 3px;
+        }
+
+        .achievement-tooltip-progress {
+            font-size: 11px;
+            color: var(--secondary-color);
+        }
+
         .settings-btn {
             background: transparent;
             border: none;
@@ -841,6 +1097,57 @@
     </style>
 </head>
 <body>
+    <!-- Профиль игрока -->
+    <div class="player-profile" id="player-profile">
+        <div class="player-avatar" id="player-avatar">👤</div>
+        <div class="player-info">
+            <div class="player-name" id="player-name">Игрок</div>
+            <div class="player-tag" id="player-tag">#0000</div>
+            <div class="player-level" id="player-level">Ур. 1</div>
+        </div>
+    </div>
+
+    <!-- Попап профиля -->
+    <div class="profile-popup" id="profile-popup">
+        <div class="profile-header">
+            <div class="profile-avatar" id="profile-avatar">👤</div>
+            <div class="profile-details">
+                <div class="profile-name" id="profile-name">Игрок</div>
+                <div class="profile-tag" id="profile-tag">#0000</div>
+                <div class="profile-level" id="profile-level">Уровень 1</div>
+            </div>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="stat-clicks">0</div>
+                <div class="stat-label" data-i18n="statClicks">Кликов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="stat-coins">0</div>
+                <div class="stat-label" data-i18n="statCoins">$INSOMNIA</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="stat-refs">0</div>
+                <div class="stat-label" data-i18n="statRefs">Рефералов</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="stat-quests">0</div>
+                <div class="stat-label" data-i18n="statQuests">Заданий</div>
+            </div>
+        </div>
+        
+        <div class="achievements-section">
+            <div class="section-title">
+                <span data-i18n="achievements">Достижения</span>
+                <span style="margin-left: auto; font-size: 12px;" id="achievements-count">0/12</span>
+            </div>
+            <div class="achievements-grid" id="achievements-grid">
+                <!-- Достижения будут добавлены через JS -->
+            </div>
+        </div>
+    </div>
+
     <div class="header">
         <div class="header-content">
             <h1 data-i18n="title">Insomnia Clicker <span id="premium-badge" class="premium-badge" style="display:none;" data-i18n="premiumBadge">PREMIUM</span></h1>
@@ -1162,7 +1469,25 @@
                 claimedDays: []
             },
             customEmoji: localStorage.getItem('customEmoji') || '🌙',
-            bgEmoji: localStorage.getItem('bgEmoji') || '⭐'
+            bgEmoji: localStorage.getItem('bgEmoji') || '⭐',
+            playerName: localStorage.getItem('playerName') || 'Игрок',
+            playerTag: localStorage.getItem('playerTag') || '#' + Math.floor(1000 + Math.random() * 9000),
+            playerLevel: parseInt(localStorage.getItem('playerLevel')) || 1,
+            playerXP: parseInt(localStorage.getItem('playerXP')) || 0,
+            achievements: JSON.parse(localStorage.getItem('achievements')) || {
+                firstClick: { unlocked: false, progress: 0, max: 1 },
+                hundredClicks: { unlocked: false, progress: 0, max: 100 },
+                thousandClicks: { unlocked: false, progress: 0, max: 1000 },
+                firstCoin: { unlocked: false, progress: 0, max: 1 },
+                hundredCoins: { unlocked: false, progress: 0, max: 100 },
+                thousandCoins: { unlocked: false, progress: 0, max: 1000 },
+                firstRef: { unlocked: false, progress: 0, max: 1 },
+                fiveRefs: { unlocked: false, progress: 0, max: 5 },
+                tenRefs: { unlocked: false, progress: 0, max: 10 },
+                firstQuest: { unlocked: false, progress: 0, max: 1 },
+                allQuests: { unlocked: false, progress: 0, max: 3 },
+                premium: { unlocked: false, progress: 0, max: 1 }
+            }
         };
 
         // Локализация
@@ -1274,7 +1599,36 @@
                 changeEmoji: "Изменить эмодзи кнопки",
                 changeBgEmoji: "Изменить эмодзи фона",
                 emojiChanged: "Эмодзи кнопки изменено!",
-                bgEmojiChanged: "Эмодзи фона изменено!"
+                bgEmojiChanged: "Эмодзи фона изменено!",
+                statClicks: "Кликов",
+                statCoins: "$INSOMNIA",
+                statRefs: "Рефералов",
+                statQuests: "Заданий",
+                achievements: "Достижения",
+                achievementFirstClick: "Первый клик",
+                achievementFirstClickDesc: "Сделайте свой первый клик",
+                achievementHundredClicks: "100 кликов",
+                achievementHundredClicksDesc: "Сделайте 100 кликов",
+                achievementThousandClicks: "1000 кликов",
+                achievementThousandClicksDesc: "Сделайте 1000 кликов",
+                achievementFirstCoin: "Первая монета",
+                achievementFirstCoinDesc: "Заработайте свою первую монету",
+                achievementHundredCoins: "100 монет",
+                achievementHundredCoinsDesc: "Заработайте 100 монет",
+                achievementThousandCoins: "1000 монет",
+                achievementThousandCoinsDesc: "Заработайте 1000 монет",
+                achievementFirstRef: "Первый реферал",
+                achievementFirstRefDesc: "Пригласите первого друга",
+                achievementFiveRefs: "5 рефералов",
+                achievementFiveRefsDesc: "Пригласите 5 друзей",
+                achievementTenRefs: "10 рефералов",
+                achievementTenRefsDesc: "Пригласите 10 друзей",
+                achievementFirstQuest: "Первое задание",
+                achievementFirstQuestDesc: "Выполните первое задание",
+                achievementAllQuests: "Все задания",
+                achievementAllQuestsDesc: "Выполните все задания",
+                achievementPremium: "PREMIUM",
+                achievementPremiumDesc: "Активируйте PREMIUM подписку"
             },
             en: {
                 title: "Insomnia Clicker",
@@ -1383,7 +1737,36 @@
                 changeEmoji: "Change button emoji",
                 changeBgEmoji: "Change background emoji",
                 emojiChanged: "Button emoji changed!",
-                bgEmojiChanged: "Background emoji changed!"
+                bgEmojiChanged: "Background emoji changed!",
+                statClicks: "Clicks",
+                statCoins: "$INSOMNIA",
+                statRefs: "Referrals",
+                statQuests: "Quests",
+                achievements: "Achievements",
+                achievementFirstClick: "First click",
+                achievementFirstClickDesc: "Make your first click",
+                achievementHundredClicks: "100 clicks",
+                achievementHundredClicksDesc: "Make 100 clicks",
+                achievementThousandClicks: "1000 clicks",
+                achievementThousandClicksDesc: "Make 1000 clicks",
+                achievementFirstCoin: "First coin",
+                achievementFirstCoinDesc: "Earn your first coin",
+                achievementHundredCoins: "100 coins",
+                achievementHundredCoinsDesc: "Earn 100 coins",
+                achievementThousandCoins: "1000 coins",
+                achievementThousandCoinsDesc: "Earn 1000 coins",
+                achievementFirstRef: "First referral",
+                achievementFirstRefDesc: "Invite your first friend",
+                achievementFiveRefs: "5 referrals",
+                achievementFiveRefsDesc: "Invite 5 friends",
+                achievementTenRefs: "10 referrals",
+                achievementTenRefsDesc: "Invite 10 friends",
+                achievementFirstQuest: "First quest",
+                achievementFirstQuestDesc: "Complete your first quest",
+                achievementAllQuests: "All quests",
+                achievementAllQuestsDesc: "Complete all quests",
+                achievementPremium: "PREMIUM",
+                achievementPremiumDesc: "Activate PREMIUM subscription"
             }
         };
 
@@ -1437,7 +1820,23 @@
             changeEmojiBtn: document.getElementById('change-emoji-btn'),
             changeBgEmojiBtn: document.getElementById('change-bg-emoji-btn'),
             emojiSelector: document.getElementById('emoji-selector'),
-            bgEmojiSelector: document.getElementById('bg-emoji-selector')
+            bgEmojiSelector: document.getElementById('bg-emoji-selector'),
+            playerProfile: document.getElementById('player-profile'),
+            profilePopup: document.getElementById('profile-popup'),
+            playerAvatar: document.getElementById('player-avatar'),
+            playerName: document.getElementById('player-name'),
+            playerTag: document.getElementById('player-tag'),
+            playerLevel: document.getElementById('player-level'),
+            profileAvatar: document.getElementById('profile-avatar'),
+            profileName: document.getElementById('profile-name'),
+            profileTag: document.getElementById('profile-tag'),
+            profileLevel: document.getElementById('profile-level'),
+            statClicks: document.getElementById('stat-clicks'),
+            statCoins: document.getElementById('stat-coins'),
+            statRefs: document.getElementById('stat-refs'),
+            statQuests: document.getElementById('stat-quests'),
+            achievementsGrid: document.getElementById('achievements-grid'),
+            achievementsCount: document.getElementById('achievements-count')
         };
 
         // Вспомогательные функции
@@ -1539,6 +1938,186 @@
                 elements.buyPremiumBtn.textContent = translations[lang]['buyPremium'];
                 elements.buyPremiumBtn.classList.remove('premium-btn');
             }
+            
+            // Обновляем статистику профиля
+            updateProfileStats();
+        }
+
+        // Обновление профиля игрока
+        function updatePlayerProfile() {
+            elements.playerName.textContent = gameState.playerName;
+            elements.playerTag.textContent = gameState.playerTag;
+            elements.playerLevel.textContent = `Ур. ${gameState.playerLevel}`;
+            elements.profileName.textContent = gameState.playerName;
+            elements.profileTag.textContent = gameState.playerTag;
+            elements.profileLevel.textContent = `Уровень ${gameState.playerLevel}`;
+            
+            // Обновляем аватар с первым символом имени
+            const firstChar = gameState.playerName.charAt(0).toUpperCase();
+            elements.playerAvatar.textContent = firstChar;
+            elements.profileAvatar.textContent = firstChar;
+            
+            // Обновляем статистику
+            updateProfileStats();
+        }
+
+        // Обновление статистики профиля
+        function updateProfileStats() {
+            elements.statClicks.textContent = gameState.totalClicks;
+            elements.statCoins.textContent = gameState.coins;
+            elements.statRefs.textContent = gameState.refCount;
+            elements.statQuests.textContent = gameState.completedQuests.length;
+            
+            // Обновляем количество выполненных достижений
+            const completedAchievements = Object.values(gameState.achievements).filter(a => a.unlocked).length;
+            const totalAchievements = Object.keys(gameState.achievements).length;
+            elements.achievementsCount.textContent = `${completedAchievements}/${totalAchievements}`;
+        }
+
+        // Обновление достижений
+        function updateAchievements() {
+            elements.achievementsGrid.innerHTML = '';
+            
+            const achievementsList = [
+                { id: 'firstClick', icon: '👆', name: translations[gameState.currentLanguage]['achievementFirstClick'], desc: translations[gameState.currentLanguage]['achievementFirstClickDesc'] },
+                { id: 'hundredClicks', icon: '🖱️', name: translations[gameState.currentLanguage]['achievementHundredClicks'], desc: translations[gameState.currentLanguage]['achievementHundredClicksDesc'] },
+                { id: 'thousandClicks', icon: '💻', name: translations[gameState.currentLanguage]['achievementThousandClicks'], desc: translations[gameState.currentLanguage]['achievementThousandClicksDesc'] },
+                { id: 'firstCoin', icon: '💰', name: translations[gameState.currentLanguage]['achievementFirstCoin'], desc: translations[gameState.currentLanguage]['achievementFirstCoinDesc'] },
+                { id: 'hundredCoins', icon: '💵', name: translations[gameState.currentLanguage]['achievementHundredCoins'], desc: translations[gameState.currentLanguage]['achievementHundredCoinsDesc'] },
+                { id: 'thousandCoins', icon: '💎', name: translations[gameState.currentLanguage]['achievementThousandCoins'], desc: translations[gameState.currentLanguage]['achievementThousandCoinsDesc'] },
+                { id: 'firstRef', icon: '👥', name: translations[gameState.currentLanguage]['achievementFirstRef'], desc: translations[gameState.currentLanguage]['achievementFirstRefDesc'] },
+                { id: 'fiveRefs', icon: '👨‍👩‍👧‍👦', name: translations[gameState.currentLanguage]['achievementFiveRefs'], desc: translations[gameState.currentLanguage]['achievementFiveRefsDesc'] },
+                { id: 'tenRefs', icon: '🌐', name: translations[gameState.currentLanguage]['achievementTenRefs'], desc: translations[gameState.currentLanguage]['achievementTenRefsDesc'] },
+                { id: 'firstQuest', icon: '✅', name: translations[gameState.currentLanguage]['achievementFirstQuest'], desc: translations[gameState.currentLanguage]['achievementFirstQuestDesc'] },
+                { id: 'allQuests', icon: '🏆', name: translations[gameState.currentLanguage]['achievementAllQuests'], desc: translations[gameState.currentLanguage]['achievementAllQuestsDesc'] },
+                { id: 'premium', icon: '🌟', name: translations[gameState.currentLanguage]['achievementPremium'], desc: translations[gameState.currentLanguage]['achievementPremiumDesc'] }
+            ];
+            
+            achievementsList.forEach(achievement => {
+                const achievementData = gameState.achievements[achievement.id];
+                const progressPercent = Math.min(100, (achievementData.progress / achievementData.max) * 100);
+                
+                const achievementElement = document.createElement('div');
+                achievementElement.className = `achievement ${achievementData.unlocked ? '' : 'locked'}`;
+                achievementElement.innerHTML = `
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-progress" style="width: ${progressPercent}%"></div>
+                    <div class="achievement-tooltip">
+                        <div class="achievement-tooltip-title">${achievement.name}</div>
+                        <div class="achievement-tooltip-desc">${achievement.desc}</div>
+                        ${!achievementData.unlocked ? `<div class="achievement-tooltip-progress">${achievementData.progress}/${achievementData.max}</div>` : ''}
+                    </div>
+                `;
+                
+                elements.achievementsGrid.appendChild(achievementElement);
+            });
+            
+            // Обновляем счетчик выполненных достижений
+            updateProfileStats();
+        }
+
+        // Проверка и разблокировка достижений
+        function checkAchievements() {
+            // Первый клик
+            if (gameState.totalClicks > 0) {
+                gameState.achievements.firstClick.progress = 1;
+                if (!gameState.achievements.firstClick.unlocked) {
+                    gameState.achievements.firstClick.unlocked = true;
+                    showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementFirstClick']}`);
+                }
+            }
+            
+            // 100 кликов
+            gameState.achievements.hundredClicks.progress = Math.min(gameState.totalClicks, gameState.achievements.hundredClicks.max);
+            if (gameState.totalClicks >= gameState.achievements.hundredClicks.max && !gameState.achievements.hundredClicks.unlocked) {
+                gameState.achievements.hundredClicks.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementHundredClicks']}`);
+            }
+            
+            // 1000 кликов
+            gameState.achievements.thousandClicks.progress = Math.min(gameState.totalClicks, gameState.achievements.thousandClicks.max);
+            if (gameState.totalClicks >= gameState.achievements.thousandClicks.max && !gameState.achievements.thousandClicks.unlocked) {
+                gameState.achievements.thousandClicks.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementThousandClicks']}`);
+            }
+            
+            // Первая монета
+            if (gameState.coins > 0) {
+                gameState.achievements.firstCoin.progress = 1;
+                if (!gameState.achievements.firstCoin.unlocked) {
+                    gameState.achievements.firstCoin.unlocked = true;
+                    showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementFirstCoin']}`);
+                }
+            }
+            
+            // 100 монет
+            gameState.achievements.hundredCoins.progress = Math.min(gameState.coins, gameState.achievements.hundredCoins.max);
+            if (gameState.coins >= gameState.achievements.hundredCoins.max && !gameState.achievements.hundredCoins.unlocked) {
+                gameState.achievements.hundredCoins.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementHundredCoins']}`);
+            }
+            
+            // 1000 монет
+            gameState.achievements.thousandCoins.progress = Math.min(gameState.coins, gameState.achievements.thousandCoins.max);
+            if (gameState.coins >= gameState.achievements.thousandCoins.max && !gameState.achievements.thousandCoins.unlocked) {
+                gameState.achievements.thousandCoins.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementThousandCoins']}`);
+            }
+            
+            // Первый реферал
+            if (gameState.refCount > 0) {
+                gameState.achievements.firstRef.progress = 1;
+                if (!gameState.achievements.firstRef.unlocked) {
+                    gameState.achievements.firstRef.unlocked = true;
+                    showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementFirstRef']}`);
+                }
+            }
+            
+            // 5 рефералов
+            gameState.achievements.fiveRefs.progress = Math.min(gameState.refCount, gameState.achievements.fiveRefs.max);
+            if (gameState.refCount >= gameState.achievements.fiveRefs.max && !gameState.achievements.fiveRefs.unlocked) {
+                gameState.achievements.fiveRefs.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementFiveRefs']}`);
+            }
+            
+            // 10 рефералов
+            gameState.achievements.tenRefs.progress = Math.min(gameState.refCount, gameState.achievements.tenRefs.max);
+            if (gameState.refCount >= gameState.achievements.tenRefs.max && !gameState.achievements.tenRefs.unlocked) {
+                gameState.achievements.tenRefs.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementTenRefs']}`);
+            }
+            
+            // Первое задание
+            if (gameState.completedQuests.length > 0) {
+                gameState.achievements.firstQuest.progress = 1;
+                if (!gameState.achievements.firstQuest.unlocked) {
+                    gameState.achievements.firstQuest.unlocked = true;
+                    showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementFirstQuest']}`);
+                }
+            }
+            
+            // Все задания
+            gameState.achievements.allQuests.progress = Math.min(gameState.completedQuests.length, gameState.achievements.allQuests.max);
+            if (gameState.completedQuests.length >= gameState.achievements.allQuests.max && !gameState.achievements.allQuests.unlocked) {
+                gameState.achievements.allQuests.unlocked = true;
+                showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementAllQuests']}`);
+            }
+            
+            // Премиум
+            if (gameState.premiumActive) {
+                gameState.achievements.premium.progress = 1;
+                if (!gameState.achievements.premium.unlocked) {
+                    gameState.achievements.premium.unlocked = true;
+                    showToast(`Достижение разблокировано: ${translations[gameState.currentLanguage]['achievementPremium']}`);
+                }
+            }
+            
+            // Сохраняем достижения
+            localStorage.setItem('achievements', JSON.stringify(gameState.achievements));
+            
+            // Обновляем отображение достижений
+            updateAchievements();
         }
 
         // Проверка премиум-статуса
@@ -1584,6 +2163,9 @@
             
             // Проверяем задание на премиум
             checkPremiumQuest();
+            
+            // Проверяем достижения
+            checkAchievements();
         }
 
         // Обновление фона с выбранным эмодзи
@@ -1699,6 +2281,9 @@
         function updateBalance() {
             elements.balance.textContent = gameState.coins;
             localStorage.setItem('insomniaCoins', gameState.coins);
+            
+            // Проверяем достижения, связанные с монетами
+            checkAchievements();
         }
 
         // Применение сохраненных цветов
@@ -1734,6 +2319,9 @@
                     elements.refCount.textContent = gameState.refCount;
                     elements.refEarned.textContent = gameState.refEarned;
                     showToast(`${translations[gameState.currentLanguage]['refReward']} ${reward} $INSOMNIA ${translations[gameState.currentLanguage]['forFriendInvite']}`);
+                    
+                    // Проверяем достижения, связанные с рефералами
+                    checkAchievements();
                 }
             }
         }
@@ -1747,6 +2335,9 @@
             
             // Обновляем статус заданий
             updateQuestStatus();
+            
+            // Проверяем достижения, связанные с заданиями
+            checkAchievements();
         }
 
         function completeQuest(questId, reward) {
@@ -1756,6 +2347,9 @@
             localStorage.setItem('completedQuests', JSON.stringify(gameState.completedQuests));
             showToast(`${translations[gameState.currentLanguage]['questCompleted']}${reward} $INSOMNIA`);
             updateQuestStatus();
+            
+            // Проверяем достижения
+            checkAchievements();
         }
 
         function updateQuestStatus() {
@@ -2005,6 +2599,20 @@
                     lastClaimed: null,
                     claimedDays: []
                 };
+                gameState.achievements = {
+                    firstClick: { unlocked: false, progress: 0, max: 1 },
+                    hundredClicks: { unlocked: false, progress: 0, max: 100 },
+                    thousandClicks: { unlocked: false, progress: 0, max: 1000 },
+                    firstCoin: { unlocked: false, progress: 0, max: 1 },
+                    hundredCoins: { unlocked: false, progress: 0, max: 100 },
+                    thousandCoins: { unlocked: false, progress: 0, max: 1000 },
+                    firstRef: { unlocked: false, progress: 0, max: 1 },
+                    fiveRefs: { unlocked: false, progress: 0, max: 5 },
+                    tenRefs: { unlocked: false, progress: 0, max: 10 },
+                    firstQuest: { unlocked: false, progress: 0, max: 1 },
+                    allQuests: { unlocked: false, progress: 0, max: 3 },
+                    premium: { unlocked: false, progress: 0, max: 1 }
+                };
                 
                 // Восстанавливаем премиум статус
                 gameState.premiumActive = premiumData.active;
@@ -2024,6 +2632,8 @@
                 updateClicksCounter();
                 updateQuestStatus();
                 updateDailyRewardsDisplay();
+                updatePlayerProfile();
+                updateAchievements();
                 
                 if (gameState.premiumActive) {
                     activatePremium();
@@ -2078,6 +2688,8 @@
             checkQuests();
             checkDailyRewards();
             checkPremiumLink();
+            updatePlayerProfile();
+            updateAchievements();
             
             // Применяем выбранный язык
             translatePage(gameState.currentLanguage);
@@ -2085,6 +2697,23 @@
 
         // Обработчики событий
         function setupEventListeners() {
+            // Профиль игрока
+            elements.playerProfile.addEventListener('click', (e) => {
+                e.stopPropagation();
+                elements.profilePopup.classList.toggle('active');
+                elements.settingsMenu.classList.remove('active');
+                elements.languageMenu.classList.remove('active');
+                elements.emojiSelector.classList.remove('active');
+                elements.bgEmojiSelector.classList.remove('active');
+            });
+            
+            // Закрытие попапа профиля при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.player-profile') && !e.target.closest('.profile-popup')) {
+                    elements.profilePopup.classList.remove('active');
+                }
+            });
+
             // Кликер с задержкой и эффектом
             elements.clickArea.addEventListener('click', (e) => {
                 const now = Date.now();
@@ -2124,6 +2753,9 @@
                             if (gameState.totalClicks >= 100 && !gameState.completedQuests.includes('click_quest')) {
                                 completeQuest('click_quest', 100);
                             }
+                            
+                            // Проверяем достижения
+                            checkAchievements();
                         }, gameState.CLICK_DELAY);
                     } else {
                         // Для премиум-пользователей без задержки
@@ -2133,6 +2765,9 @@
                         localStorage.setItem('totalClicks', gameState.totalClicks);
                         createCoinEffect(e.clientX, e.clientY, gameState.clickPower);
                         updateBalance();
+                        
+                        // Проверяем достижения
+                        checkAchievements();
                     }
                 }
             });
@@ -2239,6 +2874,7 @@
                 elements.languageMenu.classList.remove('active');
                 elements.emojiSelector.classList.remove('active');
                 elements.bgEmojiSelector.classList.remove('active');
+                elements.profilePopup.classList.remove('active');
             });
 
             // Закрытие меню при клике вне его
