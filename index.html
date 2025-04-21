@@ -58,8 +58,8 @@
         .header-content {
             flex: 1;
             text-align: center;
-            margin-left: 60px; /* Добавляем отступ для профиля */
-            margin-right: 35px; /* Добавляем отступ для кнопки настроек */
+            padding-left: 50px; /* Добавляем отступ слева для профиля */
+            padding-right: 50px; /* Добавляем отступ справа для кнопки настроек */
         }
 
         .header h1 {
@@ -69,7 +69,7 @@
 
         /* Профиль игрока */
         .player-profile {
-            position: relative;
+            position: relative; /* Изменено с absolute на relative */
             display: flex;
             align-items: center;
             z-index: 101;
@@ -79,7 +79,7 @@
             cursor: pointer;
             transition: all 0.3s;
             max-width: 180px;
-            margin-left: 10px;
+            margin-right: 10px; /* Добавляем отступ справа */
         }
 
         .player-profile:hover {
@@ -90,7 +90,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -158,7 +158,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -460,7 +460,7 @@
 
         .progress-bar {
             height: 18px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             border-radius: 8px;
             width: 100%;
             transition: width 0.3s, background 0.5s;
@@ -1213,14 +1213,6 @@
                 <span data-i18n="invitedFriends">Приглашено</span>: <span id="ref-count">0</span> <span data-i18n="friends">друзей</span> | 
                 <span data-i18n="earned">Получено</span>: <span id="ref-earned">0</span> $INSOMNIA
             </div>
-            
-            <!-- Вкладка друзей -->
-            <div class="friends-list" style="margin-top: 20px;">
-                <h4 data-i18n="friendsList">Ваши друзья</h4>
-                <div id="friends-container" style="text-align: left; margin-top: 10px;">
-                    <!-- Список друзей будет заполняться динамически -->
-                </div>
-            </div>
         </div>
 
         <!-- Кошелёк -->
@@ -1480,7 +1472,7 @@
             customEmoji: localStorage.getItem('customEmoji') || '🌙',
             bgEmoji: localStorage.getItem('bgEmoji') || '⭐',
             playerName: localStorage.getItem('playerName') || 'Игрок',
-            playerTag: localStorage.getItem('playerTag') || this.generatePlayerTag(),
+            playerTag: localStorage.getItem('playerTag') || '#' + generatePlayerId(),
             playerLevel: parseInt(localStorage.getItem('playerLevel')) || 1,
             playerXP: parseInt(localStorage.getItem('playerXP')) || 0,
             achievements: JSON.parse(localStorage.getItem('achievements')) || {
@@ -1496,32 +1488,31 @@
                 firstQuest: { unlocked: false, progress: 0, max: 1 },
                 allQuests: { unlocked: false, progress: 0, max: 3 },
                 premium: { unlocked: false, progress: 0, max: 1 }
-            },
-            friends: JSON.parse(localStorage.getItem('friends')) || []
+            }
         };
 
-        // Генерация уникального тега игрока
-        function generatePlayerTag() {
-            // Проверяем, есть ли уже сохраненный тег
-            if (localStorage.getItem('playerTag')) {
-                return localStorage.getItem('playerTag');
-            }
+        // Генерация уникального ID игрока
+        function generatePlayerId() {
+            // Проверяем, есть ли уже сохраненный ID
+            let playerId = localStorage.getItem('playerId');
             
-            // Проверяем, является ли игрок первым (администратором)
-            const isFirstPlayer = !localStorage.getItem('playerCount');
-            
-            if (isFirstPlayer) {
-                localStorage.setItem('playerCount', '1');
-                return '#00000'; // Администратор
-            } else {
-                // Генерируем новый номер для игрока
-                const playerCount = parseInt(localStorage.getItem('playerCount')) + 1;
-                localStorage.setItem('playerCount', playerCount.toString());
+            if (!playerId) {
+                // Если это первый игрок (администратор)
+                if (!localStorage.getItem('lastPlayerId')) {
+                    playerId = '00000';
+                    localStorage.setItem('lastPlayerId', '0'); // Начинаем счетчик с 0
+                } else {
+                    // Генерируем новый ID на основе последнего использованного
+                    const lastId = parseInt(localStorage.getItem('lastPlayerId'));
+                    playerId = (lastId + 1).toString().padStart(5, '0');
+                    localStorage.setItem('lastPlayerId', (lastId + 1).toString());
+                }
                 
-                // Форматируем номер с ведущими нулями (5 цифр)
-                const tagNumber = playerCount.toString().padStart(5, '0');
-                return `#${tagNumber}`;
+                // Сохраняем ID игрока
+                localStorage.setItem('playerId', playerId);
             }
+            
+            return playerId;
         }
 
         // Локализация
@@ -1530,148 +1521,6 @@
                 title: "Insomnia Clicker",
                 premiumBadge: "PREMIUM",
                 balance: "Баланс:",
-                clicksLeft: "Осталось кликов:",
-                regenInfo: "Готово! Максимум кликов",
-                buyPremium: "Купить PREMIUM",
-                referralTitle: "Реферальная система",
-                refBonusText: "Получи +100 $INSOMNIA за каждого друга!",
-                refBonusTextPremium: "Получи +200 $INSOMNIA за каждого друга! (PREMIUM 2X)",
-                copyRefLink: "Скопировать реферальную ссылку",
-                invitedFriends: "Приглашено",
-                friends: "друзей",
-                earned: "Получено",
-                walletTitle: "Подключение кошелька",
-                connected: "Подключен",
-                network: "Сеть",
-                clickerTab: "Кликер",
-                friendsTab: "Друзья",
-                walletTab: "Кошелёк",
-                questsTab: "Задания",
-                premiumTitle: "PREMIUM подписка",
-                premiumFeature1: "2X монет за клики",
-                premiumFeature2: "2X монет за рефералов",
-                premiumFeature3: "Безлимитные клики",
-                premiumFeature4: "🎨 Выбор цвета кнопки и фона",
-                premiumFeature5: "2X ежедневные награды",
-                premiumFeature6: "✨ Настройка эмодзи кнопки",
-                premiumFeature7: "🌌 Настройка эмодзи фона",
-                premiumFeature8: "💎 Эксклюзивный фон",
-                chooseButtonColor: "Выберите цвет кнопки:",
-                chooseBgColor: "Выберите цвет фона:",
-                chooseProgressColor: "Выберите цвет шкалы кликов:",
-                confirmPayment: "Я оплатил",
-                close: "Закрыть",
-                privacy: "Политика конфиденциальности",
-                support: "Поддержка",
-                resetProgress: "Сбросить прогресс",
-                language: "Язык",
-                privacyTitle: "Политика конфиденциальности Insomnia Clicker",
-                privacyIntro: "Настоящая Политика конфиденциальности описывает, как собирается, используется и защищается ваша информация при использовании нашего приложения Insomnia Clicker.",
-                dataCollection: "1. Сбор данных",
-                dataCollectionText: "Приложение Insomnia Clicker собирает следующие данные:",
-                data1: "Локально сохраняемые данные о вашем игровом прогрессе (баланс, количество кликов, рефералы)",
-                data2: "Информация о подключенных кошельках (если вы решите подключить)",
-                data3: "Анонимная статистика использования для улучшения приложения",
-                dataUsage: "2. Использование данных",
-                dataUsageText: "Собранные данные используются для:",
-                usage1: "Обеспечения работы игровых функций",
-                usage2: "Улучшения пользовательского опыта",
-                usage3: "Анализа эффективности функций приложения",
-                dataStorage: "3. Хранение данных",
-                dataStorageText: "Все игровые данные хранятся локально в вашем браузере. Вы можете в любой момент сбросить прогресс в настройках.",
-                thirdParty: "4. Третьи стороны",
-                thirdPartyText: "Приложение может интегрироваться со следующими сервисами:",
-                service1: "Telegram Wallet",
-                service2: "Аналитические сервисы для сбора анонимной статистики",
-                changes: "5. Изменения в политике",
-                changesText: "Мы оставляем за собой право обновлять данную Политику конфиденциальности. Все изменения будут отражены в этом документе.",
-                understand: "Понятно",
-                paymentWallet: "Для оплаты через Telegram Stars нажмите кнопку ниже:",
-                premiumActive: "PREMIUM активен",
-                unlimitedClicks: "Безлимитные клики",
-                premiumExpiresIn: "PREMIUM истекает через",
-                premiumActiveFor: "Ваша подписка активна ещё",
-                premiumOnly: "Эта функция доступна только для PREMIUM пользователей!",
-                premiumActivated: "PREMIUM активирован!",
-                premiumActivated7Days: "PREMIUM подписка активирована на 7 дней!",
-                premiumExpired: "PREMIUM подписка истекла",
-                refReward: "Вы получили",
-                forFriendInvite: "за приглашение друга!",
-                refLinkCopied: "Реферальная ссылка скопирована!\nОтправьте её друзьям!",
-                walletConnected: "Кошелёк подключен",
-                walletError: "Ошибка подключения кошелька",
-                telegramWalletConnected: "Telegram подключен!",
-                telegramWalletError: "Ошибка подключения Telegram",
-                languageChanged: "Язык изменен на",
-                resetConfirm: "Вы уверены, что хотите сбросить весь прогресс? Это действие нельзя отменить.",
-                progressReset: "Прогресс сброшен",
-                regenInfo: "Восстановление",
-                nextIn: "следующий +1 через",
-                seconds: "сек",
-                regenReady: "Готово! Максимум кликов",
-                unlimitedClicksPremium: "Безлимитные клики (PREMIUM)",
-                paymentMethods: "Способы оплаты:",
-                checkPayment: "Проверить оплату",
-                paymentSuccess: "Оплата подтверждена! PREMIUM активирован!",
-                paymentPending: "Оплата еще не подтверждена. Попробуйте позже.",
-                paymentFailed: "Оплата не найдена. Пожалуйста, попробуйте еще раз.",
-                questsTitle: "Задания",
-                dailyRewards: "Ежедневные награды",
-                nextRewardTime: "Следующая награда через:",
-                telegramQuestTitle: "Подпишись на Telegram канал",
-                telegramQuestDesc: "Подпишись на наш канал и получи 100 $INSOMNIA",
-                clickQuestTitle: "Сделай 100 кликов",
-                clickQuestDesc: "Кликни 100 раз и получи 100 $INSOMNIA",
-                premiumQuestTitle: "Активируй PREMIUM",
-                premiumQuestDesc: "Активируй PREMIUM подписку и получи 1000 $INSOMNIA",
-                questCompleted: "Задание выполнено! +",
-                subscribeTelegram: "Подписаться на канал",
-                telegramSubscribed: "Спасибо за подписку! Награда зачислена.",
-                telegramPaymentInitiated: "Платеж через Telegram Stars инициирован",
-                dailyRewardClaimed: "Ежедневная награда получена! +",
-                streakReset: "Серия ежедневных наград сброшена",
-                changeEmoji: "Изменить эмодзи кнопки",
-                changeBgEmoji: "Изменить эмодзи фона",
-                emojiChanged: "Эмодзи кнопки изменено!",
-                bgEmojiChanged: "Эмодзи фона изменено!",
-                statClicks: "Кликов",
-                statCoins: "$INSOMNIA",
-                statRefs: "Рефералов",
-                statQuests: "Заданий",
-                achievements: "Достижения",
-                achievementFirstClick: "Первый клик",
-                achievementFirstClickDesc: "Сделайте свой первый клик",
-                achievementHundredClicks: "100 кликов",
-                achievementHundredClicksDesc: "Сделайте 100 кликов",
-                achievementThousandClicks: "1000 кликов",
-                achievementThousandClicksDesc: "Сделайте 1000 кликов",
-                achievementFirstCoin: "Первая монета",
-                achievementFirstCoinDesc: "Заработайте свою первую монету",
-                achievementHundredCoins: "100 монет",
-                achievementHundredCoinsDesc: "Заработайте 100 монет",
-                achievementThousandCoins: "1000 монет",
-                achievementThousandCoinsDesc: "Заработайте 1000 монет",
-                achievementFirstRef: "Первый реферал",
-                achievementFirstRefDesc: "Пригласите первого друга",
-                achievementFiveRefs: "5 рефералов",
-                achievementFiveRefsDesc: "Пригласите 5 друзей",
-                achievementTenRefs: "10 рефералов",
-                achievementTenRefsDesc: "Пригласите 10 друзей",
-                achievementFirstQuest: "Первое задание",
-                achievementFirstQuestDesc: "Выполните первое задание",
-                achievementAllQuests: "Все задания",
-                achievementAllQuestsDesc: "Выполните все задания",
-                achievementPremium: "PREMIUM",
-                achievementPremiumDesc: "Активируйте PREMIUM подписку",
-                friendsList: "Ваши друзья",
-                viewProfile: "Посмотреть профиль",
-                noFriends: "У вас пока нет друзей",
-                adminBadge: "ADMIN"
-            },
-            en: {
-                title: "Insomnia Clicker",
-                premiumBadge: "PREMIUM",
-                balance: "Balance:",
                 clicksLeft: "Clicks left:",
                 regenInfo: "Ready! Maximum clicks",
                 buyPremium: "Buy PREMIUM",
@@ -1804,11 +1653,7 @@
                 achievementAllQuests: "All quests",
                 achievementAllQuestsDesc: "Complete all quests",
                 achievementPremium: "PREMIUM",
-                achievementPremiumDesc: "Activate PREMIUM subscription",
-                friendsList: "Your friends",
-                viewProfile: "View profile",
-                noFriends: "You don't have friends yet",
-                adminBadge: "ADMIN"
+                achievementPremiumDesc: "Activate PREMIUM subscription"
             }
         };
 
@@ -1878,8 +1723,7 @@
             statRefs: document.getElementById('stat-refs'),
             statQuests: document.getElementById('stat-quests'),
             achievementsGrid: document.getElementById('achievements-grid'),
-            achievementsCount: document.getElementById('achievements-count'),
-            friendsContainer: document.getElementById('friends-container')
+            achievementsCount: document.getElementById('achievements-count')
         };
 
         // Вспомогательные функции
@@ -1984,8 +1828,6 @@
             
             // Обновляем статистику профиля
             updateProfileStats();
-            // Обновляем список друзей
-            updateFriendsList();
         }
 
         // Обновление профиля игрока
@@ -2002,23 +1844,6 @@
             elements.playerAvatar.textContent = firstChar;
             elements.profileAvatar.textContent = firstChar;
             
-            // Добавляем бейдж администратора, если это первый игрок
-            if (gameState.playerTag === '#00000') {
-                const adminBadge = document.createElement('span');
-                adminBadge.className = 'premium-badge';
-                adminBadge.textContent = translations[gameState.currentLanguage]['adminBadge'];
-                adminBadge.style.marginLeft = '5px';
-                adminBadge.style.backgroundColor = '#ff5722';
-                
-                // Проверяем, не добавлен ли уже бейдж
-                if (!elements.playerName.querySelector('.premium-badge')) {
-                    elements.playerName.appendChild(adminBadge.cloneNode(true));
-                }
-                if (!elements.profileName.querySelector('.premium-badge')) {
-                    elements.profileName.appendChild(adminBadge);
-                }
-            }
-            
             // Обновляем статистику
             updateProfileStats();
         }
@@ -2034,99 +1859,6 @@
             const completedAchievements = Object.values(gameState.achievements).filter(a => a.unlocked).length;
             const totalAchievements = Object.keys(gameState.achievements).length;
             elements.achievementsCount.textContent = `${completedAchievements}/${totalAchievements}`;
-        }
-
-        // Обновление списка друзей
-        function updateFriendsList() {
-            elements.friendsContainer.innerHTML = '';
-            
-            if (gameState.friends.length === 0) {
-                const noFriends = document.createElement('p');
-                noFriends.textContent = translations[gameState.currentLanguage]['noFriends'];
-                noFriends.style.opacity = '0.7';
-                noFriends.style.textAlign = 'center';
-                noFriends.style.marginTop = '15px';
-                elements.friendsContainer.appendChild(noFriends);
-                return;
-            }
-            
-            gameState.friends.forEach(friend => {
-                const friendElement = document.createElement('div');
-                friendElement.className = 'quest-item';
-                friendElement.style.cursor = 'pointer';
-                friendElement.innerHTML = `
-                    <div>
-                        <div class="quest-title">${friend.name} <span style="font-size:11px; opacity:0.7;">${friend.tag}</span></div>
-                        <div class="quest-description">${translations[gameState.currentLanguage]['viewProfile']}</div>
-                    </div>
-                    <div class="quest-reward">${friend.level} ур.</div>
-                `;
-                
-                friendElement.addEventListener('click', () => {
-                    showFriendProfile(friend);
-                });
-                
-                elements.friendsContainer.appendChild(friendElement);
-            });
-        }
-
-        // Показать профиль друга
-        function showFriendProfile(friend) {
-            // Создаем модальное окно профиля друга
-            const friendProfileModal = document.createElement('div');
-            friendProfileModal.className = 'profile-popup';
-            friendProfileModal.style.position = 'fixed';
-            friendProfileModal.style.top = '50%';
-            friendProfileModal.style.left = '50%';
-            friendProfileModal.style.transform = 'translate(-50%, -50%)';
-            friendProfileModal.style.zIndex = '1001';
-            
-            friendProfileModal.innerHTML = `
-                <div class="profile-header">
-                    <div class="profile-avatar">${friend.name.charAt(0).toUpperCase()}</div>
-                    <div class="profile-details">
-                        <div class="profile-name">${friend.name} ${friend.tag === '#00000' ? `<span class="premium-badge" style="background-color:#ff5722;">${translations[gameState.currentLanguage]['adminBadge']}</span>` : ''}</div>
-                        <div class="profile-tag">${friend.tag}</div>
-                        <div class="profile-level">Уровень ${friend.level}</div>
-                    </div>
-                </div>
-                
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">${friend.clicks || 0}</div>
-                        <div class="stat-label">${translations[gameState.currentLanguage]['statClicks']}</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">${friend.coins || 0}</div>
-                        <div class="stat-label">${translations[gameState.currentLanguage]['statCoins']}</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">${friend.refs || 0}</div>
-                        <div class="stat-label">${translations[gameState.currentLanguage]['statRefs']}</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">${friend.quests || 0}</div>
-                        <div class="stat-label">${translations[gameState.currentLanguage]['statQuests']}</div>
-                    </div>
-                </div>
-                
-                <div class="achievements-section">
-                    <div class="section-title">
-                        <span>${translations[gameState.currentLanguage]['achievements']}</span>
-                        <span style="margin-left: auto; font-size: 12px;">${friend.achievements || 0}/${Object.keys(gameState.achievements).length}</span>
-                    </div>
-                    <p style="text-align: center; opacity: 0.7; font-size: 12px;">${translations[gameState.currentLanguage]['viewProfile']}</p>
-                </div>
-                
-                <button id="close-friend-profile" style="margin-top: 15px; width: 100%;">Закрыть</button>
-            `;
-            
-            document.body.appendChild(friendProfileModal);
-            
-            // Обработчик закрытия
-            document.getElementById('close-friend-profile').addEventListener('click', () => {
-                friendProfileModal.remove();
-            });
         }
 
         // Обновление достижений
@@ -2475,22 +2207,6 @@
                     elements.refEarned.textContent = gameState.refEarned;
                     showToast(`${translations[gameState.currentLanguage]['refReward']} ${reward} $INSOMNIA ${translations[gameState.currentLanguage]['forFriendInvite']}`);
                     
-                    // Добавляем друга в список
-                    const friend = {
-                        name: 'Друг ' + (gameState.friends.length + 1),
-                        tag: '#' + Math.floor(1000 + Math.random() * 9000),
-                        level: Math.floor(Math.random() * 10) + 1,
-                        clicks: Math.floor(Math.random() * 1000),
-                        coins: Math.floor(Math.random() * 500),
-                        refs: Math.floor(Math.random() * 5),
-                        quests: Math.floor(Math.random() * 3),
-                        achievements: Math.floor(Math.random() * 5)
-                    };
-                    
-                    gameState.friends.push(friend);
-                    localStorage.setItem('friends', JSON.stringify(gameState.friends));
-                    updateFriendsList();
-                    
                     // Проверяем достижения, связанные с рефералами
                     checkAchievements();
                 }
@@ -2784,7 +2500,6 @@
                     allQuests: { unlocked: false, progress: 0, max: 3 },
                     premium: { unlocked: false, progress: 0, max: 1 }
                 };
-                gameState.friends = [];
                 
                 // Восстанавливаем премиум статус
                 gameState.premiumActive = premiumData.active;
@@ -2797,6 +2512,10 @@
                 gameState.customEmoji = premiumData.customEmoji;
                 gameState.bgEmoji = premiumData.bgEmoji;
                 
+                // Генерируем новый ID игрока
+                gameState.playerTag = '#' + generatePlayerId();
+                localStorage.setItem('playerTag', gameState.playerTag);
+                
                 // Обновление UI
                 updateBalance();
                 elements.refCount.textContent = gameState.refCount;
@@ -2806,7 +2525,6 @@
                 updateDailyRewardsDisplay();
                 updatePlayerProfile();
                 updateAchievements();
-                updateFriendsList();
                 
                 if (gameState.premiumActive) {
                     activatePremium();
@@ -2863,7 +2581,6 @@
             checkPremiumLink();
             updatePlayerProfile();
             updateAchievements();
-            updateFriendsList();
             
             // Применяем выбранный язык
             translatePage(gameState.currentLanguage);
@@ -3157,6 +2874,5 @@
             setInterval(updateDailyRewardsDisplay, 1000);
         });
     </script>
-    
 </body>
 </html>
