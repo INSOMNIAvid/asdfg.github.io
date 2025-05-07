@@ -139,7 +139,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -847,6 +846,199 @@
             transform: none;
         }
         
+        /* Стили для просмотра кейса */
+        .case-preview {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .case-preview-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .case-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .case-item {
+            background-color: #444;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .case-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .case-item-emoji {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+        
+        .case-item-name {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .case-item-price {
+            color: var(--primary-color);
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .open-case-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .open-case-count {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .open-case-count input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            background-color: #444;
+            color: white;
+        }
+        
+        .open-case-speed {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .speed-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .speed-btn.active {
+            background-color: var(--primary-color);
+            color: #333;
+        }
+        
+        .open-case-btn {
+            padding: 10px 20px;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .open-case-btn:hover {
+            background-color: #29a329;
+            transform: translateY(-2px);
+        }
+        
+        /* Стили для профиля */
+        .profile-container {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .profile-level {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .profile-level-number {
+            background-color: var(--primary-color);
+            color: #333;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background-color: #444;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .stat-title {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
         /* Адаптивность */
         @media (max-width: 768px) {
             .cases-container {
@@ -877,6 +1069,10 @@
             
             .quests-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .case-items {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
         }
     </style>
@@ -916,6 +1112,7 @@
                 Задания
                 <span id="quests-badge" class="tab-badge" style="display: none;">0</span>
             </button>
+            <button class="tab" onclick="openTab('profile-tab')">Профиль</button>
         </div>
         
         <div id="cases-tab" class="tab-content active">
@@ -927,21 +1124,21 @@
             
             <h2>Доступные кейсы</h2>
             <div class="cases-container">
-                <div class="case" onclick="openCase(0)">
+                <div class="case" onclick="showCasePreview(0)">
                     <div class="case-img-container">📦</div>
                     <h3>Обычный кейс</h3>
                     <div class="price">100 ₽</div>
                     <div class="rarity common">Обычный</div>
                 </div>
                 
-                <div class="case" onclick="openCase(1)">
+                <div class="case" onclick="showCasePreview(1)">
                     <div class="case-img-container">🎁</div>
                     <h3>Редкий кейс</h3>
                     <div class="price">300 ₽</div>
                     <div class="rarity rare">Редкий</div>
                 </div>
                 
-                <div class="case" onclick="openCase(2)">
+                <div class="case" onclick="showCasePreview(2)">
                     <div class="case-img-container">💎</div>
                     <h3>Эпический кейс</h3>
                     <div class="price">500 ₽</div>
@@ -949,7 +1146,7 @@
                     <div class="limited">Осталось: <span id="limited-count">5</span></div>
                 </div>
                 
-                <div class="case" onclick="openCase(3)">
+                <div class="case" onclick="showCasePreview(3)">
                     <div class="case-img-container">🏆</div>
                     <h3>Легендарный кейс</h3>
                     <div class="price">1000 ₽</div>
@@ -957,7 +1154,7 @@
                     <div class="limited">Осталось: <span id="legendary-count">3</span></div>
                 </div>
                 
-                <div class="case" onclick="openCase(4)">
+                <div class="case" onclick="showCasePreview(4)">
                     <div class="case-img-container">👑</div>
                     <h3>Мифический кейс</h3>
                     <div class="price"><span class="key-icon">🔑</span> 1</div>
@@ -965,11 +1162,30 @@
                     <div class="limited">Осталось: <span id="mythic-count">2</span></div>
                 </div>
                 
-                <div class="case" onclick="openCase(5)">
+                <div class="case" onclick="showCasePreview(5)">
                     <div class="case-img-container">🎲</div>
                     <h3>Случайный кейс</h3>
                     <div class="price">200 ₽</div>
                     <div class="rarity special">Особый</div>
+                </div>
+            </div>
+            
+            <div id="case-preview-container" class="case-preview" style="display: none;">
+                <h3 class="case-preview-title" id="case-preview-title">Просмотр кейса</h3>
+                <div class="case-items" id="case-items-preview">
+                    <!-- Здесь будут предметы из кейса -->
+                </div>
+                <div class="open-case-options">
+                    <div class="open-case-count">
+                        <span>Количество:</span>
+                        <input type="number" id="case-count" min="1" max="10" value="1">
+                    </div>
+                    <div class="open-case-speed">
+                        <span>Скорость:</span>
+                        <button class="speed-btn active" onclick="setOpenSpeed('fast')">Быстрая</button>
+                        <button class="speed-btn" onclick="setOpenSpeed('slow')">Медленная</button>
+                    </div>
+                    <button class="open-case-btn" id="open-case-btn" onclick="openSelectedCase()">Открыть</button>
                 </div>
             </div>
             
@@ -998,7 +1214,7 @@
             <div class="upgrade-container">
                 <div class="upgrade-info">
                     <h3>Как это работает?</h3>
-                    <p>Выберите две фигурки одного уровня для попытки улучшения. При успехе вы получите фигурку следующего уровня, при неудаче - потеряете обе фигурки.</p>
+                    <p>Выберите две фигурки одного уровня для попытки улучшения. При успехе вы получите фигурку следующего уровня, при неудаче - потеряете оба предмета.</p>
                     <div class="progress-bar">
                         <div class="progress" id="upgrade-progress">0%</div>
                     </div>
@@ -1020,6 +1236,52 @@
             
             <div class="quests-container" id="quests-container">
                 <!-- Здесь будут задания -->
+            </div>
+        </div>
+        
+        <div id="profile-tab" class="tab-content">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info">
+                        <div class="profile-name">Игрок</div>
+                        <div class="profile-level">
+                            <div class="profile-level-number" id="profile-level">1</div>
+                            <div>Уровень</div>
+                        </div>
+                        <div class="progress-bar" style="height: 10px;">
+                            <div class="progress" id="profile-level-progress" style="height: 100%; width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Статистика</h3>
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-title">Всего открыто кейсов</div>
+                        <div class="stat-value" id="stat-cases-opened">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Всего получено фигурок</div>
+                        <div class="stat-value" id="stat-items-received">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Всего продано на</div>
+                        <div class="stat-value" id="stat-money-earned">0 ₽</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Максимальный уровень фигурки</div>
+                        <div class="stat-value" id="stat-max-level">1</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Легендарных фигурок</div>
+                        <div class="stat-value" id="stat-legendary-items">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Выполнено заданий</div>
+                        <div class="stat-value" id="stat-quests-completed">0</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1151,6 +1413,17 @@
         let completedQuests = [];
         let lastDailyBonusDate = null;
         let dailyBonusAvailable = false;
+        let selectedCaseIndex = -1;
+        let openSpeed = 'fast'; // 'fast' или 'slow'
+        let openCount = 1;
+        let stats = {
+            totalCasesOpened: 0,
+            totalItemsReceived: 0,
+            totalMoneyEarned: 0,
+            maxItemLevel: 1,
+            legendaryItems: 0,
+            questsCompleted: 0
+        };
         
         // Квесты
         const allQuests = [
@@ -1219,6 +1492,7 @@
             updateInventory();
             updateQuests();
             startDailyBonusTimer();
+            updateProfileStats();
         }
         
         // Сохранение игры
@@ -1237,7 +1511,8 @@
                 quests,
                 completedQuests,
                 lastDailyBonusDate,
-                dailyBonusAvailable
+                dailyBonusAvailable,
+                stats
             };
             
             localStorage.setItem('caseSimulatorSave', JSON.stringify(gameData));
@@ -1264,6 +1539,14 @@
                 completedQuests = gameData.completedQuests || [];
                 lastDailyBonusDate = gameData.lastDailyBonusDate ? new Date(gameData.lastDailyBonusDate) : null;
                 dailyBonusAvailable = gameData.dailyBonusAvailable || false;
+                stats = gameData.stats || {
+                    totalCasesOpened: 0,
+                    totalItemsReceived: 0,
+                    totalMoneyEarned: 0,
+                    maxItemLevel: 1,
+                    legendaryItems: 0,
+                    questsCompleted: 0
+                };
             }
         }
         
@@ -1304,58 +1587,138 @@
             if (tabId === 'upgrade-tab') {
                 updateUpgradeTab();
             }
+            
+            // Если открываем профиль, обновляем статистику
+            if (tabId === 'profile-tab') {
+                updateProfileStats();
+            }
+        }
+        
+        // Показать просмотр кейса
+        function showCasePreview(caseIndex) {
+            selectedCaseIndex = caseIndex;
+            const casePreview = document.getElementById('case-preview-container');
+            const caseTitle = document.getElementById('case-preview-title');
+            const caseItemsPreview = document.getElementById('case-items-preview');
+            
+            // Устанавливаем название кейса
+            let caseName = '';
+            switch(caseIndex) {
+                case 0: caseName = 'Обычный кейс'; break;
+                case 1: caseName = 'Редкий кейс'; break;
+                case 2: caseName = 'Эпический кейс'; break;
+                case 3: caseName = 'Легендарный кейс'; break;
+                case 4: caseName = 'Мифический кейс'; break;
+                case 5: caseName = 'Случайный кейс'; break;
+            }
+            caseTitle.textContent = `Просмотр кейса: ${caseName}`;
+            
+            // Очищаем предыдущие предметы
+            caseItemsPreview.innerHTML = '';
+            
+            // Добавляем предметы из кейса
+            const items = caseItems[caseIndex];
+            items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'case-item';
+                itemElement.innerHTML = `
+                    <div class="case-item-emoji">${item.emoji}</div>
+                    <div class="case-item-name">${item.name}</div>
+                    <div class="case-item-price">${item.price} ₽</div>
+                    <div class="rarity ${item.rarity}">${getRarityName(item.rarity)}</div>
+                `;
+                caseItemsPreview.appendChild(itemElement);
+            });
+            
+            // Показываем контейнер просмотра
+            casePreview.style.display = 'block';
+            
+            // Прокручиваем к началу
+            casePreview.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Установить скорость открытия кейсов
+        function setOpenSpeed(speed) {
+            openSpeed = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // Открыть выбранный кейс
+        function openSelectedCase() {
+            const countInput = document.getElementById('case-count');
+            let count = parseInt(countInput.value);
+            
+            // Проверяем корректность ввода
+            if (isNaN(count) || count < 1) {
+                count = 1;
+                countInput.value = 1;
+            } else if (count > 10) {
+                count = 10;
+                countInput.value = 10;
+            }
+            
+            openCount = count;
+            openCase(selectedCaseIndex);
         }
         
         // Открытие кейса
         function openCase(caseIndex) {
             // Проверка баланса и ключей
             if (caseIndex === 4) { // Мифический кейс требует ключ
-                if (keys <= 0) {
-                    alert('Недостаточно ключей!');
+                if (keys < openCount) {
+                    alert(`Недостаточно ключей! Нужно ${openCount}, а у вас ${keys}`);
                     return;
                 }
-            } else if (money < casePrices[caseIndex] && keys === 0) {
-                alert('Недостаточно средств!');
-                return;
+            } else {
+                const totalCost = casePrices[caseIndex] * openCount;
+                if (money < totalCost && keys === 0) {
+                    alert(`Недостаточно средств! Нужно ${totalCost} ₽`);
+                    return;
+                }
             }
             
             // Проверка ограниченных кейсов
-            if (caseIndex === 2 && limitedCasesLeft <= 0) {
-                alert('Эпические кейсы закончились!');
+            if (caseIndex === 2 && limitedCasesLeft < openCount) {
+                alert(`Недостаточно эпических кейсов! Осталось только ${limitedCasesLeft}`);
                 return;
             }
             
-            if (caseIndex === 3 && legendaryCasesLeft <= 0) {
-                alert('Легендарные кейсы закончились!');
+            if (caseIndex === 3 && legendaryCasesLeft < openCount) {
+                alert(`Недостаточно легендарных кейсов! Осталось только ${legendaryCasesLeft}`);
                 return;
             }
             
-            if (caseIndex === 4 && mythicCasesLeft <= 0) {
-                alert('Мифические кейсы закончились!');
+            if (caseIndex === 4 && mythicCasesLeft < openCount) {
+                alert(`Недостаточно мифических кейсов! Осталось только ${mythicCasesLeft}`);
                 return;
             }
             
-            // Используем ключ если это мифический кейс, иначе списываем деньги
+            // Используем ключи если это мифический кейс, иначе списываем деньги
             if (caseIndex === 4) {
-                keys--;
-            } else if (keys > 0 && confirm('Использовать ключ вместо денег?')) {
-                keys--;
+                keys -= openCount;
+            } else if (keys > 0 && confirm(`Использовать ${openCount} ключей вместо денег?`)) {
+                keys -= openCount;
             } else {
-                money -= casePrices[caseIndex];
+                money -= casePrices[caseIndex] * openCount;
             }
             
-            openedCases++;
-            if (caseIndex === 2) limitedCasesLeft--;
-            if (caseIndex === 3) legendaryCasesLeft--;
-            if (caseIndex === 4) mythicCasesLeft--;
+            openedCases += openCount;
+            stats.totalCasesOpened += openCount;
+            
+            if (caseIndex === 2) limitedCasesLeft -= openCount;
+            if (caseIndex === 3) legendaryCasesLeft -= openCount;
+            if (caseIndex === 4) mythicCasesLeft -= openCount;
             
             // Добавляем опыт за открытие кейса
-            addXp(10 * (caseIndex + 1));
+            addXp(10 * (caseIndex + 1) * openCount);
             
             // Обновляем квесты
-            updateQuestProgress('open_cases', 1);
+            updateQuestProgress('open_cases', openCount);
             if (caseIndex === 1 || caseIndex === 2 || caseIndex === 3) {
-                updateQuestProgress('open_rare_cases', 1);
+                updateQuestProgress('open_rare_cases', openCount);
             }
             
             updateBalance();
@@ -1454,8 +1817,8 @@
             
             if (animationInterval) clearInterval(animationInterval);
             
-            // Добавим немного случайности в скорость анимации
-            const baseSpeed = 30;
+            // Устанавливаем скорость анимации в зависимости от выбора
+            const baseSpeed = openSpeed === 'fast' ? 20 : 50;
             const speedVariation = Math.random() * 20 - 10; // от -10 до +10
             animationSpeed = baseSpeed + speedVariation;
             
@@ -1463,7 +1826,7 @@
                 // Если еще не начали замедляться и прошли 70% пути
                 if (!slowingDown && currentPosition < targetPosition * 0.7) {
                     slowingDown = true;
-                    animationSpeed = 150; // Замедляемся
+                    animationSpeed = openSpeed === 'fast' ? 100 : 150; // Замедляемся
                     
                     // Подсветим все элементы с таким же именем
                     const items = document.querySelectorAll('.animation-item');
@@ -1491,7 +1854,7 @@
                     }
                 } else {
                     // Быстрое движение в начале
-                    currentPosition -= 30;
+                    currentPosition -= openSpeed === 'fast' ? 40 : 30;
                 }
                 
                 animationItems.style.left = currentPosition + 'px';
@@ -1516,15 +1879,52 @@
             const resultElement = document.getElementById('result');
             const buttonsElement = document.getElementById('buttons');
             
-            resultElement.textContent = `🎉 Вы получили: ${currentItem.name} (${currentItem.price} ₽) 🎉`;
+            if (openCount > 1) {
+                resultElement.textContent = `🎉 Вы получили ${openCount} фигурок! 🎉`;
+                
+                // Для массового открытия сразу добавляем предметы в инвентарь
+                for (let i = 0; i < openCount; i++) {
+                    const items = caseItems[selectedCaseIndex];
+                    let totalRarity = items.reduce((sum, item) => sum + getRarityValue(item.rarity), 0);
+                    let randomValue = Math.random() * totalRarity;
+                    let selectedItem = null;
+                    
+                    for (const item of items) {
+                        if (randomValue <= getRarityValue(item.rarity)) {
+                            selectedItem = item;
+                            break;
+                        }
+                        randomValue -= getRarityValue(item.rarity);
+                    }
+                    
+                    if (!selectedItem) selectedItem = items[0];
+                    
+                    // Создаем копию объекта, чтобы можно было изменять level независимо
+                    const itemCopy = JSON.parse(JSON.stringify(selectedItem));
+                    inventory.push(itemCopy);
+                    stats.totalItemsReceived++;
+                    
+                    // Проверяем на легендарные предметы
+                    if (itemCopy.rarity === 'legendary' || itemCopy.rarity === 'mythic') {
+                        stats.legendaryItems++;
+                        updateQuestProgress('get_legendary', 1);
+                    }
+                }
+                
+                updateInventory();
+                buttonsElement.style.display = 'none';
+            } else {
+                resultElement.textContent = `🎉 Вы получили: ${currentItem.name} (${currentItem.price} ₽) 🎉`;
+                buttonsElement.style.display = 'flex';
+            }
+            
             resultElement.style.display = 'block';
-            buttonsElement.style.display = 'flex';
             
             // Разблокируем кейсы
             document.querySelectorAll('.case').forEach(c => c.style.pointerEvents = 'auto');
             
             // Если это ключ, покажем модальное окно
-            if (currentItem.isKey) {
+            if (currentItem && currentItem.isKey) {
                 keys++;
                 updateBalance();
                 setTimeout(() => {
@@ -1533,14 +1933,19 @@
             }
             
             // Проверяем квест на получение легендарной фигурки
-            if (currentItem.rarity === 'legendary' || currentItem.rarity === 'mythic') {
+            if (currentItem && (currentItem.rarity === 'legendary' || currentItem.rarity === 'mythic')) {
+                stats.legendaryItems++;
                 updateQuestProgress('get_legendary', 1);
             }
+            
+            // Обновляем статистику
+            updateProfileStats();
         }
         
         // Продать предмет
         function sellItem() {
             money += currentItem.price;
+            stats.totalMoneyEarned += currentItem.price;
             updateBalance();
             
             // Обновляем квест на продажу
@@ -1550,6 +1955,9 @@
             createConfetti(currentItem.rarity);
             
             hideResultElements();
+            
+            // Обновляем статистику
+            updateProfileStats();
         }
         
         // Оставить предмет в инвентаре
@@ -1557,7 +1965,12 @@
             // Создаем копию объекта, чтобы можно было изменять level независимо
             const itemCopy = JSON.parse(JSON.stringify(currentItem));
             inventory.push(itemCopy);
-            updateInventory();
+            stats.totalItemsReceived++;
+            
+            // Проверяем на легендарные предметы
+            if (itemCopy.rarity === 'legendary' || itemCopy.rarity === 'mythic') {
+                stats.legendaryItems++;
+            }
             
             // Обновляем квест на сбор предметов
             updateQuestProgress('collect_items', 1);
@@ -1566,6 +1979,10 @@
             createConfetti(currentItem.rarity);
             
             hideResultElements();
+            
+            // Обновляем статистику
+            updateInventory();
+            updateProfileStats();
         }
         
         // Скрыть элементы результата
@@ -1619,6 +2036,7 @@
             if (index >= 0 && index < inventory.length) {
                 const item = inventory[index];
                 money += item.price * item.level;
+                stats.totalMoneyEarned += item.price * item.level;
                 
                 // Обновляем квест на продажу
                 updateQuestProgress('sell_items', item.price * item.level);
@@ -1640,6 +2058,9 @@
                 
                 // Эффект продажи
                 createConfetti(item.rarity);
+                
+                // Обновляем статистику
+                updateProfileStats();
             }
         }
         
@@ -1803,6 +2224,12 @@
                 };
                 
                 inventory.push(upgradedItem);
+                stats.totalItemsReceived++;
+                
+                // Обновляем максимальный уровень
+                if (upgradedItem.level > stats.maxItemLevel) {
+                    stats.maxItemLevel = upgradedItem.level;
+                }
                 
                 // Обновляем квест на улучшение
                 updateQuestProgress('upgrade_items', 1);
@@ -1821,6 +2248,7 @@
             selectedForUpgrade = [];
             updateInventory();
             updateUpgradeTab();
+            updateProfileStats();
             saveGame();
         }
         
@@ -1993,6 +2421,7 @@
                 // Выдаем награду
                 if (quest.reward.money) {
                     money += quest.reward.money;
+                    stats.totalMoneyEarned += quest.reward.money;
                 }
                 
                 if (quest.reward.keys) {
@@ -2004,6 +2433,7 @@
                 // Перемещаем квест в выполненные
                 completedQuests.push(quest.id);
                 quests.splice(questIndex, 1);
+                stats.questsCompleted++;
                 
                 // Показываем модальное окно с наградой
                 document.getElementById('quest-complete-modal-text').textContent = 
@@ -2015,6 +2445,7 @@
                 generateQuests();
                 updateQuests();
                 updateBalance();
+                updateProfileStats();
                 saveGame();
             }
         }
@@ -2069,6 +2500,7 @@
             if (dailyBonusAvailable) {
                 const bonusAmount = 500 + level * 100;
                 money += bonusAmount;
+                stats.totalMoneyEarned += bonusAmount;
                 addXp(50);
                 
                 lastDailyBonusDate = new Date();
@@ -2082,6 +2514,7 @@
                 
                 checkDailyBonus();
                 updateBalance();
+                updateProfileStats();
                 saveGame();
             }
         }
@@ -2108,6 +2541,20 @@
             }
             
             updateBalance();
+            updateProfileStats();
+        }
+        
+        // Обновление статистики профиля
+        function updateProfileStats() {
+            document.getElementById('profile-level').textContent = level;
+            document.getElementById('profile-level-progress').style.width = `${(xp / nextLevelXp) * 100}%`;
+            
+            document.getElementById('stat-cases-opened').textContent = stats.totalCasesOpened;
+            document.getElementById('stat-items-received').textContent = stats.totalItemsReceived;
+            document.getElementById('stat-money-earned').textContent = `${stats.totalMoneyEarned} ₽`;
+            document.getElementById('stat-max-level').textContent = stats.maxItemLevel;
+            document.getElementById('stat-legendary-items').textContent = stats.legendaryItems;
+            document.getElementById('stat-quests-completed').textContent = stats.questsCompleted;
         }
         
         // Закрыть модальное окно
@@ -2156,6 +2603,17 @@
             
             // Назначаем обработчик для ежедневного бонуса
             document.getElementById('daily-bonus-btn').addEventListener('click', claimDailyBonus);
+            
+            // Назначаем обработчик изменения количества кейсов
+            document.getElementById('case-count').addEventListener('change', function() {
+                let value = parseInt(this.value);
+                if (isNaN(value) || value < 1) {
+                    this.value = 1;
+                } else if (value > 10) {
+                    this.value = 10;
+                }
+                openCount = parseInt(this.value);
+            });
         };
     </script>
 </body>
