@@ -1,1248 +1,173 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Block Blast: Фигурный режим</title>
+    <title>Arcade Score Game</title>
     <style>
-        :root {
-            --primary-dark: #1a1a2e;
-            --primary: #16213e;
-            --primary-light: #0f3460;
-            --secondary: #e94560;
-            --accent: #f9b208;
-            --text-light: #f8f8f8;
-            --text-dark: #222;
-            --block-size: 32px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #111;
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background: radial-gradient(circle at center, var(--primary), var(--primary-dark));
-            color: var(--text-light);
-            padding: 20px;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        @font-face {
-            font-family: 'Montserrat';
-            src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
         }
         
         .game-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            max-width: 100%;
-            width: fit-content;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .game-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(233, 69, 96, 0.1) 0%, transparent 70%);
-            animation: rotate 60s linear infinite;
-            z-index: -1;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(233, 69, 96, 0.3);
-            font-weight: 900;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--accent), var(--secondary));
-            border-radius: 3px;
-        }
-        
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 25px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 18px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .game-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 15px;
-            min-width: 80px;
-        }
-        
-        .info-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 8px;
-            color: var(--accent);
-            font-weight: bold;
-        }
-        
-        .info-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(to bottom, var(--text-light), #ccc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .game-board-container {
-            position: relative;
-            margin-bottom: 25px;
-        }
-        
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(10, var(--block-size));
-            grid-template-rows: repeat(10, var(--block-size));
-            gap: 4px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-        
-        .game-board::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.03) 0%,
-                transparent 20%,
-                transparent 80%,
-                rgba(255, 255, 255, 0.03) 100%
-            );
-            pointer-events: none;
-        }
-        
-        .block {
-            width: var(--block-size);
-            height: var(--block-size);
-            border-radius: 6px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: rgba(0, 0, 0, 0.7);
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
-            user-select: none;
-        }
-        
-        .block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.4) 0%,
-                rgba(255, 255, 255, 0.1) 50%,
-                rgba(0, 0, 0, 0.1) 100%
-            );
-        }
-        
-        .block:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-            z-index: 10;
-        }
-        
-        .block.destroying {
-            animation: blockDestroy 0.6s forwards;
-        }
-        
-        .block.selected {
-            box-shadow: 0 0 0 3px var(--accent);
-            transform: scale(1.1);
-        }
-        
-        @keyframes blockDestroy {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-                filter: brightness(1);
-            }
-            50% {
-                transform: scale(1.4);
-                opacity: 0.8;
-                filter: brightness(1.5);
-            }
-            100% {
-                transform: scale(0);
-                opacity: 0;
-                filter: brightness(2);
-            }
-        }
-        
-        .combo-display {
-            position: absolute;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-shadow: 0 0 15px rgba(249, 178, 8, 0.8);
-            animation: comboFloat 1.2s forwards;
-            pointer-events: none;
-            z-index: 100;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        @keyframes comboFloat {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-80px) scale(1.8);
-                opacity: 0;
-            }
-        }
-        
-        .controls {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .btn {
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            color: var(--text-light);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            min-width: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg,
-                transparent 10%,
-                rgba(255, 255, 255, 0.2) 50%,
-                transparent 90%
-            );
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        .btn:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .btn:active {
-            transform: translateY(-2px);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(45deg, var(--secondary), #ff6b6b);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--primary-light), #1e88e5);
-        }
-        
-        .btn-icon {
-            font-size: 1.2rem;
-        }
-        
-        .powerup-indicator {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 0.8rem;
-            background: rgba(233, 69, 96, 0.9);
-            padding: 5px 10px;
-            border-radius: 20px;
-            animation: pulse 1.5s infinite;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 10px rgba(233, 69, 96, 0.5);
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .tutorial {
-            margin-top: 25px;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 500px;
             text-align: center;
-            font-size: 1rem;
-            line-height: 1.7;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
         }
         
-        .tutorial::before {
-            content: 'i';
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
-            color: var(--text-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .score-display {
+            font-size: 72px;
             font-weight: bold;
-            font-size: 0.9rem;
+            margin: 20px 0;
+            color: #ff0;
+            text-shadow: 0 0 10px #ff0;
         }
         
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+        .previous-score {
+            font-size: 36px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .message {
+            font-size: 48px;
+            margin: 20px 0;
+            height: 60px;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+        }
+        
+        .points-added {
+            position: absolute;
+            font-size: 36px;
+            color: #0f0;
+            animation: floatUp 1s ease-out forwards;
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            backdrop-filter: blur(5px);
+            text-shadow: 0 0 5px #0f0;
         }
         
-        .modal.active {
-            opacity: 1;
-            pointer-events: all;
+        .combo {
+            font-size: 24px;
+            color: #f0f;
+            margin-top: 10px;
+            text-shadow: 0 0 5px #f0f;
         }
         
-        .modal-content {
-            background: linear-gradient(to bottom right, var(--primary), var(--primary-dark));
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s;
-        }
-        
-        .modal.active .modal-content {
-            transform: translateY(0);
-        }
-        
-        .modal-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-            text-align: center;
-        }
-        
-        .modal-text {
-            margin-bottom: 25px;
-            line-height: 1.7;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
+        button {
+            background-color: #f00;
+            color: white;
             border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
+            padding: 15px 30px;
+            font-size: 24px;
+            margin-top: 30px;
             cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.2s;
+            border-radius: 5px;
+            transition: all 0.3s;
         }
         
-        .modal-close:hover {
-            opacity: 1;
+        button:hover {
+            background-color: #ff5050;
+            transform: scale(1.05);
         }
         
-        .powerups-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .powerup {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-        
-        .powerup:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .powerup-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        .powerup-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: var(--accent);
-        }
-        
-        .powerup-desc {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            text-align: center;
-        }
-        
-        .progress-container {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            height: 10px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(to right, var(--accent), var(--secondary));
-            border-radius: 10px;
-            transition: width 0.5s;
-        }
-        
-        .shape-preview {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .shape-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-        
-        .mini-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 20px);
-            grid-template-rows: repeat(4, 20px);
-            gap: 2px;
-        }
-        
-        .mini-cell {
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .mini-cell.filled {
-            background: var(--secondary);
-            box-shadow: 0 0 5px var(--secondary);
-        }
-        
-        @media (max-width: 768px) {
-            :root {
-                --block-size: 28px;
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
             }
-            
-            h1 {
-                font-size: 2.2rem;
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
             }
-            
-            .game-header {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .game-info {
-                padding: 0 10px;
-            }
-            
-            .controls {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            :root {
-                --block-size: 24px;
-            }
-            
-            .game-container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .info-value {
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Анимации фона */
-        .bg-particle {
-            position: fixed;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-            z-index: -1;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>ФИГУРНЫЙ РЕЖИМ</h1>
-        
-        <div class="game-header">
-            <div class="game-info">
-                <div class="info-label">Счет</div>
-                <div class="info-value" id="score">0</div>
-            </div>
-            <div class="game-info">
-                <div class="info-label">Уровень</div>
-                <div class="info-value" id="level">1</div>
-            </div>
-            <div class="game-info">
-                <div class="info-label">Фигура</div>
-                <div class="info-value" id="shapeCount">0</div>
-            </div>
-            <div class="game-info">
-                <div class="info-label">Осталось</div>
-                <div class="info-value" id="blocksLeft">100</div>
-            </div>
-        </div>
-        
-        <div class="game-board-container">
-            <div class="game-board" id="gameBoard"></div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-        </div>
-        
-        <div class="shape-preview">
-            <div class="shape-title">Найдите эту фигуру:</div>
-            <div class="mini-grid" id="shapePreview"></div>
-        </div>
-        
-        <div class="controls">
-            <button class="btn btn-primary" id="restartBtn">
-                <i class="fas fa-sync-alt btn-icon"></i> Новая игра
-            </button>
-            <button class="btn btn-secondary" id="hintBtn">
-                <i class="fas fa-lightbulb btn-icon"></i> Подсказка
-            </button>
-        </div>
-        
-        <div class="tutorial">
-            Соединяйте блоки, чтобы собрать фигуру, показанную выше. Кликайте на блоки по порядку, 
-            чтобы выделить их. Когда выделите всю фигуру - она исчезнет и принесет очки!
-        </div>
+        <div class="previous-score">0</div>
+        <div class="score-display">0</div>
+        <div class="message">PLAY NOW!</div>
+        <div class="combo"></div>
+        <button id="action-btn">TAP!</button>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Элементы DOM
-            const gameBoard = document.getElementById('gameBoard');
-            const scoreDisplay = document.getElementById('score');
-            const levelDisplay = document.getElementById('level');
-            const shapeCountDisplay = document.getElementById('shapeCount');
-            const blocksLeftDisplay = document.getElementById('blocksLeft');
-            const progressBar = document.getElementById('progressBar');
-            const shapePreview = document.getElementById('shapePreview');
-            const restartBtn = document.getElementById('restartBtn');
-            const hintBtn = document.getElementById('hintBtn');
+        const scoreDisplay = document.querySelector('.score-display');
+        const previousScore = document.querySelector('.previous-score');
+        const message = document.querySelector('.message');
+        const comboDisplay = document.querySelector('.combo');
+        const actionBtn = document.getElementById('action-btn');
+        const gameContainer = document.querySelector('.game-container');
+        
+        let score = 0;
+        let combo = 0;
+        let lastClickTime = 0;
+        const messages = ["AMAZING!", "ADDICTIVE!", "RELAXING!", "INTERESTING!", "NEWHIGH", "SCORE*"];
+        
+        function updateScore(points) {
+            previousScore.textContent = scoreDisplay.textContent;
+            score += points;
+            scoreDisplay.textContent = score;
             
-            // Игровые переменные
-            let score = 0;
-            let level = 1;
-            let shapesCompleted = 0;
-            let totalBlocks = 100;
-            let blocksDestroyed = 0;
-            let currentShape = [];
-            let selectedBlocks = [];
-            let hintActive = false;
-            let hintTimeout = null;
-            let blocks = [];
-            const rows = 10;
-            const cols = 10;
+            // Show points added animation
+            const pointsElement = document.createElement('div');
+            pointsElement.className = 'points-added';
+            pointsElement.textContent = `+${points}`;
+            gameContainer.appendChild(pointsElement);
             
-            // Фигуры для поиска (4x4)
-            const shapes = [
-                // L-образные
-                [[1,0,0,0], [1,0,0,0], [1,0,0,0], [1,1,0,0]],
-                [[0,0,0,1], [0,0,0,1], [0,0,0,1], [0,0,1,1]],
-                [[1,1,1,1], [1,0,0,0], [0,0,0,0], [0,0,0,0]],
-                [[0,0,0,0], [0,0,0,1], [1,1,1,1], [0,0,0,0]],
-                
-                // Квадраты
-                [[1,1,0,0], [1,1,0,0], [0,0,0,0], [0,0,0,0]],
-                [[0,1,1,0], [0,1,1,0], [0,0,0,0], [0,0,0,0]],
-                
-                // Зигзаги
-                [[1,1,0,0], [0,1,1,0], [0,0,0,0], [0,0,0,0]],
-                [[0,1,1,0], [1,1,0,0], [0,0,0,0], [0,0,0,0]],
-                
-                // Т-образные
-                [[1,1,1,0], [0,1,0,0], [0,0,0,0], [0,0,0,0]],
-                [[0,1,0,0], [1,1,1,0], [0,0,0,0], [0,0,0,0]],
-                
-                // Другие формы
-                [[1,0,0,0], [1,1,0,0], [0,1,0,0], [0,0,0,0]],
-                [[0,1,0,0], [1,1,0,0], [1,0,0,0], [0,0,0,0]]
-            ];
+            // Remove after animation
+            setTimeout(() => {
+                pointsElement.remove();
+            }, 1000);
             
-            // Цвета блоков
-            const colors = [
-                '#FF5252', '#FF4081', '#E040FB', '#7C4DFF', 
-                '#536DFE', '#448AFF', '#40C4FF', '#18FFFF', 
-                '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41', 
-                '#FFFF00', '#FFD740', '#FFAB40', '#FF6E40'
-            ];
-            
-            // Инициализация игры
-            function initGame() {
-                score = 0;
-                level = 1;
-                shapesCompleted = 0;
-                blocksDestroyed = 0;
-                selectedBlocks = [];
+            // Random message sometimes
+            if (Math.random() > 0.7) {
+                const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+                message.textContent = randomMsg;
                 
-                updateDisplays();
-                createBoard();
-                generateNewShape();
-            }
-            
-            // Создание игрового поля
-            function createBoard() {
-                gameBoard.innerHTML = '';
-                blocks = [];
-                
-                for (let row = 0; row < rows; row++) {
-                    blocks[row] = [];
-                    for (let col = 0; col < cols; col++) {
-                        createBlock(row, col);
+                setTimeout(() => {
+                    if (message.textContent === randomMsg) {
+                        message.textContent = "";
                     }
-                }
-                
-                updateBlocksLeft();
+                }, 1500);
             }
             
-            // Создание блока
-            function createBlock(row, col) {
-                const block = document.createElement('div');
-                block.className = 'block';
-                
-                // Случайный цвет
-                const colorIndex = Math.floor(Math.random() * colors.length);
-                block.style.backgroundColor = colors[colorIndex];
-                
-                // Значение блока (1-5)
-                const value = Math.floor(Math.random() * 5) + 1;
-                block.dataset.value = value;
-                block.dataset.row = row;
-                block.dataset.col = col;
-                block.textContent = value;
-                
-                block.addEventListener('click', () => handleBlockClick(block));
-                gameBoard.appendChild(block);
-                blocks[row][col] = block;
-            }
-            
-            // Генерация новой фигуры для поиска
-            function generateNewShape() {
-                currentShape = shapes[Math.floor(Math.random() * shapes.length)];
-                renderShapePreview();
-            }
-            
-            // Отрисовка превью фигуры
-            function renderShapePreview() {
-                shapePreview.innerHTML = '';
-                
-                for (let row = 0; row < 4; row++) {
-                    for (let col = 0; col < 4; col++) {
-                        const cell = document.createElement('div');
-                        cell.className = 'mini-cell';
-                        if (currentShape[row][col] === 1) {
-                            cell.classList.add('filled');
-                        }
-                        shapePreview.appendChild(cell);
-                    }
-                }
-            }
-            
-            // Обработка клика по блоку
-            function handleBlockClick(block) {
-                if (hintActive) {
-                    clearHint();
-                }
-                
-                if (block.classList.contains('destroying')) return;
-                
-                const row = parseInt(block.dataset.row);
-                const col = parseInt(block.dataset.col);
-                
-                // Если блок уже выбран, снимаем выделение
-                const selectedIndex = selectedBlocks.findIndex(b => b === block);
-                if (selectedIndex !== -1) {
-                    // Если это последний выбранный блок, снимаем выделение
-                    if (selectedIndex === selectedBlocks.length - 1) {
-                        block.classList.remove('selected');
-                        selectedBlocks.pop();
-                    }
-                    return;
-                }
-                
-                // Проверяем, можно ли выбрать этот блок (должен быть рядом с последним выбранным)
-                if (selectedBlocks.length > 0) {
-                    const lastBlock = selectedBlocks[selectedBlocks.length - 1];
-                    const lastRow = parseInt(lastBlock.dataset.row);
-                    const lastCol = parseInt(lastBlock.dataset.col);
-                    
-                    const rowDiff = Math.abs(row - lastRow);
-                    const colDiff = Math.abs(col - lastCol);
-                    
-                    if (rowDiff > 1 || colDiff > 1 || (rowDiff === 0 && colDiff === 0)) {
-                        // Блок не соседний, нельзя выбрать
-                        return;
-                    }
-                }
-                
-                // Выбираем блок
-                block.classList.add('selected');
-                selectedBlocks.push(block);
-                
-                // Проверяем, совпадает ли выбранная фигура с искомой
-                checkShapeMatch();
-            }
-            
-            // Проверка совпадения фигуры
-            function checkShapeMatch() {
-                if (selectedBlocks.length < 4) return; // Минимальный размер фигуры
-                
-                // Создаем матрицу выбранных блоков
-                const selectedMatrix = createSelectedMatrix();
-                
-                // Проверяем все возможные повороты фигуры
-                if (compareShapes(selectedMatrix, currentShape)) {
-                    completeShape();
-                    return;
-                }
-                
-                // Поворот на 90 градусов
-                const rotated90 = rotateShape(currentShape);
-                if (compareShapes(selectedMatrix, rotated90)) {
-                    completeShape();
-                    return;
-                }
-                
-                // Поворот на 180 градусов
-                const rotated180 = rotateShape(rotated90);
-                if (compareShapes(selectedMatrix, rotated180)) {
-                    completeShape();
-                    return;
-                }
-                
-                // Поворот на 270 градусов
-                const rotated270 = rotateShape(rotated180);
-                if (compareShapes(selectedMatrix, rotated270)) {
-                    completeShape();
-                    return;
-                }
-                
-                // Зеркальное отражение
-                const mirrored = mirrorShape(currentShape);
-                if (compareShapes(selectedMatrix, mirrored)) {
-                    completeShape();
-                    return;
-                }
-                
-                // И все его повороты
-                const mirroredRotated90 = rotateShape(mirrored);
-                if (compareShapes(selectedMatrix, mirroredRotated90)) {
-                    completeShape();
-                    return;
-                }
-                
-                const mirroredRotated180 = rotateShape(mirroredRotated90);
-                if (compareShapes(selectedMatrix, mirroredRotated180)) {
-                    completeShape();
-                    return;
-                }
-                
-                const mirroredRotated270 = rotateShape(mirroredRotated180);
-                if (compareShapes(selectedMatrix, mirroredRotated270)) {
-                    completeShape();
-                    return;
-                }
-            }
-            
-            // Создание матрицы выбранных блоков
-            function createSelectedMatrix() {
-                if (selectedBlocks.length === 0) return [];
-                
-                // Находим минимальные и максимальные координаты
-                let minRow = rows, maxRow = 0, minCol = cols, maxCol = 0;
-                
-                selectedBlocks.forEach(block => {
-                    const row = parseInt(block.dataset.row);
-                    const col = parseInt(block.dataset.col);
-                    
-                    minRow = Math.min(minRow, row);
-                    maxRow = Math.max(maxRow, row);
-                    minCol = Math.min(minCol, col);
-                    maxCol = Math.max(maxCol, col);
-                });
-                
-                // Создаем матрицу 4x4 (максимальный размер фигуры)
-                const matrix = [
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]
-                ];
-                
-                // Заполняем матрицу
-                selectedBlocks.forEach(block => {
-                    const row = parseInt(block.dataset.row) - minRow;
-                    const col = parseInt(block.dataset.col) - minCol;
-                    
-                    if (row >= 0 && row < 4 && col >= 0 && col < 4) {
-                        matrix[row][col] = 1;
-                    }
-                });
-                
-                return matrix;
-            }
-            
-            // Сравнение фигур
-            function compareShapes(shape1, shape2) {
-                for (let row = 0; row < 4; row++) {
-                    for (let col = 0; col < 4; col++) {
-                        if (shape1[row][col] !== shape2[row][col]) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-            
-            // Поворот фигуры на 90 градусов
-            function rotateShape(shape) {
-                const rotated = [
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]
-                ];
-                
-                for (let row = 0; row < 4; row++) {
-                    for (let col = 0; col < 4; col++) {
-                        rotated[col][3 - row] = shape[row][col];
-                    }
-                }
-                
-                return rotated;
-            }
-            
-            // Зеркальное отражение фигуры
-            function mirrorShape(shape) {
-                const mirrored = [
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]
-                ];
-                
-                for (let row = 0; row < 4; row++) {
-                    for (let col = 0; col < 4; col++) {
-                        mirrored[row][3 - col] = shape[row][col];
-                    }
-                }
-                
-                return mirrored;
-            }
-            
-            // Завершение фигуры
-            function completeShape() {
-                // Анимация завершения
-                selectedBlocks.forEach((block, index) => {
+            // Combo system
+            const now = Date.now();
+            if (now - lastClickTime < 500) {
+                combo++;
+            } else {
+                if (combo > 5) {
+                    message.textContent = `COMBO ${combo}`;
                     setTimeout(() => {
-                        block.classList.add('destroying');
-                        
-                        setTimeout(() => {
-                            if (block.parentNode) {
-                                block.remove();
-                            }
-                        }, 600);
-                    }, index * 100);
-                });
-                
-                // Обновляем счет
-                const points = selectedBlocks.length * 50 * level;
-                score += points;
-                shapesCompleted++;
-                blocksDestroyed += selectedBlocks.length;
-                
-                // Эффект комбо
-                showCombo(selectedBlocks[0], selectedBlocks.length);
-                
-                // Сбрасываем выбранные блоки
-                selectedBlocks = [];
-                
-                // Обновляем отображение
-                updateDisplays();
-                updateBlocksLeft();
-                
-                // Генерируем новую фигуру
-                setTimeout(() => {
-                    generateNewShape();
-                    checkLevelComplete();
-                }, 800);
-            }
-            
-            // Показать комбо
-            function showCombo(block, count) {
-                const comboText = document.createElement('div');
-                comboText.className = 'combo-display';
-                comboText.textContent = `+${count * 50 * level}`;
-                
-                const rect = block.getBoundingClientRect();
-                comboText.style.left = `${rect.left + rect.width / 2}px`;
-                comboText.style.top = `${rect.top + rect.height / 2}px`;
-                
-                document.body.appendChild(comboText);
-                
-                setTimeout(() => {
-                    comboText.remove();
-                }, 1200);
-            }
-            
-            // Проверка завершения уровня
-            function checkLevelComplete() {
-                const destroyedPercentage = blocksDestroyed / totalBlocks;
-                
-                if (destroyedPercentage >= 0.8) {
-                    level++;
-                    blocksDestroyed = 0;
-                    
-                    setTimeout(() => {
-                        createBoard();
-                        showLevelUp();
-                    }, 800);
-                }
-            }
-            
-            // Обновление счетчика оставшихся блоков
-            function updateBlocksLeft() {
-                let remainingBlocks = 0;
-                
-                for (let row = 0; row < rows; row++) {
-                    for (let col = 0; col < cols; col++) {
-                        const block = blocks[row][col];
-                        if (block && !block.classList.contains('destroying')) {
-                            remainingBlocks++;
+                        if (message.textContent === `COMBO ${combo}`) {
+                            message.textContent = "";
                         }
-                    }
+                    }, 1500);
                 }
-                
-                blocksLeftDisplay.textContent = remainingBlocks;
-                
-                // Обновление progress bar
-                const progress = (blocksDestroyed / totalBlocks) * 100;
-                progressBar.style.width = `${progress}%`;
-                
-                // Изменение цвета progress bar
-                if (progress >= 80) {
-                    progressBar.style.background = 'linear-gradient(to right, #4CAF50, #8BC34A)';
-                } else if (progress >= 50) {
-                    progressBar.style.background = 'linear-gradient(to right, #FFC107, #FFEB3B)';
-                } else {
-                    progressBar.style.background = 'linear-gradient(to right, #F44336, #E91E63)';
-                }
+                combo = 0;
             }
+            lastClickTime = now;
             
-            // Показать сообщение о новом уровне
-            function showLevelUp() {
-                const levelUp = document.createElement('div');
-                levelUp.textContent = `Уровень ${level}!`;
-                levelUp.style.position = 'fixed';
-                levelUp.style.top = '50%';
-                levelUp.style.left = '50%';
-                levelUp.style.transform = 'translate(-50%, -50%)';
-                levelUp.style.fontSize = '4rem';
-                levelUp.style.fontWeight = 'bold';
-                levelUp.style.color = '#f9b208';
-                levelUp.style.textShadow = '0 0 25px rgba(249, 178, 8, 0.9)';
-                levelUp.style.zIndex = '1000';
-                levelUp.style.pointerEvents = 'none';
-                levelUp.style.opacity = '0';
-                
-                document.body.appendChild(levelUp);
-                
-                // Анимация появления
-                levelUp.animate([
-                    { opacity: 0, transform: 'translate(-50%, -50%) scale(0.5)' },
-                    { opacity: 1, transform: 'translate(-50%, -50%) scale(1.2)' },
-                    { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
-                    { opacity: 0, transform: 'translate(-50%, -50%) scale(1.5)' }
-                ], {
-                    duration: 2000,
-                    easing: 'cubic-bezier(0.2, 0.8, 0.4, 1)'
-                });
-                
-                setTimeout(() => {
-                    levelUp.remove();
-                }, 2000);
-            }
-            
-            // Показать подсказку
-            function showHint() {
-                if (hintActive) return;
-                
-                // Находим возможные места для фигуры
-                const matches = findShapeMatches();
-                
-                if (matches.length > 0) {
-                    const randomMatch = matches[Math.floor(Math.random() * matches.length)];
-                    hintActive = true;
-                    
-                    // Подсвечиваем блоки в найденной фигуре
-                    randomMatch.blocks.forEach((block, index) => {
-                        setTimeout(() => {
-                            block.style.boxShadow = '0 0 20px white';
-                            block.style.transform = 'scale(1.1)';
-                        }, index * 100);
-                    });
-                    
-                    hintTimeout = setTimeout(clearHint, 2500);
-                }
-            }
-            
-            // Поиск совпадений фигуры на поле
-            function findShapeMatches() {
-                const matches = [];
-                
-                // Проверяем все возможные позиции на поле
-                for (let row = 0; row < rows - 3; row++) {
-                    for (let col = 0; col < cols - 3; col++) {
-                        // Проверяем все варианты фигуры (повороты и отражения)
-                        const shapeVariations = getAllShapeVariations();
-                        
-                        for (const variation of shapeVariations) {
-                            const matchedBlocks = [];
-                            let match = true;
-                            
-                            // Проверяем совпадение
-                            for (let r = 0; r < 4; r++) {
-                                for (let c = 0; c < 4; c++) {
-                                    if (variation[r][c] === 1) {
-                                        if (row + r >= rows || col + c >= cols || 
-                                            !blocks[row + r][col + c] || 
-                                            blocks[row + r][col + c].classList.contains('destroying')) {
-                                            match = false;
-                                            break;
-                                        }
-                                        matchedBlocks.push(blocks[row + r][col + c]);
-                                    }
-                                }
-                                if (!match) break;
-                            }
-                            
-                            if (match) {
-                                matches.push({
-                                    blocks: matchedBlocks,
-                                    shape: variation
-                                });
-                            }
-                        }
-                    }
-                }
-                
-                return matches;
-            }
-            
-            // Получение всех вариаций фигуры (повороты + отражения)
-            function getAllShapeVariations() {
-                const variations = [];
-                
-                // Оригинальная
-                variations.push(currentShape);
-                
-                // Повороты
-                let rotated = rotateShape(currentShape);
-                variations.push(rotated);
-                
-                rotated = rotateShape(rotated);
-                variations.push(rotated);
-                
-                rotated = rotateShape(rotated);
-                variations.push(rotated);
-                
-                // Зеркальная
-                const mirrored = mirrorShape(currentShape);
-                variations.push(mirrored);
-                
-                // Повороты зеркальной
-                rotated = rotateShape(mirrored);
-                variations.push(rotated);
-                
-                rotated = rotateShape(rotated);
-                variations.push(rotated);
-                
-                rotated = rotateShape(rotated);
-                variations.push(rotated);
-                
-                return variations;
-            }
-            
-            // Очистить подсказку
-            function clearHint() {
-                if (!hintActive) return;
-                
-                document.querySelectorAll('.block').forEach(block => {
-                    block.style.boxShadow = '0 3px 6px rgba(0, 0, 0, 0.3)';
-                    block.style.transform = 'scale(1)';
-                });
-                
-                hintActive = false;
-                if (hintTimeout) {
-                    clearTimeout(hintTimeout);
-                    hintTimeout = null;
-                }
-            }
-            
-            // Обновление отображения информации
-            function updateDisplays() {
-                scoreDisplay.textContent = score.toLocaleString();
-                levelDisplay.textContent = level;
-                shapeCountDisplay.textContent = shapesCompleted;
-            }
-            
-            // Обработчики событий
-            restartBtn.addEventListener('click', initGame);
-            hintBtn.addEventListener('click', showHint);
-            
-            // Запуск игры
-            initGame();
+            comboDisplay.textContent = combo > 0 ? `Combo ${combo}` : "";
+        }
+        
+        actionBtn.addEventListener('click', () => {
+            const points = Math.floor(Math.random() * 200) + 50;
+            updateScore(points);
         });
+        
+        // Initialize
+        scoreDisplay.textContent = "0";
+        previousScore.textContent = "0";
     </script>
 </body>
 </html>
