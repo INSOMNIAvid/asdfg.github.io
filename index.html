@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade Score Game</title>
+    <title>Color Shape Matcher</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #111;
-            color: #fff;
+            background-color: #222;
+            color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -17,157 +17,395 @@
             margin: 0;
             overflow: hidden;
         }
-        
+
         .game-container {
-            text-align: center;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(12, 50px);
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .cell:hover {
+            transform: scale(1.05);
+        }
+
         .score-display {
-            font-size: 72px;
+            font-size: 48px;
             font-weight: bold;
             margin: 20px 0;
             color: #ff0;
             text-shadow: 0 0 10px #ff0;
         }
-        
-        .previous-score {
-            font-size: 36px;
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-        
+
         .message {
-            font-size: 48px;
-            margin: 20px 0;
-            height: 60px;
+            font-size: 36px;
+            margin: 10px 0;
+            height: 50px;
             color: #0ff;
             text-shadow: 0 0 10px #0ff;
         }
-        
-        .points-added {
-            position: absolute;
-            font-size: 36px;
-            color: #0f0;
-            animation: floatUp 1s ease-out forwards;
-            opacity: 0;
-            text-shadow: 0 0 5px #0f0;
-        }
-        
+
         .combo {
             font-size: 24px;
             color: #f0f;
             margin-top: 10px;
             text-shadow: 0 0 5px #f0f;
         }
-        
+
+        .controls {
+            margin-top: 20px;
+        }
+
         button {
             background-color: #f00;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 24px;
-            margin-top: 30px;
+            padding: 12px 25px;
+            font-size: 20px;
+            margin: 0 10px;
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s;
         }
-        
+
         button:hover {
             background-color: #ff5050;
             transform: scale(1.05);
         }
-        
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
+
+        .shape {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        /* Shape colors */
+        .red { background-color: #ff3e3e; }
+        .blue { background-color: #3e9fff; }
+        .green { background-color: #3eff3e; }
+        .yellow { background-color: #ffeb3e; }
+        .purple { background-color: #c13eff; }
+
+        /* Shape types */
+        .circle { border-radius: 50%; }
+        .square { border-radius: 5px; }
+        .triangle { 
+            width: 0; 
+            height: 0; 
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            background-color: transparent;
         }
     </style>
 </head>
 <body>
     <div class="game-container">
-        <div class="previous-score">0</div>
         <div class="score-display">0</div>
-        <div class="message">PLAY NOW!</div>
+        <div class="message">MATCH SHAPES!</div>
         <div class="combo"></div>
-        <button id="action-btn">TAP!</button>
+        <div class="game-board" id="gameBoard"></div>
+        <div class="controls">
+            <button id="new-game-btn">New Game</button>
+        </div>
     </div>
 
     <script>
+        const gameBoard = document.getElementById('gameBoard');
         const scoreDisplay = document.querySelector('.score-display');
-        const previousScore = document.querySelector('.previous-score');
-        const message = document.querySelector('.message');
+        const messageDisplay = document.querySelector('.message');
         const comboDisplay = document.querySelector('.combo');
-        const actionBtn = document.getElementById('action-btn');
-        const gameContainer = document.querySelector('.game-container');
-        
+        const newGameBtn = document.getElementById('new-game-btn');
+
+        const COLORS = ['red', 'blue', 'green', 'yellow', 'purple'];
+        const SHAPES = ['circle', 'square', 'triangle'];
+        const MESSAGES = ["AMAZING!", "ADDICTIVE!", "RELAXING!", "INTERESTING!", "NEW HIGH SCORE!", "INCREDIBLE!"];
+
+        let board = [];
+        let selectedCell = null;
         let score = 0;
         let combo = 0;
-        let lastClickTime = 0;
-        const messages = ["AMAZING!", "ADDICTIVE!", "RELAXING!", "INTERESTING!", "NEWHIGH", "SCORE*"];
-        
-        function updateScore(points) {
-            previousScore.textContent = scoreDisplay.textContent;
+
+        function initGame() {
+            board = [];
+            score = 0;
+            combo = 0;
+            scoreDisplay.textContent = '0';
+            comboDisplay.textContent = '';
+            messageDisplay.textContent = 'MATCH SHAPES!';
+
+            // Clear the board
+            gameBoard.innerHTML = '';
+
+            // Create the game board
+            for (let row = 0; row < 12; row++) {
+                board[row] = [];
+                for (let col = 0; col < 8; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    const shapeType = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+                    const colorType = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+                    const shape = document.createElement('div');
+                    shape.className = `shape ${colorType} ${shapeType}`;
+                    
+                    if (shapeType === 'triangle') {
+                        shape.style.borderBottom = `40px solid var(--${colorType})`;
+                    }
+
+                    cell.appendChild(shape);
+                    cell.addEventListener('click', () => handleCellClick(row, col));
+
+                    gameBoard.appendChild(cell);
+                    board[row][col] = { shape: shapeType, color: colorType, element: cell };
+                }
+            }
+        }
+
+        function handleCellClick(row, col) {
+            const cell = board[row][col];
+
+            if (!selectedCell) {
+                // First selection
+                selectedCell = { row, col };
+                cell.element.style.transform = 'scale(1.1)';
+                cell.element.style.boxShadow = '0 0 15px white';
+            } else {
+                // Second selection - try to swap
+                const prevCell = board[selectedCell.row][selectedCell.col];
+                
+                // Remove selection effects
+                prevCell.element.style.transform = '';
+                prevCell.element.style.boxShadow = '';
+
+                // Check if cells are adjacent
+                if (isAdjacent(selectedCell.row, selectedCell.col, row, col)) {
+                    // Swap cells
+                    swapCells(selectedCell.row, selectedCell.col, row, col);
+                    
+                    // Check for matches
+                    const matches = checkMatches();
+                    
+                    if (matches.length > 0) {
+                        // Valid move
+                        processMatches(matches);
+                    } else {
+                        // No matches - swap back
+                        setTimeout(() => {
+                            swapCells(selectedCell.row, selectedCell.col, row, col);
+                            messageDisplay.textContent = 'NO MATCH!';
+                            setTimeout(() => {
+                                if (messageDisplay.textContent === 'NO MATCH!') {
+                                    messageDisplay.textContent = 'MATCH SHAPES!';
+                                }
+                            }, 1000);
+                        }, 300);
+                    }
+                } else {
+                    messageDisplay.textContent = 'NOT ADJACENT!';
+                    setTimeout(() => {
+                        if (messageDisplay.textContent === 'NOT ADJACENT!') {
+                            messageDisplay.textContent = 'MATCH SHAPES!';
+                        }
+                    }, 1000);
+                }
+
+                selectedCell = null;
+            }
+        }
+
+        function isAdjacent(row1, col1, row2, col2) {
+            return (
+                (Math.abs(row1 - row2) === 1 && col1 === col2) ||
+                (Math.abs(col1 - col2) === 1 && row1 === row2)
+            );
+        }
+
+        function swapCells(row1, col1, row2, col2) {
+            // Swap in the board array
+            const temp = { ...board[row1][col1] };
+            board[row1][col1] = { ...board[row2][col2] };
+            board[row2][col2] = temp;
+
+            // Update the DOM
+            updateCell(row1, col1);
+            updateCell(row2, col2);
+        }
+
+        function updateCell(row, col) {
+            const cell = board[row][col];
+            cell.element.innerHTML = '';
+            
+            const shape = document.createElement('div');
+            shape.className = `shape ${cell.color} ${cell.shape}`;
+            
+            if (cell.shape === 'triangle') {
+                shape.style.borderBottom = `40px solid var(--${cell.color})`;
+            }
+            
+            cell.element.appendChild(shape);
+        }
+
+        function checkMatches() {
+            const matches = [];
+
+            // Check horizontal matches
+            for (let row = 0; row < 12; row++) {
+                for (let col = 0; col < 6; col++) {
+                    const cell = board[row][col];
+                    if (cell.shape === board[row][col+1].shape && cell.shape === board[row][col+2].shape) {
+                        // Found a match of 3
+                        const match = [{row, col}, {row, col: col+1}, {row, col: col+2}];
+                        
+                        // Check for longer matches
+                        let offset = 3;
+                        while (col + offset < 8 && board[row][col+offset].shape === cell.shape) {
+                            match.push({row, col: col+offset});
+                            offset++;
+                        }
+                        
+                        matches.push(match);
+                    }
+                }
+            }
+
+            // Check vertical matches
+            for (let col = 0; col < 8; col++) {
+                for (let row = 0; row < 10; row++) {
+                    const cell = board[row][col];
+                    if (cell.shape === board[row+1][col].shape && cell.shape === board[row+2][col].shape) {
+                        // Found a match of 3
+                        const match = [{row, col}, {row: row+1, col}, {row: row+2, col}];
+                        
+                        // Check for longer matches
+                        let offset = 3;
+                        while (row + offset < 12 && board[row+offset][col].shape === cell.shape) {
+                            match.push({row: row+offset, col});
+                            offset++;
+                        }
+                        
+                        matches.push(match);
+                    }
+                }
+            }
+
+            return matches;
+        }
+
+        function processMatches(matches) {
+            // Calculate score
+            let points = 0;
+            const matchedCells = new Set();
+            
+            matches.forEach(match => {
+                points += match.length * 100;
+                combo++;
+                
+                match.forEach(({row, col}) => {
+                    matchedCells.add(`${row},${col}`);
+                });
+            });
+
+            // Apply combo bonus
+            if (combo > 1) {
+                points *= combo;
+                comboDisplay.textContent = `COMBO x${combo}!`;
+            }
+
+            // Update score
             score += points;
             scoreDisplay.textContent = score;
-            
-            // Show points added animation
-            const pointsElement = document.createElement('div');
-            pointsElement.className = 'points-added';
-            pointsElement.textContent = `+${points}`;
-            gameContainer.appendChild(pointsElement);
-            
-            // Remove after animation
+
+            // Show message
+            if (points >= 500) {
+                const randomMsg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+                messageDisplay.textContent = randomMsg;
+            }
+
+            // Remove matched cells
+            matchedCells.forEach(cellKey => {
+                const [row, col] = cellKey.split(',').map(Number);
+                board[row][col].element.style.visibility = 'hidden';
+            });
+
+            // After a delay, drop new shapes
             setTimeout(() => {
-                pointsElement.remove();
-            }, 1000);
-            
-            // Random message sometimes
-            if (Math.random() > 0.7) {
-                const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-                message.textContent = randomMsg;
+                dropNewShapes();
                 
+                // Check for new matches after dropping
                 setTimeout(() => {
-                    if (message.textContent === randomMsg) {
-                        message.textContent = "";
-                    }
-                }, 1500);
-            }
-            
-            // Combo system
-            const now = Date.now();
-            if (now - lastClickTime < 500) {
-                combo++;
-            } else {
-                if (combo > 5) {
-                    message.textContent = `COMBO ${combo}`;
-                    setTimeout(() => {
-                        if (message.textContent === `COMBO ${combo}`) {
-                            message.textContent = "";
+                    const newMatches = checkMatches();
+                    if (newMatches.length > 0) {
+                        processMatches(newMatches);
+                    } else {
+                        combo = 0;
+                        comboDisplay.textContent = '';
+                        if (messageDisplay.textContent !== 'MATCH SHAPES!') {
+                            messageDisplay.textContent = 'MATCH SHAPES!';
                         }
-                    }, 1500);
-                }
-                combo = 0;
-            }
-            lastClickTime = now;
-            
-            comboDisplay.textContent = combo > 0 ? `Combo ${combo}` : "";
+                    }
+                }, 500);
+            }, 500);
         }
-        
-        actionBtn.addEventListener('click', () => {
-            const points = Math.floor(Math.random() * 200) + 50;
-            updateScore(points);
-        });
-        
-        // Initialize
-        scoreDisplay.textContent = "0";
-        previousScore.textContent = "0";
+
+        function dropNewShapes() {
+            // Move cells down
+            for (let col = 0; col < 8; col++) {
+                let emptySpaces = [];
+                
+                for (let row = 11; row >= 0; row--) {
+                    if (board[row][col].element.style.visibility === 'hidden') {
+                        emptySpaces.push(row);
+                    } else if (emptySpaces.length > 0) {
+                        const emptyRow = emptySpaces.shift();
+                        swapCells(row, col, emptyRow, col);
+                        emptySpaces.push(row);
+                    }
+                }
+                
+                // Fill top empty spaces with new shapes
+                emptySpaces.forEach(row => {
+                    const shapeType = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+                    const colorType = COLORS[Math.floor(Math.random() * COLORS.length)];
+                    
+                    board[row][col] = {
+                        shape: shapeType,
+                        color: colorType,
+                        element: board[row][col].element
+                    };
+                    
+                    board[row][col].element.style.visibility = 'visible';
+                    updateCell(row, col);
+                });
+            }
+        }
+
+        // Start new game
+        newGameBtn.addEventListener('click', initGame);
+
+        // Initialize game
+        initGame();
     </script>
 </body>
 </html>
