@@ -1,411 +1,529 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Shape Matcher</title>
+    <title>Симулятор кейсов с фигурками</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #222;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
             color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
-            overflow: hidden;
+            padding: 20px;
         }
-
-        .game-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(8, 50px);
-            grid-template-rows: repeat(12, 50px);
-            gap: 2px;
-            margin-bottom: 20px;
+        
+        h1 {
+            text-align: center;
+            color: #ffcc00;
         }
-
-        .cell {
-            width: 50px;
-            height: 50px;
+        
+        .balance {
+            background-color: #333;
+            padding: 10px;
             border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s;
+            margin-bottom: 20px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+            justify-content: space-between;
         }
-
-        .cell:hover {
+        
+        .cases {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+        
+        .case {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .case:hover {
             transform: scale(1.05);
         }
-
-        .score-display {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #ff0;
-            text-shadow: 0 0 10px #ff0;
+        
+        .case img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
         }
-
-        .message {
-            font-size: 36px;
+        
+        .case h3 {
             margin: 10px 0;
-            height: 50px;
-            color: #0ff;
-            text-shadow: 0 0 10px #0ff;
         }
-
-        .combo {
+        
+        .case .price {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        .case .limited {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff3333;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .animation-container {
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+            background-color: #222;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .animation-items {
+            display: flex;
+            position: absolute;
+            left: 0;
+            transition: left 0.1s;
+        }
+        
+        .animation-item {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+        
+        .animation-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        
+        .animation-item .name {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .result {
+            text-align: center;
+            margin: 20px 0;
             font-size: 24px;
-            color: #f0f;
-            margin-top: 10px;
-            text-shadow: 0 0 5px #f0f;
+            color: #ffcc00;
+            display: none;
         }
-
-        .controls {
-            margin-top: 20px;
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            display: none;
         }
-
+        
         button {
-            background-color: #f00;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .sell-btn {
+            background-color: #ff3333;
+            color: white;
+        }
+        
+        .keep-btn {
+            background-color: #33cc33;
+            color: white;
+        }
+        
+        .inventory {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .inventory h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+        }
+        
+        .inventory-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .inventory-item {
+            background-color: #444;
+            border-radius: 5px;
+            padding: 10px;
+            width: 120px;
+            text-align: center;
+        }
+        
+        .inventory-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+        
+        .inventory-item .name {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .inventory-item .price {
+            color: #ffcc00;
+            font-size: 12px;
+        }
+        
+        .sell-inventory-btn {
+            background-color: #ff3333;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 20px;
-            margin: 0 10px;
+            border-radius: 3px;
+            padding: 3px 6px;
+            font-size: 12px;
             cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background-color: #ff5050;
-            transform: scale(1.05);
-        }
-
-        .shape {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        /* Shape colors */
-        .red { background-color: #ff3e3e; }
-        .blue { background-color: #3e9fff; }
-        .green { background-color: #3eff3e; }
-        .yellow { background-color: #ffeb3e; }
-        .purple { background-color: #c13eff; }
-
-        /* Shape types */
-        .circle { border-radius: 50%; }
-        .square { border-radius: 5px; }
-        .triangle { 
-            width: 0; 
-            height: 0; 
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            background-color: transparent;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="score-display">0</div>
-        <div class="message">MATCH SHAPES!</div>
-        <div class="combo"></div>
-        <div class="game-board" id="gameBoard"></div>
-        <div class="controls">
-            <button id="new-game-btn">New Game</button>
+    <div class="container">
+        <h1>Симулятор кейсов с фигурками</h1>
+        
+        <div class="balance">
+            <div>Баланс: <span id="money">1000</span> ₽</div>
+            <div>Кейсов открыто: <span id="opened-cases">0</span></div>
+        </div>
+        
+        <h2>Доступные кейсы</h2>
+        <div class="cases">
+            <div class="case" onclick="openCase(0)">
+                <img src="https://via.placeholder.com/150/333/fff?text=Обычный" alt="Обычный кейс">
+                <h3>Обычный кейс</h3>
+                <div class="price">100 ₽</div>
+            </div>
+            
+            <div class="case" onclick="openCase(1)">
+                <img src="https://via.placeholder.com/150/555/fff?text=Редкий" alt="Редкий кейс">
+                <h3>Редкий кейс</h3>
+                <div class="price">300 ₽</div>
+            </div>
+            
+            <div class="case" onclick="openCase(2)">
+                <img src="https://via.placeholder.com/150/900/fff?text=Ограниченный" alt="Ограниченный кейс">
+                <h3>Ограниченный кейс</h3>
+                <div class="price">500 ₽</div>
+                <div class="limited">Осталось: <span id="limited-count">5</span></div>
+            </div>
+        </div>
+        
+        <div class="animation-container" id="animation-container">
+            <div class="animation-items" id="animation-items"></div>
+        </div>
+        
+        <div class="result" id="result"></div>
+        
+        <div class="buttons" id="buttons">
+            <button class="sell-btn" onclick="sellItem()">Продать</button>
+            <button class="keep-btn" onclick="keepItem()">Оставить</button>
+        </div>
+        
+        <div class="inventory">
+            <h2>Инвентарь</h2>
+            <div class="inventory-items" id="inventory-items">
+                <!-- Здесь будут отображаться полученные фигурки -->
+            </div>
         </div>
     </div>
 
     <script>
-        const gameBoard = document.getElementById('gameBoard');
-        const scoreDisplay = document.querySelector('.score-display');
-        const messageDisplay = document.querySelector('.message');
-        const comboDisplay = document.querySelector('.combo');
-        const newGameBtn = document.getElementById('new-game-btn');
-
-        const COLORS = ['red', 'blue', 'green', 'yellow', 'purple'];
-        const SHAPES = ['circle', 'square', 'triangle'];
-        const MESSAGES = ["AMAZING!", "ADDICTIVE!", "RELAXING!", "INTERESTING!", "NEW HIGH SCORE!", "INCREDIBLE!"];
-
-        let board = [];
-        let selectedCell = null;
-        let score = 0;
-        let combo = 0;
-
-        function initGame() {
-            board = [];
-            score = 0;
-            combo = 0;
-            scoreDisplay.textContent = '0';
-            comboDisplay.textContent = '';
-            messageDisplay.textContent = 'MATCH SHAPES!';
-
-            // Clear the board
-            gameBoard.innerHTML = '';
-
-            // Create the game board
-            for (let row = 0; row < 12; row++) {
-                board[row] = [];
-                for (let col = 0; col < 8; col++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'cell';
-                    cell.dataset.row = row;
-                    cell.dataset.col = col;
-
-                    const shapeType = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-                    const colorType = COLORS[Math.floor(Math.random() * COLORS.length)];
-
-                    const shape = document.createElement('div');
-                    shape.className = `shape ${colorType} ${shapeType}`;
-                    
-                    if (shapeType === 'triangle') {
-                        shape.style.borderBottom = `40px solid var(--${colorType})`;
-                    }
-
-                    cell.appendChild(shape);
-                    cell.addEventListener('click', () => handleCellClick(row, col));
-
-                    gameBoard.appendChild(cell);
-                    board[row][col] = { shape: shapeType, color: colorType, element: cell };
+        // Данные о фигурках для каждого кейса
+        const caseItems = [
+            // Обычный кейс
+            [
+                { name: "Обычная фигурка 1", price: 50, image: "https://via.placeholder.com/100/aaa/000?text=Обыч1", rarity: 60 },
+                { name: "Обычная фигурка 2", price: 70, image: "https://via.placeholder.com/100/aaa/000?text=Обыч2", rarity: 50 },
+                { name: "Редкая фигурка 1", price: 150, image: "https://via.placeholder.com/100/blue/fff?text=Редк1", rarity: 20 },
+                { name: "Редкая фигурка 2", price: 200, image: "https://via.placeholder.com/100/blue/fff?text=Редк2", rarity: 15 },
+                { name: "Легендарная фигурка", price: 500, image: "https://via.placeholder.com/100/gold/000?text=Легенда", rarity: 5 }
+            ],
+            // Редкий кейс
+            [
+                { name: "Редкая фигурка A", price: 200, image: "https://via.placeholder.com/100/blue/fff?text=РедкA", rarity: 50 },
+                { name: "Редкая фигурка B", price: 250, image: "https://via.placeholder.com/100/blue/fff?text=РедкB", rarity: 40 },
+                { name: "Легендарная фигурка X", price: 600, image: "https://via.placeholder.com/100/gold/000?text=ЛегендаX", rarity: 8 },
+                { name: "Легендарная фигурка Y", price: 800, image: "https://via.placeholder.com/100/gold/000?text=ЛегендаY", rarity: 2 }
+            ],
+            // Ограниченный кейс
+            [
+                { name: "Эксклюзивная фигурка 1", price: 400, image: "https://via.placeholder.com/100/purple/fff?text=Экс1", rarity: 40 },
+                { name: "Эксклюзивная фигурка 2", price: 600, image: "https://via.placeholder.com/100/purple/fff?text=Экс2", rarity: 30 },
+                { name: "Уникальная фигурка", price: 1500, image: "https://via.placeholder.com/100/red/fff?text=Уникаль", rarity: 5 },
+                { name: "Золотая фигурка", price: 3000, image: "https://via.placeholder.com/100/gold/000?text=Золото", rarity: 1 }
+            ]
+        ];
+        
+        // Цены кейсов
+        const casePrices = [100, 300, 500];
+        
+        // Ограниченное количество ограниченных кейсов
+        let limitedCasesLeft = 5;
+        
+        // Игровые переменные
+        let money = 1000;
+        let openedCases = 0;
+        let inventory = [];
+        let currentItem = null;
+        let animationInterval = null;
+        let animationSpeed = 50;
+        let slowingDown = false;
+        let currentPosition = 0;
+        let targetPosition = 0;
+        
+        // Обновление отображения баланса
+        function updateBalance() {
+            document.getElementById('money').textContent = money;
+            document.getElementById('opened-cases').textContent = openedCases;
+            document.getElementById('limited-count').textContent = limitedCasesLeft;
+        }
+        
+        // Открытие кейса
+        function openCase(caseIndex) {
+            // Проверка баланса
+            if (money < casePrices[caseIndex]) {
+                alert('Недостаточно средств!');
+                return;
+            }
+            
+            // Проверка ограниченного кейса
+            if (caseIndex === 2 && limitedCasesLeft <= 0) {
+                alert('Ограниченные кейсы закончились!');
+                return;
+            }
+            
+            // Спишем деньги
+            money -= casePrices[caseIndex];
+            openedCases++;
+            if (caseIndex === 2) {
+                limitedCasesLeft--;
+            }
+            updateBalance();
+            
+            // Заблокируем кнопки кейсов на время анимации
+            document.querySelectorAll('.case').forEach(c => c.style.pointerEvents = 'none');
+            
+            // Подготовка анимации
+            prepareAnimation(caseIndex);
+            
+            // Запуск анимации
+            startAnimation(caseIndex);
+        }
+        
+        // Подготовка анимации
+        function prepareAnimation(caseIndex) {
+            const animationContainer = document.getElementById('animation-container');
+            const animationItems = document.getElementById('animation-items');
+            
+            // Очистим предыдущие элементы
+            animationItems.innerHTML = '';
+            
+            // Создадим много копий фигурок для анимации прокрутки
+            const items = caseItems[caseIndex];
+            for (let i = 0; i < 100; i++) {
+                const item = items[Math.floor(Math.random() * items.length)];
+                const itemElement = document.createElement('div');
+                itemElement.className = 'animation-item';
+                itemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="name">${item.name}</div>
+                `;
+                animationItems.appendChild(itemElement);
+            }
+            
+            // Покажем контейнер анимации
+            animationContainer.style.display = 'block';
+            
+            // Скрываем предыдущий результат и кнопки
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('buttons').style.display = 'none';
+        }
+        
+        // Запуск анимации
+        function startAnimation(caseIndex) {
+            const animationItems = document.getElementById('animation-items');
+            const itemsCount = caseItems[caseIndex].length;
+            
+            // Вычисляем целевую позицию для остановки (случайный элемент с учетом редкости)
+            const items = caseItems[caseIndex];
+            let totalRarity = items.reduce((sum, item) => sum + item.rarity, 0);
+            let randomValue = Math.random() * totalRarity;
+            let selectedItem = null;
+            
+            for (const item of items) {
+                if (randomValue <= item.rarity) {
+                    selectedItem = item;
+                    break;
+                }
+                randomValue -= item.rarity;
+            }
+            
+            // Если почему-то не выбрали (маловероятно), берем первый
+            if (!selectedItem) selectedItem = items[0];
+            
+            currentItem = selectedItem;
+            
+            // Вычисляем позицию, где этот элемент будет в центре
+            const itemWidth = 155; // 150px + 5px margin-right
+            const containerWidth = document.getElementById('animation-container').offsetWidth;
+            const centerPosition = Math.floor(containerWidth / 2) - Math.floor(itemWidth / 2);
+            
+            // Находим индекс выбранного элемента в анимации (последние 20 элементов)
+            const animationItemsCount = animationItems.children.length;
+            const searchStart = animationItemsCount - 20;
+            let targetIndex = -1;
+            
+            for (let i = searchStart; i < animationItemsCount; i++) {
+                const img = animationItems.children[i].querySelector('img');
+                if (img && img.alt === selectedItem.name) {
+                    targetIndex = i;
+                    break;
                 }
             }
-        }
-
-        function handleCellClick(row, col) {
-            const cell = board[row][col];
-
-            if (!selectedCell) {
-                // First selection
-                selectedCell = { row, col };
-                cell.element.style.transform = 'scale(1.1)';
-                cell.element.style.boxShadow = '0 0 15px white';
-            } else {
-                // Second selection - try to swap
-                const prevCell = board[selectedCell.row][selectedCell.col];
+            
+            // Если не нашли (маловероятно), берем предпоследний
+            if (targetIndex === -1) targetIndex = animationItemsCount - 2;
+            
+            // Вычисляем целевую позицию для остановки
+            targetPosition = -(targetIndex * itemWidth - centerPosition);
+            
+            // Начинаем анимацию
+            currentPosition = 0;
+            slowingDown = false;
+            animationItems.style.left = currentPosition + 'px';
+            
+            if (animationInterval) clearInterval(animationInterval);
+            
+            animationInterval = setInterval(() => {
+                // Если еще не начали замедляться и прошли 70% пути
+                if (!slowingDown && currentPosition < targetPosition * 0.7) {
+                    slowingDown = true;
+                    animationSpeed = 150; // Замедляемся
+                }
                 
-                // Remove selection effects
-                prevCell.element.style.transform = '';
-                prevCell.element.style.boxShadow = '';
-
-                // Check if cells are adjacent
-                if (isAdjacent(selectedCell.row, selectedCell.col, row, col)) {
-                    // Swap cells
-                    swapCells(selectedCell.row, selectedCell.col, row, col);
+                // Двигаемся к цели
+                if (slowingDown) {
+                    // Приближаемся к цели с замедлением
+                    const distance = targetPosition - currentPosition;
+                    currentPosition += distance * 0.1;
                     
-                    // Check for matches
-                    const matches = checkMatches();
-                    
-                    if (matches.length > 0) {
-                        // Valid move
-                        processMatches(matches);
-                    } else {
-                        // No matches - swap back
-                        setTimeout(() => {
-                            swapCells(selectedCell.row, selectedCell.col, row, col);
-                            messageDisplay.textContent = 'NO MATCH!';
-                            setTimeout(() => {
-                                if (messageDisplay.textContent === 'NO MATCH!') {
-                                    messageDisplay.textContent = 'MATCH SHAPES!';
-                                }
-                            }, 1000);
-                        }, 300);
+                    // Если очень близко, останавливаемся
+                    if (Math.abs(distance) < 5) {
+                        currentPosition = targetPosition;
+                        clearInterval(animationInterval);
+                        animationItems.style.left = currentPosition + 'px';
+                        showResult();
+                        return;
                     }
                 } else {
-                    messageDisplay.textContent = 'NOT ADJACENT!';
-                    setTimeout(() => {
-                        if (messageDisplay.textContent === 'NOT ADJACENT!') {
-                            messageDisplay.textContent = 'MATCH SHAPES!';
-                        }
-                    }, 1000);
+                    // Быстрое движение в начале
+                    currentPosition -= 30;
                 }
-
-                selectedCell = null;
-            }
-        }
-
-        function isAdjacent(row1, col1, row2, col2) {
-            return (
-                (Math.abs(row1 - row2) === 1 && col1 === col2) ||
-                (Math.abs(col1 - col2) === 1 && row1 === row2)
-            );
-        }
-
-        function swapCells(row1, col1, row2, col2) {
-            // Swap in the board array
-            const temp = { ...board[row1][col1] };
-            board[row1][col1] = { ...board[row2][col2] };
-            board[row2][col2] = temp;
-
-            // Update the DOM
-            updateCell(row1, col1);
-            updateCell(row2, col2);
-        }
-
-        function updateCell(row, col) {
-            const cell = board[row][col];
-            cell.element.innerHTML = '';
-            
-            const shape = document.createElement('div');
-            shape.className = `shape ${cell.color} ${cell.shape}`;
-            
-            if (cell.shape === 'triangle') {
-                shape.style.borderBottom = `40px solid var(--${cell.color})`;
-            }
-            
-            cell.element.appendChild(shape);
-        }
-
-        function checkMatches() {
-            const matches = [];
-
-            // Check horizontal matches
-            for (let row = 0; row < 12; row++) {
-                for (let col = 0; col < 6; col++) {
-                    const cell = board[row][col];
-                    if (cell.shape === board[row][col+1].shape && cell.shape === board[row][col+2].shape) {
-                        // Found a match of 3
-                        const match = [{row, col}, {row, col: col+1}, {row, col: col+2}];
-                        
-                        // Check for longer matches
-                        let offset = 3;
-                        while (col + offset < 8 && board[row][col+offset].shape === cell.shape) {
-                            match.push({row, col: col+offset});
-                            offset++;
-                        }
-                        
-                        matches.push(match);
-                    }
-                }
-            }
-
-            // Check vertical matches
-            for (let col = 0; col < 8; col++) {
-                for (let row = 0; row < 10; row++) {
-                    const cell = board[row][col];
-                    if (cell.shape === board[row+1][col].shape && cell.shape === board[row+2][col].shape) {
-                        // Found a match of 3
-                        const match = [{row, col}, {row: row+1, col}, {row: row+2, col}];
-                        
-                        // Check for longer matches
-                        let offset = 3;
-                        while (row + offset < 12 && board[row+offset][col].shape === cell.shape) {
-                            match.push({row: row+offset, col});
-                            offset++;
-                        }
-                        
-                        matches.push(match);
-                    }
-                }
-            }
-
-            return matches;
-        }
-
-        function processMatches(matches) {
-            // Calculate score
-            let points = 0;
-            const matchedCells = new Set();
-            
-            matches.forEach(match => {
-                points += match.length * 100;
-                combo++;
                 
-                match.forEach(({row, col}) => {
-                    matchedCells.add(`${row},${col}`);
-                });
+                animationItems.style.left = currentPosition + 'px';
+            }, 30);
+        }
+        
+        // Показать результат
+        function showResult() {
+            const resultElement = document.getElementById('result');
+            const buttonsElement = document.getElementById('buttons');
+            
+            resultElement.textContent = `Вы получили: ${currentItem.name} (${currentItem.price} ₽)`;
+            resultElement.style.display = 'block';
+            buttonsElement.style.display = 'flex';
+            
+            // Разблокируем кейсы
+            document.querySelectorAll('.case').forEach(c => c.style.pointerEvents = 'auto');
+        }
+        
+        // Продать предмет
+        function sellItem() {
+            money += currentItem.price;
+            updateBalance();
+            
+            document.getElementById('animation-container').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('buttons').style.display = 'none';
+        }
+        
+        // Оставить предмет в инвентаре
+        function keepItem() {
+            inventory.push(currentItem);
+            updateInventory();
+            
+            document.getElementById('animation-container').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('buttons').style.display = 'none';
+        }
+        
+        // Обновление инвентаря
+        function updateInventory() {
+            const inventoryItems = document.getElementById('inventory-items');
+            inventoryItems.innerHTML = '';
+            
+            inventory.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'inventory-item';
+                itemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="name">${item.name}</div>
+                    <div class="price">${item.price} ₽</div>
+                    <button class="sell-inventory-btn" onclick="sellInventoryItem(${index})">Продать</button>
+                `;
+                inventoryItems.appendChild(itemElement);
             });
-
-            // Apply combo bonus
-            if (combo > 1) {
-                points *= combo;
-                comboDisplay.textContent = `COMBO x${combo}!`;
-            }
-
-            // Update score
-            score += points;
-            scoreDisplay.textContent = score;
-
-            // Show message
-            if (points >= 500) {
-                const randomMsg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-                messageDisplay.textContent = randomMsg;
-            }
-
-            // Remove matched cells
-            matchedCells.forEach(cellKey => {
-                const [row, col] = cellKey.split(',').map(Number);
-                board[row][col].element.style.visibility = 'hidden';
-            });
-
-            // After a delay, drop new shapes
-            setTimeout(() => {
-                dropNewShapes();
-                
-                // Check for new matches after dropping
-                setTimeout(() => {
-                    const newMatches = checkMatches();
-                    if (newMatches.length > 0) {
-                        processMatches(newMatches);
-                    } else {
-                        combo = 0;
-                        comboDisplay.textContent = '';
-                        if (messageDisplay.textContent !== 'MATCH SHAPES!') {
-                            messageDisplay.textContent = 'MATCH SHAPES!';
-                        }
-                    }
-                }, 500);
-            }, 500);
         }
-
-        function dropNewShapes() {
-            // Move cells down
-            for (let col = 0; col < 8; col++) {
-                let emptySpaces = [];
-                
-                for (let row = 11; row >= 0; row--) {
-                    if (board[row][col].element.style.visibility === 'hidden') {
-                        emptySpaces.push(row);
-                    } else if (emptySpaces.length > 0) {
-                        const emptyRow = emptySpaces.shift();
-                        swapCells(row, col, emptyRow, col);
-                        emptySpaces.push(row);
-                    }
-                }
-                
-                // Fill top empty spaces with new shapes
-                emptySpaces.forEach(row => {
-                    const shapeType = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-                    const colorType = COLORS[Math.floor(Math.random() * COLORS.length)];
-                    
-                    board[row][col] = {
-                        shape: shapeType,
-                        color: colorType,
-                        element: board[row][col].element
-                    };
-                    
-                    board[row][col].element.style.visibility = 'visible';
-                    updateCell(row, col);
-                });
+        
+        // Продать предмет из инвентаря
+        function sellInventoryItem(index) {
+            if (index >= 0 && index < inventory.length) {
+                money += inventory[index].price;
+                inventory.splice(index, 1);
+                updateBalance();
+                updateInventory();
             }
         }
-
-        // Start new game
-        newGameBtn.addEventListener('click', initGame);
-
-        // Initialize game
-        initGame();
+        
+        // Инициализация
+        updateBalance();
+        updateInventory();
     </script>
 </body>
 </html>
