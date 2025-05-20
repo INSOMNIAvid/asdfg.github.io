@@ -2290,19 +2290,57 @@
 
         // Инициализация Telegram платежа
         function initTelegramPayment() {
-            // В реальном приложении здесь будет вызов платежного интерфейса Telegram Stars
-            // Для демонстрации перенаправляем на бота
-            window.open('https://t.me/insomnia_ins_bot', '_blank');
-            
-            // Генерируем эксклюзивную ссылку для активации PREMIUM
-            const premiumLink = generatePremiumLink();
-            showToast(`Ваша эксклюзивная ссылка для активации PREMIUM: ${premiumLink}`);
-            
-            // Для демонстрации сразу имитируем успешный платеж
-            setTimeout(() => {
-                localStorage.setItem('paymentStatus', 'completed');
-                checkPaymentStatus();
-            }, 3000);
+            // Проверяем, открыт ли сайт внутри Telegram WebApp
+            if (window.Telegram && window.Telegram.WebApp) {
+                try {
+                    // Инициализация платежа через Telegram Stars
+                    const initData = window.Telegram.WebApp.initData;
+                    const userId = window.Telegram.WebApp.initDataUnsafe.user?.id;
+                    
+                    if (!userId) {
+                        showToast('Для оплаты войдите в Telegram');
+                        return;
+                    }
+                    
+                    // Параметры платежа
+                    const paymentParams = {
+                        title: "PREMIUM подписка на 7 дней",
+                        description: "Доступ к премиум функциям на 7 дней",
+                        currency: "USD",
+                        prices: [{ label: "350 Stars", amount: 35000 }], // 350 Stars = $3.50 (в центах)
+                        payload: `premium_sub_${userId}_${Date.now()}`
+                    };
+                    
+                    // Вызов платежного интерфейса Telegram
+                    window.Telegram.WebApp.openInvoice(paymentParams, (status) => {
+                        if (status === 'paid') {
+                            // Платеж успешен
+                            localStorage.setItem('paymentStatus', 'completed');
+                            checkPaymentStatus();
+                            
+                            // Генерируем эксклюзивную ссылку для активации PREMIUM
+                            const premiumLink = generatePremiumLink();
+                            showToast(`Ваша эксклюзивная ссылка для активации PREMIUM: ${premiumLink}`);
+                        } else {
+                            // Платеж не прошел
+                            showToast('Платеж не завершен');
+                        }
+                    });
+                    
+                    showToast(translations[gameState.currentLanguage]['telegramPaymentInitiated']);
+                } catch (error) {
+                    console.error('Ошибка платежа Telegram:', error);
+                    showToast('Ошибка при инициализации платежа');
+                }
+            } else {
+                // Если сайт открыт не в Telegram, предлагаем открыть в боте
+                window.open('https://t.me/insomnia_ins_bot', '_blank');
+                showToast('Откройте сайт в Telegram для оплаты Stars');
+                
+                // Для демонстрации генерируем ссылку
+                const premiumLink = generatePremiumLink();
+                showToast(`Ваша эксклюзивная ссылка для активации PREMIUM: ${premiumLink}`);
+            }
         }
 
         // Ежедневные награды
